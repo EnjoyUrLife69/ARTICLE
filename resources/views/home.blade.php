@@ -491,7 +491,6 @@
                     </div>
                 </div>
             </div>
-            <!--/ Transactions -->
         </div>
     </div>
 @endsection

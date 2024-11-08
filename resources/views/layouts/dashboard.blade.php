@@ -208,6 +208,29 @@
         });
     </script>
 
+    {{-- checkbox di role --}}
+    <script>
+        $(document).ready(function() {
+            // Event listener untuk semua checkbox
+            $('.permission-checkbox').on('change', function() {
+                var group = $(this).data('group'); // Ambil kategori (misal 'role')
+                var type = $(this).data('type'); // Ambil tipe (misal 'list', 'create', dll)
+
+                // Jika yang di-check/uncheck adalah tipe 'list'
+                if (type === 'list') {
+                    var isChecked = $(this).is(':checked');
+
+                    // Check/uncheck checkboxes yang memiliki group sama (misal 'role')
+                    $('.permission-checkbox[data-group="' + group + '"]').each(function() {
+                        if ($(this).data('type') !== 'list') { // Selain yang 'list'
+                            $(this).prop('checked', isChecked);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>

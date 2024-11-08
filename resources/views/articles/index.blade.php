@@ -19,10 +19,11 @@
                 {{-- CREATE DATA --}}
                 <div class="col-2">
                     <div class="mt-3">
-                        <!-- Button trigger modal -->
-                        <a href="{{ route('articles.create') }}"><button type="button" class="btn btn-primary">
-                                <i class='bx bx-plus-circle'></i> Write Article
-                            </button></a>
+                        @can('article-create')
+                            <a href="{{ route('articles.create') }}"><button type="button" class="btn btn-primary">
+                                    <i class='bx bx-plus-circle'></i> Write Article
+                                </button></a>
+                        @endcan
                         {{-- Create Modal --}}
                     </div>
                 </div>
@@ -46,7 +47,8 @@
                                 <tr>
                                     <td style="font-weight: bold">{{ $loop->iteration }}</td>
                                     <td style="font-weight: bold">{{ $data->title }}</td>
-                                    <td style="font-weight: bold">{{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}
+                                    <td style="font-weight: bold">
+                                        {{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}
                                     </td>
                                     <td style="font-weight: bold">{{ $data->categorie->name }}</td>
                                     <td><b
@@ -67,23 +69,27 @@
                                         </button>
 
                                         {{-- EDIT --}}
-                                        <a href="{{ route('articles.edit', $data->id) }}"><button type="button"
-                                                class="btn btn-sm btn-primary" data-bs-toggle="modal">
-                                                <i class='bx bx-edit' data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Edit" data-bs-offset="0,4" data-bs-html="true"></i>
-                                            </button></a>
+                                        @can('article-edit')
+                                            <a href="{{ route('articles.edit', $data->id) }}"><button type="button"
+                                                    class="btn btn-sm btn-primary" data-bs-toggle="modal">
+                                                    <i class='bx bx-edit' data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="Edit" data-bs-offset="0,4" data-bs-html="true"></i>
+                                                </button></a>
+                                        @endcan
 
                                         {{-- DELETE --}}
-                                        <form action="{{ route('articles.destroy', $data->id) }}" method="POST"
-                                            style="display: inline;" id="deleteForm{{ $data->id }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="tooltip"
-                                                id="deleteButton{{ $data->id }}" data-bs-offset="0,4"
-                                                data-bs-placement="top" data-bs-html="true" title="<span>Delete</span>">
-                                                <i class='bx bx-trash'></i>
-                                            </button>
-                                        </form>
+                                        @can('article-delete')
+                                            <form action="{{ route('articles.destroy', $data->id) }}" method="POST"
+                                                style="display: inline;" id="deleteForm{{ $data->id }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="tooltip"
+                                                    id="deleteButton{{ $data->id }}" data-bs-offset="0,4"
+                                                    data-bs-placement="top" data-bs-html="true" title="<span>Delete</span>">
+                                                    <i class='bx bx-trash'></i>
+                                                </button>
+                                            </form>
+                                        @endcan
 
                                         {{-- MODAL --}}
                                         @include('articles.show')

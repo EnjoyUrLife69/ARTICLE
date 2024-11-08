@@ -20,9 +20,11 @@
                 <div class="col-2">
                     <div class="mt-3">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreate">
-                            <i class='bx bx-plus-circle'></i> Add Data
-                        </button>
+                        @can('categorie-create')
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCreate">
+                                <i class='bx bx-plus-circle'></i> Add Data
+                            </button>
+                        @endcan
                         {{-- Create Modal --}}
                         @include('categories.modal-create')
                     </div>
@@ -58,23 +60,27 @@
                                         </button>
 
                                         {{-- EDIT --}}
-                                        <button type="button" class="btn btn-sm btn-primary"
-                                            data-bs-target="#Edit{{ $data->id }}" data-bs-toggle="modal">
-                                            <i class='bx bx-edit' data-bs-toggle="tooltip" data-bs-placement="top"
-                                                title="Edit" data-bs-offset="0,4" data-bs-html="true"></i>
-                                        </button>
+                                        @can('categorie-edit')
+                                            <button type="button" class="btn btn-sm btn-primary"
+                                                data-bs-target="#Edit{{ $data->id }}" data-bs-toggle="modal">
+                                                <i class='bx bx-edit' data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Edit" data-bs-offset="0,4" data-bs-html="true"></i>
+                                            </button>
+                                        @endcan
 
                                         {{-- DELETE --}}
-                                        <form action="{{ route('categories.destroy', $data->id) }}" method="POST"
-                                            style="display: inline;" id="deleteForm{{ $data->id }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="tooltip"
-                                                id="deleteButton{{ $data->id }}" data-bs-offset="0,4"
-                                                data-bs-placement="top" data-bs-html="true" title="<span>Delete</span>">
-                                                <i class='bx bx-trash'></i>
-                                            </button>
-                                        </form>
+                                        @can('categorie-delete')
+                                            <form action="{{ route('categories.destroy', $data->id) }}" method="POST"
+                                                style="display: inline;" id="deleteForm{{ $data->id }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="tooltip"
+                                                    id="deleteButton{{ $data->id }}" data-bs-offset="0,4"
+                                                    data-bs-placement="top" data-bs-html="true" title="<span>Delete</span>">
+                                                    <i class='bx bx-trash'></i>
+                                                </button>
+                                            </form>
+                                        @endcan
 
                                         {{-- MODAL --}}
                                         @include('categories.modal')
