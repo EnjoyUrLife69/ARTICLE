@@ -60,24 +60,31 @@
         <li class="menu-item {{ request()->routeIs('home') ? 'active' : '' }}">
             <a href="{{ route('home') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
+                <div data-i18n="Analytics">Home</div>
             </a>
         </li>
         <li class="menu-item {{ request()->routeIs('categories.index') ? 'active' : '' }}">
             <a href="{{ route('categories.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="Analytics">Categories</div>
             </a>
         </li>
         <li
             class="menu-item {{ request()->routeIs('articles.index') || request()->routeIs('articles.create') || request()->routeIs('articles.edit') ? 'active' : '' }}">
             <a href="{{ route('articles.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bxs-book-content"></i>
                 <div data-i18n="Analytics">Article</div>
             </a>
         </li>
+        <li
+            class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Analytics">Profile</div>
+            </a>
+        </li>
 
-        <!-- Layouts -->
+        {{-- <!-- Layouts -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
@@ -96,7 +103,7 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
 
         {{-- @if (auth()->user()->can('sertifikat-list') && auth()->user()->can('training-list')) --}}
             <li class="menu-header small text-uppercase">
@@ -110,7 +117,7 @@
                     <div data-i18n="Account Settings">Access Control List</div>
                 </a>
                 <ul
-                    class="menu-sub {{ request()->routeIs('users.index') || request()->routeIs('roles.index') ? 'show' : '' }}">
+                    class="menu-sub {{ request()->routeIs('users.index') || request()->routeIs('roles.index') ? 'show' : '' }}" style="display: block;">
                     <li class="menu-item {{ request()->routeIs('roles.index') ? 'active' : '' }}">
                         <a href="{{ route('roles.index') }}" class="menu-link">
                             <div data-i18n="Account">Role & Permission</div>
@@ -121,8 +128,6 @@
                             <div data-i18n="Account">User</div>
                         </a>
                     </li>
-
-
                 </ul>
             </li>
         {{-- @endif --}}

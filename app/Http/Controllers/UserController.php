@@ -60,6 +60,9 @@ class UserController extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
+        // Tambahkan default image
+        $input['image'] = $request->has('image') ? $request->file('image')->store('users', 'public') : 'default.jpg';
+
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
@@ -68,9 +71,9 @@ class UserController extends Controller
 
     public function show($id): View
     {
-        $user = User::find($id);
+        $user = User::with('articles')->findOrFail($id);
 
-        return view('users.show', compact('user'));
+        return view('users.index', compact('user'));
     }
 
     public function edit($id): View

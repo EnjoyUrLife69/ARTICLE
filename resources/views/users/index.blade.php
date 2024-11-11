@@ -97,19 +97,22 @@
 
                                         {{-- DELETE DATA --}}
                                         @can('user-delete')
-                                            <form id="deleteForm{{ $user->id }}"
-                                                action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                                style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="btn btn-sm btn-danger"
-                                                    id="deleteButton{{ $user->id }}" data-bs-toggle="tooltip"
-                                                    data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
-                                                    title="<span>Delete</span>">
-                                                    <i class='bx bx-trash'></i>
-                                                </button>
-                                            </form>
+                                            @if (auth()->id() != $user->id)
+                                                <form id="deleteForm{{ $user->id }}"
+                                                    action="{{ route('users.destroy', $user->id) }}" method="POST"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-sm btn-danger"
+                                                        id="deleteButton{{ $user->id }}" data-bs-toggle="tooltip"
+                                                        data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                                        title="<span>Delete</span>">
+                                                        <i class='bx bx-trash'></i>
+                                                    </button>
+                                                </form>
+                                            @endif
                                         @endcan
+
 
                                         <!-- Modal -->
                                         @include('users.modal')

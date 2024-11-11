@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Categorie;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Storage;
 
 class ArticleController extends Controller
 {
