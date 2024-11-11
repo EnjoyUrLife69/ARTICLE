@@ -56,9 +56,21 @@
                                     @endforeach
                                 </select>
                             </div>
-                            {{-- @error('id_training')
-                                                                        <small class="text-danger">{{ $message }}</small>
-                                                                    @enderror --}}
+                            @error('roles')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="nameWithTitle" class="form-label">Photo Profile</label>
+                            <div class="input-group input-group-merge">
+                                <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                        class='bx bx-category'></i></span>
+                                <input class="form-control" type="file" id="formFile" name="image"
+                                    accept="image/*" onchange="previewImage(); displayFileName();"
+                                    {{ !$user->image ? 'required' : '' }} />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -93,8 +105,8 @@
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class='bx bx-user'></i></span>
-                                <input style="font-weight: bold; padding-left: 15px;" type="text" id="nameWithTitle"
-                                    required class="form-control" name="name" disabled
+                                <input style="font-weight: bold; padding-left: 15px;" type="text"
+                                    id="nameWithTitle" required class="form-control" name="name" disabled
                                     value="{{ $user->name }}" />
                             </div>
                             @error('name')

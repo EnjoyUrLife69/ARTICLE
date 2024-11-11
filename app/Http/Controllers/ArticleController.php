@@ -14,8 +14,13 @@ class ArticleController extends Controller
      */
     public function index()
     {
+
         $categories = Categorie::all();
-        $articles = Article::orderBy('created_at', 'desc')->get();
+
+        $articles = Article::where('user_id', auth()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         return view('articles.index', compact('articles', 'categories'));
     }
 
@@ -131,8 +136,11 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        //
+        $articles = Article::findOrFail($id);
+        $articles->delete();
+
+        return redirect()->route('articles.index')->with('success', 'Data deleted successfully.');
     }
 }

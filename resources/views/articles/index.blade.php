@@ -52,9 +52,9 @@
                                     </td>
                                     <td style="font-weight: bold">{{ $data->categorie->name }}</td>
                                     <td><b
-                                            class="badge 
+                                            class="badge rounded-pill
                                             {{ $data->status == 'approved' ? 'bg-success' : '' }}
-                                            {{ $data->status == 'pending' ? 'bg-warning' : '' }}
+                                            {{ $data->status == 'pending' ? 'bg-info' : '' }}
                                             {{ $data->status == 'rejected' ? 'bg-danger' : '' }}"><i
                                                 class='bx bx-time-five'></i>
                                             {{ ucfirst($data->status) }} </b>

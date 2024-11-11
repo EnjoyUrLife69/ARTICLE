@@ -22,7 +22,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
     ];
+
+    public function article()
+    {
+        return $this->hasMany(Article::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,5 +51,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function deleteImage()
+    {
+        $imagePath = public_path('images/users/' . $this->image); // Perbaiki path
+        if ($this->image && file_exists($imagePath)) {
+            return unlink($imagePath);
+        }
+        return false;
     }
 }

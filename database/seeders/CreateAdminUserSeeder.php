@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use storage;
 
 class CreateAdminUserSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class CreateAdminUserSeeder extends Seeder
             'name' => 'Super Admin',
             'email' => 'superadmin@gmail.com',
             'password' => bcrypt('000000'),
+            'image' => 'default-profile-image.jpg',
         ]);
 
         $role = Role::create(['name' => 'Super Admin']);

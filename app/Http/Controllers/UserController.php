@@ -8,9 +8,9 @@ use DB;
 use Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
+use Storage;
 
 class UserController extends Controller
 {
@@ -20,6 +20,12 @@ class UserController extends Controller
         $this->middleware('permission:user-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
+    public function profile(): View
+    {
+        $user = auth()->user();
+
+        return view('backend.header', compact('user'));
     }
 
     public function index(Request $request): View
@@ -75,29 +81,55 @@ class UserController extends Controller
         return view('users.edit', compact('user', 'roles'));
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        // Validasi input dari form
+        $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'same:confirm-password',
+            'password' => 'same:confirm-password|nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'roles' => 'required', // Pastikan ada validasi untuk role
         ]);
 
-        $input = $request->all();
-        if (!empty($input['password'])) {
-            $input['password'] = Hash::make($input['password']);
-        } else {
-            $input = Arr::except($input, array('password'));
+        // Temukan data pengguna yang akan diupdate
+        $user = User::findOrFail($id);
+
+        // Update data pengguna
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        // Jika password diubah, lakukan enkripsi
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
         }
 
-        $user = User::find($id);
-        $user->update($input);
+        // Update role pengguna (hapus role lama, lalu assign role baru)
         DB::table('model_has_roles')->where('model_id', $id)->delete();
-
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')->with('success', 'Data updated successfully.');
+        // Proses unggah gambar jika ada
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
 
+            // Simpan gambar baru ke storage
+            $image->storeAs('images/users', $imageName);
+
+            // Hapus gambar lama jika ada
+            if ($user->image) {
+                Storage::delete('images/users/' . $user->image);
+            }
+
+            // Simpan nama file gambar baru ke database
+            $user->image = $imageName;
+        }
+
+        // Simpan data pengguna yang sudah diupdate
+        $user->save();
+
+        // Redirect ke halaman index dengan pesan sukses
+        return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
     public function destroy($id): RedirectResponse

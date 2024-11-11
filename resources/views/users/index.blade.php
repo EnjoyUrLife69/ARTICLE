@@ -38,6 +38,7 @@
                                 <th>
                                     <center>No</center>
                                 </th>
+                                <th>&nbsp;&nbsp;&nbsp;</th>
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Roles</th>
@@ -47,8 +48,16 @@
                         <tbody>
                             @foreach ($data as $key => $user)
                                 <tr>
-                                    <td><center>{{$loop->iteration}}</center></td>
-                                    <td><b>{{ $user->name }}</b></td>
+                                    <td>
+                                        <center>{{ $loop->iteration }}</center>
+                                    </td>
+                                    <td>
+                                        <img src="{{ asset('storage/images/users/' . $user->image) }}" alt="Profile Image"
+                                            class="img-fluid rounded-circle" width="80px" height="80px">
+                                    </td>
+                                    <td>
+                                        <b>{{ $user->name }}</b>
+                                    </td>
                                     <td><b>{{ $user->email }}</b></td>
                                     <td>
                                         @if (!empty($user->getRoleNames()))

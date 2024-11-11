@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\PenulisController;
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,3 +26,4 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::resource('users', UserController::class);
 
 });
+
