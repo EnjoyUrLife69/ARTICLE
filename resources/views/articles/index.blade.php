@@ -133,16 +133,16 @@
 
                 <!-- Other tab contents can go here -->
                 <div class="tab-pane fade" id="navs-pills-top-card" role="tabpanel">
-                    <div class="row">
+                    <div class="row g-4">
                         @foreach ($articles as $data)
-                            <div class="col-md-3 mb-4">
-                                <div class="card" style="min-height: 350px;">
+                            <div class="col-md-3 d-flex">
+                                <div class="card w-100">
                                     <img src="{{ asset('storage/images/articles/' . $data->cover) }}" class="card-img-top"
-                                        alt="Card image">
-                                    <div class="card-body">
+                                        alt="Card image" style="height: 200px; object-fit: cover; width: 100%;">
+                                    <div class="card-body d-flex flex-column">
                                         <h5 class="card-title">{{ $data->title }}</h5>
-                                        <p class="card-text">{{ $data->description }}</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <p class="card-text flex-grow-1">{{ $data->description }}</p>
+                                        <a href="#" class="btn btn-primary mt-auto">Read More</a>
                                     </div>
                                 </div>
                             </div>
