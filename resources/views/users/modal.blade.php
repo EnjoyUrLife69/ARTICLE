@@ -19,7 +19,7 @@
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class='bx bx-user'></i></span>
-                                <input style="font-weight: bold; padding-left: 15px;" type="text" id="nameWithTitle" disabled
+                                <input style="font-weight: bold; padding-left: 15px;" type="text" id="nameWithTitle" 
                                     required class="form-control" name="name" value="{{ $user->name }}" />
                             </div>
                             @error('name')
@@ -33,7 +33,7 @@
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class='bx bx-envelope'></i></span>
-                                <input style="font-weight: bold; padding-left: 15px;" type="text" id="nameWithTitle" disabled
+                                <input style="font-weight: bold; padding-left: 15px;" type="text" id="nameWithTitle" 
                                     required class="form-control" name="email" value="{{ $user->email }}" />
                             </div>
                             @error('email')
@@ -61,7 +61,7 @@
                             @enderror
                         </div>
                     </div>
-                    {{-- <div class="row">
+                    <div class="row">
                         <div class="col mb-3">
                             <label for="nameWithTitle" class="form-label">Photo Profile</label>
                             <div class="input-group input-group-merge">
@@ -72,7 +72,7 @@
                                     {{ !$user->image ? 'required' : '' }} />
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -148,7 +148,7 @@
                                 <center>{{ $loop->iteration }}</center>
                             </div>
                             <div class="col-sm-9">
-                                <hr> {{ $data->title }} 
+                               <hr> {{ Str::limit($data->title, 48) }}
                             </div>
                             <div class="col-sm-2">
                                 <hr> {{ \Carbon\Carbon::parse($data->release_date)->format('d/m/Y') }}

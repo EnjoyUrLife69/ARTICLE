@@ -2,7 +2,9 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 style="font-weight: bold;" class="modal-title" id="Show{{ $data->id }}Title">{{ $data->title }}
+                <h5 style="font-weight: bold; white-space: normal; word-wrap: break-word; word-break: break-word; max-width: 90%;"
+                    class="modal-title" id="Show{{ $data->id }}Title">
+                    {{ $data->title }}
                 </h5>
                 <b
                     class="badge
@@ -35,11 +37,12 @@
     </div>
 </div>
 
-<div class="modal fade" id="Show2{{ $data->id }}" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="Show-request{{ $data->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 style="font-weight: bold;" class="modal-title" id="Show{{ $data->id }}Title">
+                <h5 style="font-weight: bold; white-space: normal; word-wrap: break-word; word-break: break-word; max-width: 100%;"
+                    class="modal-title" id="Show{{ $data->id }}Title">
                     {{ $data->title }}
                 </h5>
                 <b
@@ -67,12 +70,12 @@
             <div class="modal-footer">
                 <form action="{{ route('articles.reject', $data->id) }}" method="POST" style="display: inline;">
                     @csrf
-                    <button type="submit" class="btn btn-sm btn-danger">Rejected</button>
+                    <button type="submit" class="btn btn-sm btn-danger">Reject</button>
                 </form>
 
                 <form action="{{ route('articles.approve', $data->id) }}" method="POST" style="display: inline;">
                     @csrf
-                    <button type="submit" class="btn btn-sm btn-success">Approved</button>
+                    <button type="submit" class="btn btn-sm btn-success">Approve</button>
                 </form>
 
                 <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>

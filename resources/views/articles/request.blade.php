@@ -39,7 +39,7 @@
                                             alt="Profile Image" class="img-fluid rounded-circle" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="{{ $data->user->name }}" data-bs-offset="0,4" data-bs-html="true"
                                             style="width: 35px; height: 35px"></td>
-                                    <td style="font-weight: bold">{{ $data->title }}</td>
+                                    <td style="font-weight: bold">{{ Str::limit($data->title, 35) }}</td>
                                     <td style="font-weight: bold">
                                         {{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}
                                     </td>
@@ -55,7 +55,7 @@
                                     <td>
                                         {{-- SHOW --}}
                                         <button type="button" class="btn btn-sm btn-warning"
-                                            data-bs-target="#Show2{{ $data->id }}" data-bs-toggle="modal">
+                                            data-bs-target="#Show-request{{ $data->id }}" data-bs-toggle="modal">
                                             <i class='bx bx-show-alt' data-bs-toggle="tooltip" data-bs-placement="top"
                                                 title="Show" data-bs-offset="0,4" data-bs-html="true"></i>
                                         </button>

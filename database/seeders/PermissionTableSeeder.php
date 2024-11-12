@@ -36,6 +36,9 @@ class PermissionTableSeeder extends Seeder
             'role-delete',
             'categorie-delete',
             'article-delete',
+
+            // Accept Request
+            'accept-request',
         ];
 
         foreach ($permissions as $permission) {

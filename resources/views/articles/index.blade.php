@@ -76,7 +76,7 @@
                                     @foreach ($articles as $data)
                                         <tr>
                                             <td style="font-weight: bold">{{ $loop->iteration }}</td>
-                                            <td style="font-weight: bold">{{ $data->title }}</td>
+                                            <td style="font-weight: bold">{{ Str::limit($data->title, 35) }}</td>
                                             <td style="font-weight: bold">
                                                 {{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}
                                             </td>
@@ -142,7 +142,7 @@
                                         alt="Card image" style="height: 200px; object-fit: cover; width: 100%;">
                                     <div class="card-body d-flex flex-column">
                                         <h5 class="card-title">{{ $data->title }}</h5>
-                                        <p class="card-text flex-grow-1">{{ $data->description }}</p>
+                                        <p class="card-text flex-grow-1">{{ Str::limit($data->description, 99) }}</p>
                                         <a href="#" class="btn btn-primary mt-auto">Read More</a>
                                     </div>
                                 </div>

@@ -10,11 +10,20 @@ use Storage;
 
 class ArticleController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:article-list|article-create|article-edit|article-delete', ['only' => ['index','show']]);
+         $this->middleware('permission:article-create', ['only' => ['create','store']]);
+         $this->middleware('permission:article-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:article-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:accept-request', ['only' => ['request', 'approve', 'reject']]);
+    }
+
     public function sidebarData()
     {
-        // Menghitung artikel baru dengan status 'pending'
+        // Menghitung artikel baru dengan status 'pending' ( Notification)
         $newArticlesCount = Article::where('status', 'pending')
-            ->whereDate('created_at', '>=', now()->subDay()) // Artikel baru dalam 1 hari terakhir
+            ->whereDate('created_at', '>=', now()->subDay())
             ->count();
 
         return view('backend.sidebar', compact('newArticlesCount'));
@@ -63,7 +72,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $categories = Categorie::all();
+        $categories = Categorie::limit(5)->get();
+
         return view('articles.create', compact('categories'));
     }
 
@@ -117,9 +127,11 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $articles = Article::FindOrFail($id);
+
         $existingCover = $articles->cover;
 
-        $categories = Categorie::all();
+        $categories = Categorie::limit(5)->get();
+
 
         return view('articles.edit', compact('articles', 'categories', 'existingCover'));
 
