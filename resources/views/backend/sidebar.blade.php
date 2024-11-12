@@ -87,7 +87,7 @@
                 <i class='menu-icon tf-icons bx bx-git-pull-request'></i>
                 <div data-i18n="Analytics">Request</div>
                 @if ($newArticlesCount > 0)
-                    <span class="badge rounded-pill bg-danger" style="margin-left: 90px;">
+                    <span class="badge rounded-pill bg-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $newArticlesCount }} Request" style="margin-left: 90px;">
                         {{ $newArticlesCount }}
                     </span>
                 @endif
