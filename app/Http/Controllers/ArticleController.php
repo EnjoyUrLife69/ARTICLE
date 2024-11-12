@@ -10,19 +10,52 @@ use Storage;
 
 class ArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function sidebarData()
+    {
+        // Menghitung artikel baru dengan status 'pending'
+        $newArticlesCount = Article::where('status', 'pending')
+            ->whereDate('created_at', '>=', now()->subDay()) // Artikel baru dalam 1 hari terakhir
+            ->count();
+
+        return view('backend.sidebar', compact('newArticlesCount'));
+    }
+
+    public function approve($id)
+    {
+        $articles = Article::findOrFail($id);
+        $articles->status = 'approved'; // Status bisa disesuaikan, misalnya 'approved'
+        $articles->save();
+
+        return redirect()->route('request')->with('success', 'The article has been Approved');
+    }
+
+    public function reject($id)
+    {
+        $articles = Article::findOrFail($id);
+        $articles->status = 'rejected'; // Status bisa disesuaikan, misalnya 'rejected'
+        $articles->save();
+
+        return redirect()->route('request')->with('success', 'The article has been Rejected');
+
+    }
+
+    public function request()
+    {
+        $categories = Categorie::all();
+        $articles = Article::where('status', 'pending')->get(); // Hanya artikel yang statusnya 'pending'
+
+        return view('articles.request', compact('articles', 'categories'));
+    }
+
     public function index()
     {
-
         $categories = Categorie::all();
-
         $articles = Article::where('user_id', auth()->user()->id)
             ->orderBy('created_at', 'desc')
             ->get();
+        $approvedArticlesCount = Article::where('status', 'approved')->count();
 
-        return view('articles.index', compact('articles', 'categories'));
+        return view('articles.index', compact('articles', 'categories' , 'approvedArticlesCount'));
     }
 
     /**

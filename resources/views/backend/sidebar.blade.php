@@ -76,13 +76,24 @@
                 <div data-i18n="Analytics">Article</div>
             </a>
         </li>
-        <li
-            class="menu-item {{ request()->routeIs('profile') ? 'active' : '' }}">
-            <a href="{{route('profile')}}" class="menu-link">
+        <li class="menu-item {{ request()->routeIs('profile') ? 'active' : '' }}">
+            <a href="{{ route('profile') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics">Profile</div>
             </a>
         </li>
+        <li class="menu-item {{ request()->routeIs('request') ? 'active' : '' }}">
+            <a href="{{ route('request') }}" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-git-pull-request'></i>
+                <div data-i18n="Analytics">Request</div>
+                @if ($newArticlesCount > 0)
+                    <span class="badge rounded-pill bg-danger" style="margin-left: 90px;">
+                        {{ $newArticlesCount }}
+                    </span>
+                @endif
+            </a>
+        </li>
+
 
         {{-- <!-- Layouts -->
         <li class="menu-item">
@@ -106,30 +117,30 @@
         </li> --}}
 
         {{-- @if (auth()->user()->can('sertifikat-list') && auth()->user()->can('training-list')) --}}
-            <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">( Super Admin Only )</span>
-            </li>
-            {{-- 2 untuk Super Admin --}}
-            <li
-                class="menu-item {{ request()->routeIs('users.index') || request()->routeIs('roles.index') ? 'active open' : '' }} ">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                    <div data-i18n="Account Settings">Access Control List</div>
-                </a>
-                <ul
-                    class="menu-sub {{ request()->routeIs('users.index') || request()->routeIs('roles.index') ? 'show' : '' }}" style="display: block;">
-                    <li class="menu-item {{ request()->routeIs('roles.index') ? 'active' : '' }}">
-                        <a href="{{ route('roles.index') }}" class="menu-link">
-                            <div data-i18n="Account">Role & Permission</div>
-                        </a>
-                    </li>
-                    <li class="menu-item {{ request()->routeIs('users.index') ? 'active' : '' }}">
-                        <a href="{{ route('users.index') }}" class="menu-link">
-                            <div data-i18n="Account">User</div>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">( Super Admin Only )</span>
+        </li>
+        {{-- 2 untuk Super Admin --}}
+        <li
+            class="menu-item {{ request()->routeIs('users.index') || request()->routeIs('roles.index') ? 'active open' : '' }} ">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                <div data-i18n="Account Settings">Access Control List</div>
+            </a>
+            <ul class="menu-sub {{ request()->routeIs('users.index') || request()->routeIs('roles.index') ? 'show' : '' }}"
+                style="display: block;">
+                <li class="menu-item {{ request()->routeIs('roles.index') ? 'active' : '' }}">
+                    <a href="{{ route('roles.index') }}" class="menu-link">
+                        <div data-i18n="Account">Role & Permission</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->routeIs('users.index') ? 'active' : '' }}">
+                    <a href="{{ route('users.index') }}" class="menu-link">
+                        <div data-i18n="Account">User</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
         {{-- @endif --}}
     </ul>
 </aside>

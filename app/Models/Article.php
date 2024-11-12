@@ -48,4 +48,10 @@ class Article extends Model
         return false;
     }
 
+    // filter
+    public function scopeStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
+
 }

@@ -133,7 +133,7 @@
                             </div>
                             <div class="row">
                                 <center>
-                                    <p><b style="color: green;">{{ $user->article->count() }}</b> Article</p>
+                                    <p><b style="color: green;">{{ $user->article()->status('approved')->count() }}</b>  Article</p>
                                 </center>
                             </div>
                         </div>

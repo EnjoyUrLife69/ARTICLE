@@ -97,6 +97,7 @@
                                                         data-bs-placement="top" title="Show" data-bs-offset="0,4"
                                                         data-bs-html="true"></i>
                                                 </button>
+                                                @include('articles.show')
 
                                                 {{-- EDIT --}}
                                                 @can('article-edit')

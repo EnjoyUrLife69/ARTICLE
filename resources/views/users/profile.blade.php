@@ -106,7 +106,7 @@
                 </div>
             </div>
             <div class="col-8">
-                <div class="card">
+                <div class="card" data-aos-delay="300" data-aos="zoom-in">
                     <div class="card-body">
                         <i class='bx bx-bar-chart-alt-2'></i>&nbsp; Activity Timeline <br>
                         <div class="dot mt-4"></div>
@@ -122,6 +122,11 @@
                                 <td><i class='bx bx-user'></i>&nbsp;&nbsp;Article Uploaded</td>
                                 <td>&nbsp;&nbsp;: &nbsp;</td>
                                 <td><b>{{ $user->article->count() }}</b> Article</td>
+                            </tr>
+                            <tr>
+                                <td><i class='bx bx-user'></i>&nbsp;&nbsp;Article <b style="color: green;">Approved</b></td>
+                                <td>&nbsp;&nbsp;: &nbsp;</td>
+                                <td><b>{{ $user->article()->status('approved')->count() }}</b> Article</td>
                             </tr>
                             <tr>
                                 <td><i class='bx bx-badge-check'></i>&nbsp;&nbsp; View</td>
