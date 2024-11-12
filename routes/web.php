@@ -24,5 +24,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+
+    Route::get('profile', [UserController::class, 'profile'])->name('profile');
 });
 

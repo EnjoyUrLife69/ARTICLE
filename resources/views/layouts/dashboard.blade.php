@@ -35,6 +35,14 @@
         .swal2-container {
             z-index: 9999 !important;
         }
+
+        .dot {
+            height: 11px;
+            width: 11px;
+            background-color: rgb(68, 68, 249);
+            border-radius: 50%;
+            display: inline-block;
+        }
     </style>
     <script type="text/javascript">
         function showToast(title, text, icon) {
@@ -106,7 +114,7 @@
 </head>
 
 <body>
-    
+
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             @include('backend.sidebar')

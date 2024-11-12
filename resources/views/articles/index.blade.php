@@ -82,10 +82,10 @@
                                             </td>
                                             <td style="font-weight: bold">{{ $data->categorie->name }}</td>
                                             <td><b
-                                                    class="badge rounded-pill
-                                    {{ $data->status == 'approved' ? 'bg-success' : '' }}
-                                    {{ $data->status == 'pending' ? 'bg-info' : '' }}
-                                    {{ $data->status == 'rejected' ? 'bg-danger' : '' }}"><i
+                                                    class="badge 
+                                    {{ $data->status == 'approved' ? 'bg-label-success' : '' }}
+                                    {{ $data->status == 'pending' ? 'bg-label-warning' : '' }}
+                                    {{ $data->status == 'rejected' ? 'bg-label-danger' : '' }}"><i
                                                         class='bx bx-time-five'></i>
                                                     {{ ucfirst($data->status) }} </b>
                                             </td>

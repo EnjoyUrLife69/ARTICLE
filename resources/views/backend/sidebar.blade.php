@@ -77,8 +77,8 @@
             </a>
         </li>
         <li
-            class="menu-item">
-            <a href="#" class="menu-link">
+            class="menu-item {{ request()->routeIs('profile') ? 'active' : '' }}">
+            <a href="{{route('profile')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics">Profile</div>
             </a>

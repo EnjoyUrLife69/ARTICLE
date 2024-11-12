@@ -24,8 +24,9 @@ class UserController extends Controller
     public function profile(): View
     {
         $user = auth()->user();
+        $roles = $user->getRoleNames(); // Mengambil role user
 
-        return view('backend.header', compact('user'));
+        return view('users.profile', compact('user', 'roles'));
     }
 
     public function index(Request $request): View
