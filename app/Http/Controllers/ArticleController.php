@@ -102,6 +102,7 @@ class ArticleController extends Controller
             'content' => 'required',
             'cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'categorie_id' => 'required',
+            'description' => 'required',
         ]);
 
         $article = new Article();
@@ -171,7 +172,13 @@ class ArticleController extends Controller
         $article->content = $request->input('content');
         $article->categorie_id = $request->input('categorie_id');
         $article->user_id = auth()->user()->id;
-        $article->status = $request->input('status') ?? 'pending';
+
+        // Cek apakah status sudah approved atau rejected
+        if ($article->status === 'approved' || $article->status === 'rejected') {
+            $article->status = $article->status;
+        } else {
+            $article->status = $request->input('status') ?? 'pending';
+        }
 
         if ($request->hasFile('cover')) {
             $image = $request->file('cover');

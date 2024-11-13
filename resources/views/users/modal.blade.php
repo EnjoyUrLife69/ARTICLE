@@ -15,11 +15,11 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col mb-3">
-                            <label for="nameWithTitle" class="form-label">Username</label>
+                            <label for="nameWithTitle" class="form-label">Username <span style="color: red">*</span></label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class='bx bx-user'></i></span>
-                                <input style="font-weight: bold; padding-left: 15px;" type="text" id="nameWithTitle" 
+                                <input style="font-weight: bold; padding-left: 15px;" type="text" id="nameWithTitle"
                                     required class="form-control" name="name" value="{{ $user->name }}" />
                             </div>
                             @error('name')
@@ -29,11 +29,11 @@
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <label for="nameWithTitle" class="form-label">Email</label>
+                            <label for="nameWithTitle" class="form-label">Email <span style="color: red">*</span></label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class='bx bx-envelope'></i></span>
-                                <input style="font-weight: bold; padding-left: 15px;" type="text" id="nameWithTitle" 
+                                <input style="font-weight: bold; padding-left: 15px;" type="text" id="nameWithTitle"
                                     required class="form-control" name="email" value="{{ $user->email }}" />
                             </div>
                             @error('email')
@@ -43,7 +43,7 @@
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <label for="nameWithTitle" class="form-label">Role</label>
+                            <label for="nameWithTitle" class="form-label">Role <span style="color: red">*</span></label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class='bx bx-category'></i></span>
@@ -133,7 +133,9 @@
                             </div>
                             <div class="row">
                                 <center>
-                                    <p><b style="color: green;">{{ $user->article()->status('approved')->count() }}</b>  Article</p>
+                                    <p><b
+                                            style="color: green;">{{ $user->article()->status('approved')->count() }}</b>
+                                        Article</p>
                                 </center>
                             </div>
                         </div>
@@ -148,7 +150,7 @@
                                 <center>{{ $loop->iteration }}</center>
                             </div>
                             <div class="col-sm-9">
-                               <hr> {{ Str::limit($data->title, 48) }}
+                                <hr> {{ Str::limit($data->title, 48) }}
                             </div>
                             <div class="col-sm-2">
                                 <hr> {{ \Carbon\Carbon::parse($data->release_date)->format('d/m/Y') }}
@@ -173,5 +175,4 @@
         </div>
 
     </div>
-</div>
 </div>

@@ -21,11 +21,15 @@
                         </div>
                         <div class="card-body">
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="basic-default-name">Title</label>
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">Title <span style="color: red;">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="title" id="basic-default-name"
                                         placeholder="Enter Article title" />
+                                    @error('title')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
+
                             </div>
                             {{-- <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="basic-default-company">Release Date</label>
@@ -35,7 +39,7 @@
                                     </div>
                                 </div> --}}
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="basic-default-email">Categories</label>
+                                <label class="col-sm-2 col-form-label" for="basic-default-email">Categories <span style="color: red;">*</span></label>
                                 <div class="col-sm-10">
                                     <div class="input-group input-group-merge">
                                         <select id="defaultSelect" class="form-select" name="categorie_id">
@@ -46,16 +50,23 @@
                                         </select>
                                     </div>
                                     <div class="form-text">Choose your category</div>
+                                    @error('categorie_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="basic-default-message">Description</label>
+                                <label class="col-sm-2 col-form-label" for="basic-default-message">Description <span style="color: red;">*</span></label>
                                 <div class="col-sm-10">
                                     <textarea style="height: 200%" id="basic-default-message" class="form-control" name="description"
                                         placeholder="Tell More about this article" aria-label="Hi, Do you have a moment to talk Joe?"
                                         aria-describedby="basic-icon-default-message2"></textarea>
+                                    @error('description')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
+
                             </div>
                             <div class="row justify-content-end">
                                 <p style="color: white">.</p>
@@ -70,7 +81,6 @@
                                         <button type="cancel" class="btn btn-primary">Submit</button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -78,12 +88,15 @@
                 <div class="col-4" style="max-height: 50px">
                     <div class="card mb-4" style="height: 24.8rem">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="form-label" style="font-weight: bold">Cover</h5>
+                            <h5 class="form-label" style="font-weight: bold">Cover <span style="color: red;">*</span></h5>
                         </div>
                         <div class="card-body">
                             <!-- Input file -->
                             <input class="form-control" type="file" id="formFile" name="cover" accept="image/*"
                                 onchange="previewImage()" />
+                            @error('cover')
+                                <small class="text-danger">{{ $message }}<br></small>
+                            @enderror
                             <small class="form-text text-muted">
                                 jpeg, png, jpg, gif, svg, webp.
                             </small>
@@ -108,11 +121,14 @@
                             <div class="card-body">
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label" for="basic-default-message"
-                                        style="font-weight: bold">Content</label>
+                                        style="font-weight: bold">Content <span style="color: red;">*</span></label>
                                     <div class="col-sm-10">
                                         <textarea style="height: 150%" id="exampleFormControlTextarea2" class="form-control" name="content"
                                             placeholder="Write your content here" aria-label="Hi, Do you have a moment to talk Joe?"
                                             aria-describedby="basic-icon-default-message2"></textarea>
+                                        @error('content')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
 

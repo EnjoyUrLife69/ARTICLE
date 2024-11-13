@@ -118,7 +118,7 @@
 
                                                 <div class="row mb-3">
                                                     <label for="defaultSelect"
-                                                        class="col-sm-2 col-form-label">Role</label>
+                                                        class="col-sm-2 col-form-label">Role <span style="color: red">*</span></label>
                                                     <div class="col-sm-10">
                                                         <select id="defaultSelect1" class="form-select" name="roles[]">
                                                             <option value="" disabled selected>Select Role</option>
