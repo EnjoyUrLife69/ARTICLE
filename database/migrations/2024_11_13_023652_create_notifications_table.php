@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title'); 
             $table->text('message'); 
-            $table->string('status')->default('unread'); 
+            $table->boolean('status')->default(false); 
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

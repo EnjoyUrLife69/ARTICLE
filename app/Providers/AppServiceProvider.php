@@ -18,16 +18,25 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot()
+    public function boot(): void
     {
         View::composer('backend.header', function ($view) {
-            $notifications = auth()->check()
-            ? auth()->user()->notifications()->orderBy('created_at', 'desc')->take(10)->get()
-            : collect(); // Jika user belum login, beri koleksi kosong
+            if (auth()->check()) {
+                $notifications = auth()->user()
+                    ->notifications()
+                    ->orderBy('created_at', 'desc')
+                    ->take(10)
+                    ->get();
 
-            $unreadCount = auth()->check()
-            ? auth()->user()->notifications()->where('status', 'unread')->count()
-            : 0;
+                $unreadCount = auth()->user()
+                    ->notifications()
+                    ->where('status', false)
+                    ->count();
+
+            } else {
+                $notifications = collect(); // Koleksi kosong jika belum login
+                $unreadCount = 0;
+            }
 
             $view->with(compact('notifications', 'unreadCount'));
         });

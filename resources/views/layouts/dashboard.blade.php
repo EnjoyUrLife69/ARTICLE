@@ -240,6 +240,27 @@
         });
     </script>
 
+    <script>
+        document.getElementById('notification-bell').addEventListener('click', function() {
+            // Kirim permintaan ke server untuk menandai semua notifikasi sebagai dibaca
+            fetch("{{ route('notifications.markAsRead') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Ubah badge menjadi kosong (menghilangkan jumlah notifikasi baru)
+                        document.querySelector('#notification-bell .badge').textContent = '';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+
 </body>
 
 </html>

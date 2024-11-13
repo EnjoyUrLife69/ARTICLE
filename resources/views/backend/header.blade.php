@@ -24,7 +24,8 @@
             <!-- Notification -->
             <!-- Notification -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                <a id="notification-bell" class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
                     <i class='bx bx-bell' style="font-size: 24px;"></i>
                     <span class="badge bg-label-primary rounded-pill">
                         {{ $unreadCount > 0 ? $unreadCount : '' }}

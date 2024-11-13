@@ -38,4 +38,13 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
         return redirect()->back(); // Kembali ke halaman sebelumnya
     })->name('notification.read');
 
+    Route::post('/notifications/mark-as-read', function () {
+        $user = auth()->user();
+        if ($user) {
+            $user->notifications()->where('status', false)->update(['status' => true]);
+        }
+
+        return response()->json(['success' => true]);
+    })->name('notifications.markAsRead');
+
 });
