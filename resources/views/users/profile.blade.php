@@ -129,6 +129,11 @@
                                 <td><b>{{ $user->article()->status('approved')->count() }}</b> Article</td>
                             </tr>
                             <tr>
+                                <td><i class='bx bx-user'></i>&nbsp;&nbsp;Article <b style="color: red;">Rejected</b></td>
+                                <td>&nbsp;&nbsp;: &nbsp;</td>
+                                <td><b>{{ $user->article()->status('rejected')->count() }}</b> Article</td>
+                            </tr>
+                            <tr>
                                 <td><i class='bx bx-badge-check'></i>&nbsp;&nbsp; View</td>
                                 <td>&nbsp;&nbsp;: &nbsp;</td>
                                 <td>-- coming soon --</td>
