@@ -4,19 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Categorie;
+use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Storage;
 
 class ArticleController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
-         $this->middleware('permission:article-list|article-create|article-edit|article-delete', ['only' => ['index','show']]);
-         $this->middleware('permission:article-create', ['only' => ['create','store']]);
-         $this->middleware('permission:article-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:article-delete', ['only' => ['destroy']]);
-         $this->middleware('permission:accept-request', ['only' => ['request', 'approve', 'reject']]);
+        $this->middleware('permission:article-list|article-create|article-edit|article-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:article-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:article-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:article-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:accept-request', ['only' => ['request', 'approve', 'reject']]);
     }
 
     public function sidebarData()
@@ -31,21 +33,34 @@ class ArticleController extends Controller
 
     public function approve($id)
     {
-        $articles = Article::findOrFail($id);
-        $articles->status = 'approved'; // Status bisa disesuaikan, misalnya 'approved'
-        $articles->save();
+        $article = Article::findOrFail($id);
+        $article->status = 'approved';
+        $article->save();
+
+        // Kirim notifikasi ke penulis
+        Notification::create([
+            'user_id' => $article->user_id,
+            'title' => 'Article Approved',
+            'message' => "Your Article titled '{$article->title}' has been approved.",
+        ]);
 
         return redirect()->route('request')->with('success', 'The article has been Approved');
     }
 
     public function reject($id)
     {
-        $articles = Article::findOrFail($id);
-        $articles->status = 'rejected'; // Status bisa disesuaikan, misalnya 'rejected'
-        $articles->save();
+        $article = Article::findOrFail($id);
+        $article->status = 'rejected';
+        $article->save();
+
+        // Kirim notifikasi ke penulis
+        Notification::create([
+            'user_id' => $article->user_id,
+            'title' => 'Article Rejected',
+            'message' => "Your Article titled '{$article->title}' has been Rejected.",
+        ]);
 
         return redirect()->route('request')->with('success', 'The article has been Rejected');
-
     }
 
     public function request()
@@ -64,7 +79,7 @@ class ArticleController extends Controller
             ->get();
         $approvedArticlesCount = Article::where('status', 'approved')->count();
 
-        return view('articles.index', compact('articles', 'categories' , 'approvedArticlesCount'));
+        return view('articles.index', compact('articles', 'categories', 'approvedArticlesCount'));
     }
 
     /**
@@ -131,7 +146,6 @@ class ArticleController extends Controller
         $existingCover = $articles->cover;
 
         $categories = Categorie::limit(5)->get();
-
 
         return view('articles.edit', compact('articles', 'categories', 'existingCover'));
 

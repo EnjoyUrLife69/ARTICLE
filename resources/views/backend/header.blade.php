@@ -21,7 +21,60 @@
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
-            <!-- User -->
+            <!-- Notification -->
+            <!-- Notification -->
+            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <i class='bx bx-bell' style="font-size: 24px;"></i>
+                    <span class="badge bg-label-primary rounded-pill">
+                        {{ $unreadCount > 0 ? $unreadCount : '' }}
+                    </span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <!-- Header Notification -->
+                    <li class="dropdown-header">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span>Notification</span>
+                            <span class="badge bg-label-primary">{{ $unreadCount }} New</span>
+                            <i class='bx bx-envelope-open ms-2'></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown-divider"></div>
+                    </li>
+                    <!-- Notification Items -->
+                    @forelse ($notifications as $notification)
+                        <li>
+                            <a class="dropdown-item d-flex align-items-start"
+                                href="{{ route('notification.read', $notification->id) }}">
+                                <div class="flex-shrink-0 me-3">
+                                    <img src="https://via.placeholder.com/40" alt="Avatar" class="rounded-circle"
+                                        width="40">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">{{ $notification->title }}</h6>
+                                    <small class="text-muted">{{ Str::limit($notification->message, 50) }}</small>
+
+                                </div>
+                                <span
+                                    class="badge bg-label-info ms-2">{{ $notification->created_at->diffForHumans() }}</span>
+                            </a>
+                        </li>
+                    @empty
+                        <li>
+                            <p class="dropdown-item text-center">Tidak ada notifikasi.</p>
+                        </li>
+                    @endforelse
+                    <!-- View All Notifications -->
+                    <li>
+                        <a class="dropdown-item text-center text-primary" href="#">
+                            <b>View all notifications</b>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
@@ -59,7 +112,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{route('profile')}}">
+                        <a class="dropdown-item" href="{{ route('profile') }}">
                             <i class="bx bx-user me-2"></i>
                             <span class="align-middle">My Profile</span>
                         </a>

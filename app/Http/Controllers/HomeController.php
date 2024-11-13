@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class HomeController extends Controller
 {
     /**
@@ -25,4 +23,14 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function getNotifications()
+    {
+        $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->take(10)->get();
+        $unreadCount = auth()->user()->notifications()->where('status', 'unread')->count();
+
+        return view('backend.header', compact('notifications', 'unreadCount'));
+    }
+    
+
 }

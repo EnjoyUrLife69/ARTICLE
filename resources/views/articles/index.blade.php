@@ -81,14 +81,21 @@
                                                 {{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}
                                             </td>
                                             <td style="font-weight: bold">{{ $data->categorie->name }}</td>
-                                            <td><b
+                                            <td>
+                                                <b
                                                     class="badge 
-                                    {{ $data->status == 'approved' ? 'bg-label-success' : '' }}
-                                    {{ $data->status == 'pending' ? 'bg-label-warning' : '' }}
-                                    {{ $data->status == 'rejected' ? 'bg-label-danger' : '' }}"><i
-                                                        class='bx bx-time-five'></i>
-                                                    {{ ucfirst($data->status) }} </b>
+                                                        {{ $data->status == 'approved' ? 'bg-label-success' : '' }}
+                                                        {{ $data->status == 'pending' ? 'bg-label-warning' : '' }}
+                                                        {{ $data->status == 'rejected' ? 'bg-label-danger' : '' }}">
+                                                    <i
+                                                        class="{{ $data->status == 'approved' ? 'bx bx-check-double' : '' }}
+                                                               {{ $data->status == 'pending' ? 'bx bx-time-five' : '' }}
+                                                               {{ $data->status == 'rejected' ? 'bx bxs-message-square-x' : '' }}">
+                                                    </i>
+                                                    {{ ucfirst($data->status) }}
+                                                </b>
                                             </td>
+
                                             <td>
                                                 {{-- SHOW --}}
                                                 <button type="button" class="btn btn-sm btn-warning"
