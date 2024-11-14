@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activitie;
 use App\Models\Article;
 use App\Models\Categorie;
 use App\Models\Notification;
@@ -125,6 +126,16 @@ class ArticleController extends Controller
             $article->cover = $imageName;
         }
 
+        Activitie::create([
+            'user_id' => auth()->id(),
+            'action' => 'create',
+            'article_id' => $article->id,
+            'details' => "Created an article with the title <b>'{$article->title}'</b>",
+            'img' => $article->cover,
+            'description' => $article->description,
+            'categorie_name' => $article->categorie ? $article->categorie->name : 'No category',    
+        ]);
+
         $article->save();
         return redirect()->route('articles.index')->with('success', 'Data created successfully.');
     }
@@ -196,6 +207,16 @@ class ArticleController extends Controller
             $article->cover = $imageName;
         }
 
+        Activitie::create([
+            'user_id' => auth()->id(),
+            'action' => 'edit',
+            'article_id' => $article->id,
+            'details' => "Edited an article with the title <b>'{$article->title}'</b>",
+            'img' => $article->cover,
+            'description' => $article->description,
+            'categorie_name' => $article->categorie ? $article->categorie->name : 'No category',
+        ]);
+
         $article->save();
         return redirect()->route('articles.index')->with('success', 'Data updated successfully.');
     }
@@ -207,6 +228,16 @@ class ArticleController extends Controller
     {
         $articles = Article::findOrFail($id);
         $articles->delete();
+
+        Activitie::create([
+            'user_id' => auth()->id(),
+            'action' => 'delete',
+            'article_id' => $articles->id,
+            'details' => "Deleted an article with the title <b>'{$articles->title}'</b>",
+            'img' => $articles->cover,
+            'description' => $articles->description,
+            'categorie_name' => $articles->categorie ? $articles->categorie->name : 'No category',
+        ]);
 
         return redirect()->route('articles.index')->with('success', 'Data deleted successfully.');
     }

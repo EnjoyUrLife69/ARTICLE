@@ -43,6 +43,11 @@
             border-radius: 50%;
             display: inline-block;
         }
+
+        .vl {
+            border-left: 2px solid #E4E6E8;
+            height: 115px;
+        }
     </style>
     <script type="text/javascript">
         function showToast(title, text, icon) {

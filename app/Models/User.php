@@ -33,6 +33,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Notification::class);
     }
+    public function activitie()
+    {
+        return $this->hasMany(Activitie::class, 'user_id', 'id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

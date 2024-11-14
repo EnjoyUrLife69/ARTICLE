@@ -10,6 +10,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
+use App\Models\Activitie;
+
 use Storage;
 
 class UserController extends Controller
@@ -23,10 +25,14 @@ class UserController extends Controller
     }
     public function profile(): View
     {
+        $activities = Activitie::where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         $user = auth()->user();
         $roles = $user->getRoleNames(); // Mengambil role user
 
-        return view('users.profile', compact('user', 'roles'));
+        return view('users.profile', compact('user', 'roles', 'activities'));
     }
 
     public function index(Request $request): View

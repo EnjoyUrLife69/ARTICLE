@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('title'); 
-            $table->text('message'); 
-            $table->boolean('status')->default(false);
+            $table->string('action'); // e.g., "create", "edit", "delete"
+            $table->uuid('article_id')->nullable(); // Artikel terkait (jika ada)
+            $table->text('details'); // Detail aktivitas
+            $table->string('img')->nullable();
+            $table->string('categorie_name');
+            $table->longtext('description');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
         });
 
     }
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('activities');
     }
 };

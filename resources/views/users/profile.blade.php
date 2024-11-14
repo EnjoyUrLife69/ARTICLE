@@ -141,23 +141,53 @@
             <div class="col-8">
                 <div class="card" data-aos-delay="300" data-aos="zoom-in">
                     <div class="card-body">
-                        <i class='bx bx-bar-chart-alt-2'></i>&nbsp; Activity Timeline <br>
-                        <div class="dot mt-4"></div><br><br><br><br>
-                        <figure class="text-center mt-2">
-                            <blockquote class="blockquote">
-                                <p class="mb-0"><em>This feature is planned for a future update.</em></p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                                Moh Bisma Fazarahim
-                            </figcaption><br><br><br><br>
-                        </figure>
+                        <div>
+                            <i class='bx bx-bar-chart-alt-2'></i>&nbsp; Activity Timeline
+                        </div>
+                        @if ($activities->isEmpty())
+                            <center><em>No activity yet. Stay tuned!</em></center>
+                        @else
+                            @foreach ($activities as $data)
+                                <div style="display: flex; align-items: center; margin-top: 16px;">
+                                    <div class="dot"></div>
+                                    <b class="ms-3">{{ ucfirst($data->action) }} an Article</b>
+                                    <em style="margin-left: auto;">{{ $data->created_at->diffForHumans() }}</em>
+                                </div>
+                                <div class="vl ms-1">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="ms-4 mt-2">{!! $data->details !!}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <img class="ms-4" src="{{ asset('storage/images/articles/' . $data->img) }}"
+                                                width="103" alt="img"
+                                                style="border: 2px solid #E4E6E8; border-radius: 4px;">
+                                        </div>
+                                        <div class="col-10">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <em class="ms-4">" {{ $data->description }} "</em>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-12">
+                                                    <span class="badge bg-primary ms-4">{{ $data->categorie_name }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
-
 
                 </div>
             </div>
-
         </div>
+
+    </div>
 
     </div>
 @endsection
