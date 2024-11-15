@@ -83,9 +83,6 @@ class ArticleController extends Controller
         return view('articles.index', compact('articles', 'categories', 'approvedArticlesCount'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Categorie::limit(5)->get();
@@ -93,9 +90,6 @@ class ArticleController extends Controller
         return view('articles.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -140,17 +134,11 @@ class ArticleController extends Controller
         return redirect()->route('articles.index')->with('success', 'Data created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Article $article)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $articles = Article::FindOrFail($id);
@@ -163,9 +151,6 @@ class ArticleController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -221,9 +206,6 @@ class ArticleController extends Controller
         return redirect()->route('articles.index')->with('success', 'Data updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $articles = Article::findOrFail($id);
