@@ -48,8 +48,7 @@
                             <a class="dropdown-item d-flex align-items-start"
                                 href="{{ route('notification.read', $notification->id) }}">
                                 <div class="flex-shrink-0 me-3">
-                                    <img src="https://via.placeholder.com/40" alt="Avatar" class="rounded-circle"
-                                        width="40">
+                                    -
                                 </div>
                                 <div class="flex-grow-1">
                                     <h6 class="mb-1">{{ $notification->title }}</h6>

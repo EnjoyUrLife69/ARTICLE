@@ -143,10 +143,19 @@
                 <div class="tab-pane fade" id="navs-pills-top-card" role="tabpanel">
                     <div class="row g-4">
                         @foreach ($articles as $data)
-                            <div class="col-md-3 d-flex">
-                                <div class="card w-100">
-                                    <img src="{{ asset('storage/images/articles/' . $data->cover) }}" class="card-img-top"
-                                        alt="Card image" style="height: 200px; object-fit: cover; width: 100%;">
+                            <div class="col-md-4 d-flex">
+                                <div class="card w-100" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                                    <!-- Wrapper for image and category -->
+                                    <div class="position-relative">
+                                        <!-- Category placed on top right of the image -->
+                                        <span class="badge bg-primary position-absolute top-0 end-0 m-2"
+                                            style="z-index: 10;">{{ $data->categorie->name }}</span>
+
+                                        <img src="{{ asset('storage/images/articles/' . $data->cover) }}"
+                                            class="card-img-top" alt="Card image"
+                                            style="height: 200px; object-fit: cover; width: 100%;">
+                                    </div>
+
                                     <div class="card-body d-flex flex-column">
                                         <h5 class="card-title">{{ $data->title }}</h5>
                                         <p class="card-text flex-grow-1">{{ Str::limit($data->description, 99) }}</p>
@@ -155,6 +164,7 @@
                                 </div>
                             </div>
                         @endforeach
+
                     </div>
                 </div>
 

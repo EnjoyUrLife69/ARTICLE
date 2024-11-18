@@ -21,7 +21,7 @@ class CategorieController extends Controller
             ->leftJoin('articles', 'articles.categorie_id', '=', 'categories.id') // sesuaikan nama kolom dengan struktur tabel
             ->selectRaw('COUNT(articles.id) as articles_count')
             ->groupBy('categories.id')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('name', 'asc')
             ->get();
 
         return view('categories.index', compact('categories'));

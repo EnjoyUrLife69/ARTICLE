@@ -27,6 +27,9 @@
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" name="title" id="basic-default-name"
                                         placeholder="Enter Article title" value="{{ $articles->title }}" />
+                                    @error('title')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             {{-- <div class="row mb-3">
@@ -49,7 +52,9 @@
                                                 </option>
                                             @endforeach
                                         </select>
-
+                                        @error('categorie_id')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                     <div class="form-text">Choose your category</div>
                                 </div>
@@ -61,6 +66,9 @@
                                     <textarea style="height: 200%" id="basic-default-message" class="form-control" name="description"
                                         placeholder="Tell More about this article" aria-label="Hi, Do you have a moment to talk Joe?"
                                         aria-describedby="basic-icon-default-message2">{{ $articles->description }}</textarea>
+                                    @error('description')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row justify-content-end">
@@ -90,6 +98,9 @@
                             <!-- Input file -->
                             <input class="form-control" type="file" id="formFile" name="cover" accept="image/*"
                                 onchange="previewImage(); displayFileName();" {{ !$articles->cover ? 'required' : '' }} />
+                            @error('cover')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                             <small class="form-text text-muted">
                                 jpeg, png, jpg, gif, svg, webp.
                             </small>
@@ -122,6 +133,9 @@
                                         <textarea style="height: 150%" id="exampleFormControlTextarea2" class="form-control" name="content"
                                             placeholder="Write your content here" aria-label="Hi, Do you have a moment to talk Joe?"
                                             aria-describedby="basic-icon-default-message2">{{ $articles->content }}</textarea>
+                                        @error('content')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
 

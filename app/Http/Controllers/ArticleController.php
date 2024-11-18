@@ -85,7 +85,7 @@ class ArticleController extends Controller
 
     public function create()
     {
-        $categories = Categorie::limit(5)->get();
+        $categories = Categorie::orderBy('name', 'asc')->get();
 
         return view('articles.create', compact('categories'));
     }
@@ -127,7 +127,7 @@ class ArticleController extends Controller
             'details' => "Created an article with the title <b>'{$article->title}'</b>",
             'img' => $article->cover,
             'description' => $article->description,
-            'categorie_name' => $article->categorie ? $article->categorie->name : 'No category',    
+            'categorie_name' => $article->categorie ? $article->categorie->name : 'No category',
         ]);
 
         $article->save();
@@ -145,7 +145,7 @@ class ArticleController extends Controller
 
         $existingCover = $articles->cover;
 
-        $categories = Categorie::limit(5)->get();
+        $categories = Categorie::orderBy('name', 'asc')->get();
 
         return view('articles.edit', compact('articles', 'categories', 'existingCover'));
 
@@ -156,7 +156,7 @@ class ArticleController extends Controller
         $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3048',
             'categorie_id' => 'required',
             'description' => 'required',
         ]);
@@ -183,8 +183,8 @@ class ArticleController extends Controller
             // Simpan gambar baru ke storage
             $path = $image->storeAs('images/articles', $imageName);
 
-            // Hapus gambar lama jika ada
-            if ($article->cover) {
+            // Periksa apakah cover lama digunakan di aktivitas lain
+            if ($article->cover && !Activitie::where('img', $article->cover)->exists()) {
                 Storage::delete('images/articles/' . $article->cover);
             }
 
@@ -209,8 +209,6 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $articles = Article::findOrFail($id);
-        $articles->delete();
-
         Activitie::create([
             'user_id' => auth()->id(),
             'action' => 'delete',
@@ -220,6 +218,8 @@ class ArticleController extends Controller
             'description' => $articles->description,
             'categorie_name' => $articles->categorie ? $articles->categorie->name : 'No category',
         ]);
+
+        $articles->delete();
 
         return redirect()->route('articles.index')->with('success', 'Data deleted successfully.');
     }

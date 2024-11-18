@@ -23,7 +23,7 @@
                         <thead>
                             <tr style="font-weight: bold">
                                 <th>No</th>
-                                <th style="width: 8%"></th>
+                                <th>Writer</th>
                                 <th>Title</th>
                                 <th>Release Date</th>
                                 <th>Category</th>
@@ -35,13 +35,13 @@
                             @foreach ($articles as $data)
                                 <tr>
                                     <td style="font-weight: bold">{{ $loop->iteration }}</td>
-                                    <td><img src="{{ asset('storage/images/users/' . $data->user->image) }}"
+                                    <td style="font-weight: bold"><center><img src="{{ asset('storage/images/users/' . $data->user->image) }}"
                                             alt="Profile Image" class="img-fluid rounded-circle" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="{{ $data->user->name }}" data-bs-offset="0,4" data-bs-html="true"
-                                            style="width: 35px; height: 35px"></td>
-                                    <td style="font-weight: bold">{{ Str::limit($data->title, 35) }}</td>
+                                            style="width: 35px; height: 35px"></center></td>
+                                    <td style="font-weight: bold">{{ Str::limit($data->title, 45) }}</td>
                                     <td style="font-weight: bold">
-                                        {{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}
+                                        {{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D ,jS M Y') }}
                                     </td>
                                     <td style="font-weight: bold">{{ $data->categorie->name }}</td>
                                     <td><b
