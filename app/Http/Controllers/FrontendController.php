@@ -10,8 +10,9 @@ class FrontendController extends Controller
     public function home()
     {
         $articles = Article::all();
+        $article_trending = Article::take(4)->OrderBy('created_at', 'desc')->get();
         $categories = Categorie::all();
-        return view('frontend-page.homepage', compact('articles', 'categories'));
+        return view('frontend-page.homepage', compact('articles', 'article_trending' , 'categories'));
     }
     public function details($id)
     {

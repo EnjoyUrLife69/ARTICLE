@@ -75,12 +75,25 @@ class ArticleController extends Controller
     public function index()
     {
         $categories = Categorie::all();
+
         $articles = Article::where('user_id', auth()->user()->id)
             ->orderBy('created_at', 'desc')
             ->get();
         $approvedArticlesCount = Article::where('status', 'approved')->count();
 
         return view('articles.index', compact('articles', 'categories', 'approvedArticlesCount'));
+    }
+
+    public function allArticles()
+    {
+        $categories = Categorie::all();
+
+        // Mengambil semua artikel tanpa memfilter berdasarkan user
+        $articles = Article::orderBy('created_at', 'desc')->get();
+
+        $approvedArticlesCount = Article::where('status', 'approved')->count();
+
+        return view('articles.all', compact('articles', 'categories', 'approvedArticlesCount'));
     }
 
     public function create()

@@ -47,54 +47,40 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle mb-40">
-                            <h3>Coming Soon</h3>
-                        </div>
-                        <!-- Flow Socail -->
-                        <div class="single-follow mb-45">
-                            <div class="single-box">
-                                <div class="follow-us d-flex align-items-center">
-                                    <div class="follow-social">
-                                        <a href="#"><img src="assets/img/news/icon-fb.png" alt=""></a>
-                                    </div>
-                                    <div class="follow-count">
-                                        <span>8,045</span>
-                                        <p>Fans</p>
-                                    </div>
-                                </div>
-                                <div class="follow-us d-flex align-items-center">
-                                    <div class="follow-social">
-                                        <a href="#"><img src="assets/img/news/icon-tw.png" alt=""></a>
-                                    </div>
-                                    <div class="follow-count">
-                                        <span>8,045</span>
-                                        <p>Fans</p>
-                                    </div>
-                                </div>
-                                <div class="follow-us d-flex align-items-center">
-                                    <div class="follow-social">
-                                        <a href="#"><img src="assets/img/news/icon-ins.png" alt=""></a>
-                                    </div>
-                                    <div class="follow-count">
-                                        <span>8,045</span>
-                                        <p>Fans</p>
-                                    </div>
-                                </div>
-                                <div class="follow-us d-flex align-items-center">
-                                    <div class="follow-social">
-                                        <a href="#"><img src="assets/img/news/icon-yo.png" alt=""></a>
-                                    </div>
-                                    <div class="follow-count">
-                                        <span>8,045</span>
-                                        <p>Fans</p>
-                                    </div>
-                                </div>
+                        <div class="card">
+                            <div class="card header">
+                                <center><b>ABOUT THIS ARTICLE</b></center>
                             </div>
                         </div>
-                        <!-- New Poster -->
-                        <div class="news-poster d-none d-lg-block">
-                            <img src="assets/img/news/news_card.jpg" alt="">
+                        <div class="card mt-2">
+                            <div class="card header">
+                                <em>&nbsp;&nbsp;Written By :</em>
+                            </div>
+                            <div class="card body">
+                                <center><img class="mt-2"
+                                        src="{{ asset('storage/images/users/' . $articles->user->image) }}"
+                                        alt="Profile Image" style="border-radius: 50%; max-width: 120px">
+                                    <h5 class="mt-2">{{ $articles->user->name }}</h5>
+
+                                </center>
+                                <table border="0" class="mt-3">
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;Release Date</td>
+                                        <td>&nbsp;&nbsp;:</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;Category</td>
+                                        <td>&nbsp;&nbsp;:</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ $articles->categorie->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;Description</td>
+                                        <td>&nbsp;&nbsp;:</td>
+                                    </tr>
+                                </table><br>
+                                <center><p>&nbsp;&nbsp;"{{ $articles->description }}"</p></center>
+                            </div>
                         </div>
                     </div>
                 </div>

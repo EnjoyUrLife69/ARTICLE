@@ -45,7 +45,7 @@
                         <div class="col-10">
                             <h5 class="card-header">Data Table / Article</h5>
                         </div>
-                        {{-- CREATE DATA --}}
+                        {{-- CREATE DATA
                         <div class="col-2">
                             <div class="mt-3">
                                 @can('article-create')
@@ -56,7 +56,7 @@
                                     </a>
                                 @endcan
                             </div>
-                        </div>
+                        </div> --}}
                         {{-- END CREATE DATA --}}
                     </div>
                     <div class="card-body">
@@ -65,6 +65,7 @@
                                 <thead>
                                     <tr style="font-weight: bold">
                                         <th>No</th>
+                                        <th>Writer</th>
                                         <th>Title</th>
                                         <th>Release Date</th>
                                         <th>Category</th>
@@ -76,6 +77,13 @@
                                     @foreach ($articles as $data)
                                         <tr>
                                             <td style="font-weight: bold">{{ $loop->iteration }}</td>
+                                            <td style="font-weight: bold">
+                                                <center><img src="{{ asset('storage/images/users/' . $data->user->image) }}"
+                                                        alt="Profile Image" class="img-fluid rounded-circle"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        title="{{ $data->user->name }}" data-bs-offset="0,4"
+                                                        data-bs-html="true" style="width: 35px; height: 35px"></center>
+                                            </td>
                                             <td style="font-weight: bold">{{ Str::limit($data->title, 35) }}</td>
                                             <td style="font-weight: bold">
                                                 {{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}
@@ -159,7 +167,8 @@
                                     <div class="card-body d-flex flex-column">
                                         <h5 class="card-title">{{ $data->title }}</h5>
                                         <p class="card-text flex-grow-1">{{ Str::limit($data->description, 99) }}</p>
-                                        <a href="{{ url('/article/' . $data->id) }}" class="btn btn-primary mt-auto">Read More</a>
+                                        <a href="{{ url('/article/' . $data->id) }}" class="btn btn-primary mt-auto">Read
+                                            More</a>
                                     </div>
                                 </div>
                             </div>

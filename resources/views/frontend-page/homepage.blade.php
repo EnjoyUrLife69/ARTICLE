@@ -85,7 +85,7 @@
                     </div>
                     <!-- Riht content -->
                     <div class="col-lg-4">
-                        @foreach ($articles as $data)
+                        @foreach ($article_trending as $data)
                             <div class="trand-right-single d-flex">
                                 <div class="trand-right-img">
                                     <img src="{{ asset('storage/images/articles/' . $data->cover) }}" alt=""

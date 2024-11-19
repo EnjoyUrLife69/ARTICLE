@@ -117,6 +117,12 @@
                     <div data-i18n="Analytics">Categories</div>
                 </a>
             </li>
+            {{-- <li class="menu-item {{ request()->routeIs('articles.all') ? 'active' : '' }}">
+                <a href="{{ route('articles.all') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-unite"></i>
+                    <div data-i18n="Analytics">All Articles</div>
+                </a>
+            </li> --}}
             <li class="menu-item {{ request()->routeIs('request') ? 'active' : '' }}">
                 <a href="{{ route('request') }}" class="menu-link">
                     <i class='menu-icon tf-icons bx bx-git-pull-request'></i>
