@@ -7,11 +7,17 @@
                     {{ $data->title }}
                 </h5>
                 <b
-                    class="badge
-                                            {{ $data->status == 'approved' ? 'bg-success' : '' }}
-                                            {{ $data->status == 'pending' ? 'bg-warning' : '' }}
-                                            {{ $data->status == 'rejected' ? 'bg-danger' : '' }}">
-                    <i class='bx bx-time-five'></i> {{ ucfirst($data->status) }} </b>
+                    class="badge 
+                                                        {{ $data->status == 'approved' ? 'bg-success' : '' }}
+                                                        {{ $data->status == 'pending' ? 'bg-warning' : '' }}
+                                                        {{ $data->status == 'rejected' ? 'bg-danger' : '' }}">
+                    <i
+                        class="{{ $data->status == 'approved' ? 'bx bx-check-double' : '' }}
+                                                               {{ $data->status == 'pending' ? 'bx bx-time-five' : '' }}
+                                                               {{ $data->status == 'rejected' ? 'bx bxs-message-square-x' : '' }}">
+                    </i>
+                    {{ ucfirst($data->status) }}
+                </b>
             </div>
             <div class="modal-body" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word;">
                 <center><img src="{{ asset('storage/images/articles/' . $data->cover) }}" alt=""

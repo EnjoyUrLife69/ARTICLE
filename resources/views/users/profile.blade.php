@@ -48,7 +48,7 @@
                                 @endif
                             </div>
 
-                            <div class="col-5">
+                            <div class="col-10">
                                 <p class="mt-3 mb-1 text-start"><i class='bx bxs-calendar'></i> &nbsp;Joined
                                     {{ \Carbon\Carbon::parse($user->created_at)->format('F Y') }}</p>
                             </div>
@@ -60,7 +60,10 @@
         <div class="row mt-3">
             <div class="col-4">
                 <div class="row ms-0" style="padding-left: 0.1rem;">
-                    <div class="card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card" data-aos="zoom-in" data-aos-delay="200" style="height: 3rem; display: flex; justify-content: center; align-items: center; font-size: 15px; ">
+                        <b><em class="">ACCOUNT DETAIL</em></b>
+                    </div>
+                    <div class="card mt-3" data-aos="zoom-in" data-aos-delay="200">
                         <div class="card-body">
                             <h6 style="font-size: 13px;" class="card-title text-muted">ABOUT</h6>
                             <table border="0">
@@ -107,40 +110,49 @@
                     </div>
                 </div>
                 <div class="row ms-0" style="padding-left: 0.1rem;">
+                    <div class="card mt-3" data-aos="zoom-in" data-aos-delay="200" style="height: 3rem; display: flex; justify-content: center; align-items: center; font-size: 15px; ">
+                        <b><em>OVERVIEW</em></b>
+                    </div>
                     <div class="card mt-3" data-aos="zoom-in" data-aos-delay="200">
                         <div class="card-body">
-                            <h6 style="font-size: 13px;" class="card-title text-muted">OVERVIEW</h6>
                             <table border="0">
                                 <tr>
                                     <td><i class='bx bx-user'></i>&nbsp;&nbsp;Article Uploaded&nbsp;&nbsp;&nbsp;</td>
                                     <td>: &nbsp;&nbsp;&nbsp;</td>
-                                    <td><b>{{ $user->article->count() }}</b> Article</td>
+                                    <td><b>{{ $user->article->count() }}</b> Article (Total)</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td><i class='bx bx-user'></i>&nbsp;&nbsp;Article <b style="color: green;">Approved</b>
                                     </td>
                                     <td>:</td>
-                                    <td>
-                                        <b>{{ $user->article()->status('approved')->count() }}</b> Article
-                                    </td>
+                                    <td><b>{{ $user->article()->status('approved')->count() }}</b> Article</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td><i class='bx bx-user'></i>&nbsp;&nbsp;Article <b style="color: red;">Rejected</b>
                                     </td>
                                     <td>:</td>
-                                    <td>
-                                        <b>{{ $user->article()->status('rejected')->count() }}</b> Article
-                                    </td>
+                                    <td><b>{{ $user->article()->status('rejected')->count() }}</b> Article</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td><i class='bx bx-badge-check'></i>&nbsp;&nbsp; View</td>
-                                    </td>
                                     <td>:</td>
-                                    <td>
-                                        <em>-- coming soon --</em>
-                                    </td>
+                                    <td><em>-- coming soon --</em></td>
                                 </tr>
-
                             </table>
                         </div>
                     </div>
@@ -152,47 +164,10 @@
                         <div>
                             <i class='bx bx-bar-chart-alt-2'></i>&nbsp; Activity Timeline
                         </div>
-                        @if ($activities->isEmpty())
-                            <center><em>No activity yet. Stay tuned!</em></center>
-                        @else
-                            @foreach ($activities as $data)
-                                <div style="display: flex; align-items: center; margin-top: 16px;">
-                                    <div class="dot"></div>
-                                    <b class="ms-3">{{ ucfirst($data->action) }} an Article</b>
-                                    <em style="margin-left: auto;">{{ $data->created_at->diffForHumans() }}</em>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="vl"></div> <!-- Vertical line -->
-                                    <div class="ms-1">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <p class="ms-4 mt-2">{!! $data->details !!}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <img class="ms-4"
-                                                    src="{{ asset('storage/images/articles/' . $data->img) }}"
-                                                    width="103" alt="img"
-                                                    style="border: 2px solid #E4E6E8; border-radius: 4px;">
-                                            </div>
-                                            <div class="col-10">
-                                                <div class="row">
-                                                    <div class="col-12 ms-4">
-                                                        <em>" {{ $data->description }} "</em>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-2">
-                                                <div class="col-12">
-                                                    <span class="badge bg-primary ms-4">{{ $data->categorie_name }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endif
+
+                        <div id="activity-section">
+                            @include('users.partials.activity', ['activities' => $activities])
+                        </div>
                     </div>
 
                 </div>
@@ -202,4 +177,44 @@
     </div>
 
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).on('click', '.pagination a', function(e) {
+            e.preventDefault();
+
+            let page = $(this).attr('href').split('page=')[1];
+            fetchPage(page);
+        });
+
+        function fetchPage(page) {
+            $.ajax({
+                url: "?page=" + page,
+                success: function(data) {
+                    $('#activity-section').html(data);
+                },
+                error: function() {
+                    alert('Failed to load data. Please try again.');
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function fetchPage(page) {
+            $('#loading-indicator').show(); // Tampilkan indikator loading
+            $.ajax({
+                url: "?page=" + page,
+                success: function(data) {
+                    $('#activity-section').html(data);
+                    $('#loading-indicator').hide(); // Sembunyikan indikator setelah selesai
+                },
+                error: function() {
+                    $('#loading-indicator').hide(); // Sembunyikan indikator jika ada error
+                    alert('Failed to load data. Please try again.');
+                }
+            });
+        }
+    </script>
 @endsection

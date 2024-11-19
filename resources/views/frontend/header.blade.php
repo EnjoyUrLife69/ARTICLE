@@ -6,11 +6,13 @@
                     <div class="row d-flex justify-content-between align-items-center">
                         <div class="header-info-left">
                             <ul>
-                                <li><img src="{{ asset('assets-front/img/icon/header_icon1.png') }}" alt="">34ºc,
-                                    Sunny </li>
+                                {{-- <li><img src="{{ asset('assets-front/img/icon/header_icon1.png') }}"
+                                        alt="">{{ now()->format('d') }}ºC,
+                                    Sunny </li> --}}
                                 <li><img src="{{ asset('assets-front/img/icon/header_icon1.png') }}"
-                                        alt="">Tuesday, 18th June, 2019</li>
+                                        alt="">{{ now()->format('l, jS F, Y') }}</li>
                             </ul>
+
                         </div>
                         <div class="header-info-right">
                             <ul class="header-social">
@@ -30,14 +32,13 @@
                     <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                         <!-- sticky -->
                         <div class="sticky-logo">
-                            <a href="index.html"><img src="#"
-                                    alt="Logo"></a>
+                            <a href="index.html"><img src="#" alt="Logo"></a>
                         </div>
                         <!-- Main-menu -->
                         <div class="main-menu d-none d-md-block">
                             <nav>
                                 <ul id="navigation">
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="{{ url('/') }}">Home</a></li>
                                     <li><a href="categori.html">Category</a></li>
                                     <li><a href="about.html">About</a></li>
                                     <li><a href="latest_news.html">Latest News</a></li>

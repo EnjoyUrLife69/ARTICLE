@@ -48,7 +48,6 @@
             border-left: 2px solid #E4E6E8;
             margin-right: 10px;
         }
-        
     </style>
     <script type="text/javascript">
         function showToast(title, text, icon) {
@@ -272,6 +271,9 @@
         });
     </script>
 
+    {{-- paginaation user --}}
+
+    @yield('scripts')
 </body>
 
 </html>

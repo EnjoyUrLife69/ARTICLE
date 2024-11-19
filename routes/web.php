@@ -5,12 +5,12 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\Notification;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FrontendController::class, 'home']);
+Route::get('/article/{id}', [FrontendController::class, 'details']);
 
 Auth::routes();
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
@@ -46,5 +46,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
 
         return response()->json(['success' => true]);
     })->name('notifications.markAsRead');
+
+    Route::get('/profile/activities', [UserController::class, 'getActivities'])->name('profile.activities');
 
 });

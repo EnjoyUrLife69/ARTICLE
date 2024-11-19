@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Activitie;
 use App\Models\User;
 use DB;
 use Hash;
@@ -10,8 +11,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
-use App\Models\Activitie;
-
 use Storage;
 
 class UserController extends Controller
@@ -23,14 +22,19 @@ class UserController extends Controller
         $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
-    public function profile(): View
+
+    public function profile(Request $request)
     {
         $activities = Activitie::where('user_id', auth()->id())
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(3);
+
+        if ($request->ajax()) {
+            return view('users.partials.activity', compact('activities'))->render();
+        }
 
         $user = auth()->user();
-        $roles = $user->getRoleNames(); // Mengambil role user
+        $roles = $user->getRoleNames();
 
         return view('users.profile', compact('user', 'roles', 'activities'));
     }
