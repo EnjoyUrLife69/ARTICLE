@@ -23,7 +23,13 @@
     <link rel="stylesheet" href="{{ asset('assets-front/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-front/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-front/css/style.css') }}">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
+
 
 <body>
 

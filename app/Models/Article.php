@@ -42,6 +42,10 @@ class Article extends Model
     {
         return $this->hasMany(Activitie::class, 'articles_id', 'id');
     }
+    public function comment()
+    {
+        return $this->hasMany(Comment::class, 'articles_id', 'id');
+    }
 
     public function deleteImage()
     {

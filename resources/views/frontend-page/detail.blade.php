@@ -40,12 +40,64 @@
                                     <h3 class="mr-20">Comment</h3>
                                 </div>
 
-                                <center>
-                                    <p class="mt-4"><em>Coming Soon</em></p>
-                                </center>
+                                <div class="comment" class="commentList">
+                                    <form id="commentForm" action="{{ route('comments.store') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="article_id" value="{{ $articles->id }}">
+                                        <div class="form-group">
+                                            <textarea name="content" class="form-control mb-10" rows="5" placeholder="Write a comment..."></textarea>
+                                            <button id="commentList" type="submit" class="button button-contactForm boxed-btn"
+                                                style="float: right;">Send</button>
+                                        </div>
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
+                        <hr>
+                        <div>
+                            @foreach ($comments as $data)
+                                <div class="row">
+                                    <div class="col-1">
+                                        <img src="{{ asset('storage/images/users/' . $data->user->image) }}" alt="img"
+                                            height="50" width="50" style="border-radius: 50%">
+                                    </div>
+                                    <div class="col-11" style="">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                {{ $data->user->name }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p>{{ $data->created_at->diffForHumans() }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-11">
+                                        <p>{{ $data->content }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-11">
+                                        <em style="float: right;">Reply</em>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <br><br><br><br><br><br><br>
                     </div>
+
+
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card header">
@@ -67,7 +119,8 @@
                                     <tr>
                                         <td>&nbsp;&nbsp;&nbsp;&nbsp;Release Date</td>
                                         <td>&nbsp;&nbsp;:</td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>&nbsp;&nbsp;&nbsp;&nbsp;Category</td>
@@ -79,7 +132,9 @@
                                         <td>&nbsp;&nbsp;:</td>
                                     </tr>
                                 </table><br>
-                                <center><p>&nbsp;&nbsp;"{{ $articles->description }}"</p></center>
+                                <center>
+                                    <p>&nbsp;&nbsp;"{{ $articles->description }}"</p>
+                                </center>
                             </div>
                         </div>
                     </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Categorie;
+use App\Models\User;
+use App\Models\Comment;
 
 class FrontendController extends Controller
 {
@@ -19,8 +21,9 @@ class FrontendController extends Controller
         $articles = Article::findOrFail($id);
         $article = Article::all();
         $categories = Categorie::all();
+        $comments = Comment::where('article_id', $id)->OrderBy('created_at', 'desc')->get();
 
-        return view('frontend-page.detail', compact('articles', 'categories', 'article'));
+        return view('frontend-page.detail', compact('articles', 'categories', 'article', 'comments'));
     }
 
 }

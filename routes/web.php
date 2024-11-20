@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\Notification;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FrontendController;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 // FRONTEND ROUTE
 Route::get('/', [FrontendController::class, 'home']);
 Route::get('/article/{id}', [FrontendController::class, 'details']);
+
 
 Auth::routes();
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
@@ -24,6 +26,8 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::resource('articles', ArticleController::class);
     Route::resource('roles', RoleController::class);
     Route::get('/all-articles', [ArticleController::class, 'allArticles'])->name('articles.all'); // Semua artikel
+
+    Route::post('/comments', [CommentController::class, 'create'])->name('comments.store');
 
     Route::resource('users', UserController::class);
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
