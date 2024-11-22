@@ -22,7 +22,7 @@ class FrontendController extends Controller
         $categories = Categorie::all();
         $comments = Comment::where('article_id', $id)->OrderBy('created_at', 'desc')->get();
 
-        // nambah view
+        // Nambah view 1+
         if (!session()->has('viewed_article_' . $id)) {
             $articles = Article::findOrFail($id);
             $articles->increment('view_count');
