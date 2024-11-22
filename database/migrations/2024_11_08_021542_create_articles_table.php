@@ -21,6 +21,7 @@ return new class extends Migration
             $table->longtext('description');
             $table->longtext('content');
             $table->enum('status', ['approved', 'pending', 'rejected'])->default('pending');
+            $table->unsignedBigInteger('view_count')->default(0);
             $table->timestamps();
 
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
