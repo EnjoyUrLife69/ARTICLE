@@ -27,7 +27,19 @@
         html {
             scroll-behavior: smooth;
         }
+
+        .custom-dropdown-menu li:hover {
+            background-color: #f8f9fa;
+        }
+
+        .custom-dropdown-item i {
+            margin-right: 8px;
+        }
     </style>
+
+    <!-- BoxIcons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
 </head>
 
 
@@ -102,6 +114,7 @@
     <script src="{{ asset('./assets-front/js/plugins.js') }}"></script>
     <script src="{{ asset('./assets-front/js/main.js') }}"></script>
 
+    @yield('scripts')
 </body>
 
 </html>

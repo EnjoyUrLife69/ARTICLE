@@ -46,7 +46,8 @@
                                         <input type="hidden" name="article_id" value="{{ $articles->id }}">
                                         <div class="form-group">
                                             <textarea name="content" class="form-control mb-10" rows="5" placeholder="Write a comment..."></textarea>
-                                            <button id="commentList" type="submit" class="button button-contactForm boxed-btn"
+                                            <button id="commentList" type="submit"
+                                                class="button button-contactForm boxed-btn"
                                                 style="float: right;">Send</button>
                                         </div>
                                     </form>
@@ -64,13 +65,35 @@
                                     </div>
                                     <div class="col-11" style="">
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-11">
                                                 {{ $data->user->name }}
                                             </div>
+                                            @if ($data->user->id === Auth::id())
+                                                <div class="col-1 position-relative">
+                                                    <i class='bx bx-dots-vertical-rounded' style="cursor: pointer;"
+                                                        onclick="toggleDropdown(this)"></i>
+                                                    <ul class="custom-dropdown-menu"
+                                                        style="display: none; position: absolute; right: 0; margin-top: 5px; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); z-index: 1000; list-style: none; padding: 0; width: 100px;">
+                                                        <li>
+                                                            <a class="custom-dropdown-item" href="#"
+                                                                style="padding: 10px; display: block; color: black; text-decoration: none;">
+                                                                <i class='bx bx-edit-alt'></i> Edit
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="custom-dropdown-item" href="#"
+                                                                onclick="deleteItem()"
+                                                                style="padding: 10px; display: block; color: red; text-decoration: none;">
+                                                                <i class='bx bx-trash'></i> Delete
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
-                                                <p>{{ $data->created_at->diffForHumans() }}</p>
+                                                <p style="font-size: 13px;">{{ $data->created_at->diffForHumans() }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -88,16 +111,11 @@
                                     <div class="col-1">
                                         &nbsp;
                                     </div>
-                                    <div class="col-11">
-                                        <em style="float: right;">Reply</em>
-                                    </div>
                                 </div>
                             @endforeach
                         </div>
                         <br><br><br><br><br><br><br>
                     </div>
-
-
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card header">
@@ -143,4 +161,26 @@
         </div>
         <!-- About US End -->
     </main>
+@endsection
+
+@section('scripts')
+    <script>
+        function toggleDropdown(element) {
+            const dropdownMenu = element.nextElementSibling;
+
+            // Tampilkan atau sembunyikan dropdown
+            if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+                dropdownMenu.style.display = "block";
+            } else {
+                dropdownMenu.style.display = "none";
+            }
+
+            // Tutup dropdown lain saat yang ini dibuka
+            document.addEventListener('click', function(event) {
+                if (!element.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.style.display = "none";
+                }
+            });
+        }
+    </script>
 @endsection

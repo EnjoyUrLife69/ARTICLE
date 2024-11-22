@@ -57,9 +57,48 @@
                     </div>
                     <div class="col-xl-2 col-lg-2 col-md-4">
                         <div class="header-right-btn f-right d-none d-lg-block">
-                            <em id="navigation">Login</em>
+                            @auth
+                                <!-- Jika user sedang login -->
+                                <div class="dropdown">
+                                    <img src="{{ asset('storage/images/users/' . Auth::user()->image) }}" alt="User Image"
+                                        height="40" width="40" style="border-radius: 50%; cursor: pointer;"
+                                        onclick="toggleDropdown(this)">
+                                    <ul class="custom-dropdown-menu"
+                                        style="display: none; position: absolute; right: 0; margin-top: 10px; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); z-index: 1000; list-style: none; padding: 0; width: 150px;">
+                                        <li>
+                                            <a href="{{ route('profile') }}"
+                                                style="padding: 10px; display: block; color: black; text-decoration: none;">
+                                                <i class='bx bx-user'></i> Profile
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('home') }}"
+                                                style="padding: 10px; display: block; color: black; text-decoration: none;">
+                                                <i class='bx bx-home'></i> Dashboard
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                                style="padding: 10px; display: block; color: red; text-decoration: none;">
+                                                <i class='bx bx-power-off'></i> Logout
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @else
+                                <!-- Jika user tidak login -->
+                                <em id="navigation">
+                                    <a href="{{ route('login') }}" style="text-decoration: none; color: inherit;">Login</a>
+                                </em>
+                            @endauth
                         </div>
                     </div>
+
                     <!-- Mobile Menu -->
                     <div class="col-12">
                         <div class="mobile_menu d-block d-md-none"></div>
@@ -69,3 +108,25 @@
         </div>
     </div>
 </div>
+
+@section('scripts')
+    <script>
+        function toggleDropdown(element) {
+            const dropdownMenu = element.nextElementSibling;
+
+            // Tampilkan atau sembunyikan dropdown
+            if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+                dropdownMenu.style.display = "block";
+            } else {
+                dropdownMenu.style.display = "none";
+            }
+
+            // Tutup dropdown lain saat yang ini dibuka
+            document.addEventListener('click', function(event) {
+                if (!element.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.style.display = "none";
+                }
+            });
+        }
+    </script>
+@endsection

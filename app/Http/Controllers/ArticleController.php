@@ -182,9 +182,11 @@ class ArticleController extends Controller
         $article->categorie_id = $request->input('categorie_id');
         $article->user_id = auth()->user()->id;
 
-        // Cek apakah status sudah approved atau rejected
-        if ($article->status === 'approved' || $article->status === 'rejected') {
-            $article->status = $article->status;
+        // Cek status artikel
+        if ($article->status === 'approved') {
+            $article->status = 'approved';
+        } elseif ($article->status === 'rejected') {
+            $article->status = 'pending';
         } else {
             $article->status = $request->input('status') ?? 'pending';
         }

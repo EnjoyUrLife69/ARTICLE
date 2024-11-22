@@ -74,6 +74,7 @@
             </li>
 
 
+            {{-- Profile Dropdown --}}
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
@@ -120,6 +121,12 @@
                         <a class="dropdown-item" href="#">
                             <i class="bx bx-cog me-2"></i>
                             <span class="align-middle">Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{url('/')}}">
+                            <i class="bx bx-arrow-back me-2"></i>
+                            <span class="align-middle">Go To Site</span>
                         </a>
                     </li>
                     <li>
