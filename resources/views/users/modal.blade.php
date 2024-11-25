@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="EditTitle">
                     Edit
-                    Data Sertifikat</h5>
+                    Data User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{ route('users.update', $user->id) }}" method="post" role="form"
@@ -15,7 +15,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col mb-3">
-                            <label for="nameWithTitle" class="form-label">Username <span style="color: red">*</span></label>
+                            <label for="nameWithTitle" class="form-label">Username <span
+                                    style="color: red">*</span></label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class='bx bx-user'></i></span>
@@ -29,7 +30,8 @@
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <label for="nameWithTitle" class="form-label">Email <span style="color: red">*</span></label>
+                            <label for="nameWithTitle" class="form-label">Email <span
+                                    style="color: red">*</span></label>
                             <div class="input-group input-group-merge">
                                 <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                         class='bx bx-envelope'></i></span>
@@ -176,3 +178,5 @@
 
     </div>
 </div>
+
+

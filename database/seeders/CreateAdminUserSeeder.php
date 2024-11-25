@@ -22,7 +22,7 @@ class CreateAdminUserSeeder extends Seeder
             'name' => 'Prince Meow Meow III',
             'email' => 'superadmin@gmail.com',
             'password' => bcrypt('00000000'),
-            'image' => 'storage/images/cat.png',
+            'image' => 'default.jpg',
         ]);
 
         // Create Super Admin Role
@@ -40,10 +40,10 @@ class CreateAdminUserSeeder extends Seeder
 
         // Create Writer User (Optional)
         $writerUser = User::create([
-            'name' => 'Writer User',
+            'name' => 'Queen Elizabeth II',
             'email' => 'writer@gmail.com',
             'password' => bcrypt('00000000'),
-            'image' => 'storage/images/cat_writer.png',
+            'image' => 'default.jpg',
         ]);
         $writerUser->assignRole([$writerRole->id]);
 
@@ -54,10 +54,10 @@ class CreateAdminUserSeeder extends Seeder
 
         // Create Guest User (Optional)
         $guestUser = User::create([
-            'name' => 'Guest User',
+            'name' => 'King Arthur IV',
             'email' => 'guest@gmail.com',
             'password' => bcrypt('00000000'),
-            'image' => 'storage/images/cat_guest.png',
+            'image' => 'default.jpg',
         ]);
         $guestUser->assignRole([$guestRole->id]);
     }

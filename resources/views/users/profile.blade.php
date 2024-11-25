@@ -1,5 +1,41 @@
 @extends('layouts.dashboard')
 
+@section('styles')
+    <style>
+        .hover-edit {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .hover-edit .edit-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Overlay transparan */
+            border-radius: 5%;
+            /* Sesuai bentuk gambar */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            /* Animasi smooth */
+        }
+
+        .hover-edit:hover .edit-overlay {
+            opacity: 1;
+            /* Tampilkan overlay saat hover */
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card" data-aos="zoom-in">
@@ -13,12 +49,19 @@
             <div class="card-body text-center">
                 <div class="row">
                     <div class="col-2">
-                        <div class="position-relative" style="margin-top: -50px;">
-                            <img src="{{ asset('storage/images/users/' . $user->image) }}" alt="Profile Image"
-                                class="border border-5 border-white"
-                                style="border-radius: 5%; width: 135px; height: 135px; object-fit: cover;">
+                        <div class="position-relative hover-edit" style="margin-top: -50px;">
+                            <button class="border-0 bg-transparent p-0" data-bs-toggle="modal"
+                                data-bs-target="#editProfileImageModal">
+                                <img src="{{ asset('storage/images/users/' . $user->image) }}" alt="Profile Image"
+                                    class="border border-5 border-white"
+                                    style="border-radius: 5%; width: 135px; height: 135px; object-fit: cover;">
+                                <div class="edit-overlay">
+                                    <span><i class='bx bxs-edit-alt'></i> Update <br> Picture</span>
+                                </div>
+                            </button>
                         </div>
                     </div>
+
                     <div class="col-10">
                         <h4 class="mt-3 mb-1 text-start"><b>{{ $user->name }}</b></h4>
                         <div class="row">
@@ -60,7 +103,8 @@
         <div class="row mt-3">
             <div class="col-4">
                 <div class="row ms-0" style="padding-left: 0.1rem;">
-                    <div class="card" data-aos="zoom-in" data-aos-delay="200" style="height: 3rem; display: flex; justify-content: center; align-items: center; font-size: 15px; ">
+                    <div class="card" data-aos="zoom-in" data-aos-delay="200"
+                        style="height: 3rem; display: flex; justify-content: center; align-items: center; font-size: 15px; ">
                         <b><em class="">ACCOUNT DETAIL</em></b>
                     </div>
                     <div class="card mt-3" data-aos="zoom-in" data-aos-delay="200">
@@ -110,7 +154,8 @@
                     </div>
                 </div>
                 <div class="row ms-0" style="padding-left: 0.1rem;">
-                    <div class="card mt-3" data-aos="zoom-in" data-aos-delay="200" style="height: 3rem; display: flex; justify-content: center; align-items: center; font-size: 15px; ">
+                    <div class="card mt-3" data-aos="zoom-in" data-aos-delay="200"
+                        style="height: 3rem; display: flex; justify-content: center; align-items: center; font-size: 15px; ">
                         <b><em>OVERVIEW</em></b>
                     </div>
                     <div class="card mt-3" data-aos="zoom-in" data-aos-delay="200">
@@ -177,6 +222,12 @@
     </div>
 
     </div>
+    @include('users.modal-pp')
+    @if (session('success'))
+        <script type="text/javascript">
+            showToast('Success!', '{{ session('success') }}', 'success');
+        </script>
+    @endif
 @endsection
 
 @section('scripts')

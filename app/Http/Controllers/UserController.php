@@ -22,6 +22,30 @@ class UserController extends Controller
         $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
+    public function updateImage(Request $request, $id)
+    {
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            $path = $image->storeAs('images/users', $imageName, 'public');
+
+            if ($user->image) {
+                Storage::disk('public')->delete('images/users/' . $user->image);
+            }
+            $user->image = $imageName;
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'Profile photo updated successfully.');
+    }
 
     public function profile(Request $request)
     {
