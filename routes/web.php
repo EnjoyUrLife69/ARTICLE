@@ -34,7 +34,8 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
 
     Route::get('request', [ArticleController::class, 'request'])->name('request');
     Route::post('/articles/approve/{id}', [ArticleController::class, 'approve'])->name('articles.approve');
-    Route::post('/articles/reject/{id}', [ArticleController::class, 'reject'])->name('articles.reject');
+    Route::put('/articles/{id}/reject', [ArticleController::class, 'reject'])->name('articles.reject');
+
     Route::get('/notification/read/{id}', function ($id) {
         $notification = Notification::findOrFail($id);
         $notification->status = 'read'; // Tandai sebagai sudah dibaca

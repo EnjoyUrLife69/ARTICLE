@@ -7,11 +7,13 @@
                     class="modal-title" id="Show{{ $data->id }}Title">
                     {{ $data->title }}
                 </h5>
-                <b class="badge 
+                <b
+                    class="badge 
                         {{ $data->status == 'approved' ? 'bg-success' : '' }}
                         {{ $data->status == 'pending' ? 'bg-warning' : '' }}
                         {{ $data->status == 'rejected' ? 'bg-danger' : '' }}">
-                    <i class="{{ $data->status == 'approved' ? 'bx bx-check-double' : '' }}
+                    <i
+                        class="{{ $data->status == 'approved' ? 'bx bx-check-double' : '' }}
                               {{ $data->status == 'pending' ? 'bx bx-time-five' : '' }}
                               {{ $data->status == 'rejected' ? 'bx bxs-message-square-x' : '' }}">
                     </i>
@@ -67,8 +69,9 @@
                             <div class="col-10">
                                 <b>{{ $data->user->name }}</b>
                             </div>
-                            <div class="col-2"  >
-                                <span style="margin-left: 20px;" class="badge bg-primary">{{ $data->categorie->name }}</span>
+                            <div class="col-2">
+                                <span style="margin-left: 20px;"
+                                    class="badge bg-primary">{{ $data->categorie->name }}</span>
                             </div>
                             <div class="col-12">
                                 <b
@@ -101,26 +104,29 @@
                 <h5 class="modal-title" id="modalToggleLabel2">Feedback</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">Please provide a <b>Reason</b> for rejecting this article. <br> Your feedback will
-                help the
-                writer understand the issues and improve <br> their content. <br><br>
-                <textarea style="height: 200px" id="basic-default-message" class="form-control" name="#"
-                    placeholder="Write your feedback here..." aria-describedby="basic-icon-default-message2"></textarea>
-            </div>
+            <form action="{{ route('articles.reject', $data->id) }}" method="POST" style="display: inline;">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">Please provide a <b>Reason</b> for rejecting this article. <br> Your feedback
+                    will
+                    help the
+                    writer understand the issues and improve <br> their content. <br><br>
+                    <textarea style="height: 200px" id="basic-default-message" class="form-control" name="review_notes"
+                        placeholder="Write your feedback here..." aria-describedby="basic-icon-default-message2"></textarea>
+                </div>
 
-            <div class="modal-footer">
-                <button class="btn btn-sm btn-primary" data-bs-target="#Show-request{{ $data->id }}"
-                    data-bs-toggle="modal" data-bs-dismiss="modal">
-                    Cancel
-                </button>
-                <form action="{{ route('articles.reject', $data->id) }}" method="POST" style="display: inline;">
-                    @csrf
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-primary" data-bs-target="#Show-request{{ $data->id }}"
+                        data-bs-toggle="modal" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+
                     <button class="btn btn-sm  btn-danger" data-bs-target="#Show-request{{ $data->id }}"
                         data-bs-toggle="modal" data-bs-dismiss="modal">
                         Submit
                     </button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

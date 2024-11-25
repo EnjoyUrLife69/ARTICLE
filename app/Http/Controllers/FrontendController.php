@@ -18,6 +18,7 @@ class FrontendController extends Controller
     public function details($id)
     {
         $articles = Article::findOrFail($id);
+        $article_trending = Article::where('status', 'approved')->take(4)->OrderBy('created_at', 'desc')->get();
         $article = Article::all();
         $categories = Categorie::all();
         $comments = Comment::where('article_id', $id)->OrderBy('created_at', 'desc')->get();
@@ -29,7 +30,7 @@ class FrontendController extends Controller
             session()->put('viewed_article_' . $id, true);
         }
 
-        return view('frontend-page.detail', compact('articles', 'categories', 'article', 'comments'));
+        return view('frontend-page.detail', compact('articles', 'categories', 'article', 'comments', 'article_trending'));
     }
 
 }

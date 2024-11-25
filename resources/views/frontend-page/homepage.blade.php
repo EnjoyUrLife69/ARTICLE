@@ -75,8 +75,11 @@
                                         </div>
                                         <div class="trend-bottom-cap">
                                             <span class="color3">Travels</span>
-                                            <h4><a href="details.html"> Welcome To The Best Model Winner
-                                                    Contest</a></h4>
+                                            <h4>
+                                                <a href="details.html"> Welcome To The Best Model Winner
+                                                    Contest
+                                                </a>
+                                            </h4>
                                         </div>
                                     </div>
                                 </div>
@@ -88,12 +91,20 @@
                         @foreach ($article_trending as $data)
                             <div class="trand-right-single d-flex">
                                 <div class="trand-right-img">
-                                    <img src="{{ asset('storage/images/articles/' . $data->cover) }}" alt=""
-                                        style="max-width: 10rem">
+                                    <a href="{{ url('/article/' . $data->id) }}"><img
+                                            src="{{ asset('storage/images/articles/' . $data->cover) }}" alt=""
+                                            style="max-width: 10rem">
+                                    </a>
                                 </div>
                                 <div class="trand-right-cap">
                                     <span class="color1">{{ $data->categorie->name }}</span>
-                                    <h4><a href="{{ url('/article/' . $data->id) }}">{{ $data->title }}</a></h4>
+                                    <h6>
+                                        <a href="{{ url('/article/' . $data->id) }}"
+                                            style="color: inherit; text-decoration: none;"
+                                            onmouseover="this.style.color='red'" onmouseout="this.style.color='inherit'">
+                                            {{ $data->title }}
+                                        </a>
+                                    </h6>
                                 </div>
                             </div>
                         @endforeach

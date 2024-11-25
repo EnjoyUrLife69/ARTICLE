@@ -12,7 +12,7 @@ class Article extends Model
 
     // Pada model Article
     protected $fillable = [
-        'title', 'release_date', 'categorie_id', 'user_id', 'description', 'content', 'status', 'cover',
+        'title', 'release_date', 'categorie_id', 'user_id', 'description', 'content', 'status', 'cover', 'review_notes',
     ];
 
     public $timestamps = true;

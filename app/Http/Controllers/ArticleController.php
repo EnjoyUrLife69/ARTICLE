@@ -48,20 +48,24 @@ class ArticleController extends Controller
         return redirect()->route('request')->with('success', 'The article has been Approved');
     }
 
-    public function reject($id)
+    public function reject(Request $request, $id)
     {
+        $request->validate([
+            'review_notes' => 'required|string',
+        ]);
+
         $article = Article::findOrFail($id);
-        $article->status = 'rejected';
+        $article->status = 'rejected'; // Ubah status menjadi rejected
+        $article->review_notes = $request->input('review_notes'); // Simpan feedback
         $article->save();
 
-        // Kirim notifikasi ke penulis
         Notification::create([
             'user_id' => $article->user_id,
             'title' => 'Article Rejected',
             'message' => "Your Article titled '{$article->title}' has been Rejected.",
         ]);
 
-        return redirect()->route('request')->with('success', 'The article has been Rejected');
+        return redirect()->route('articles.request')->with('success', 'Article rejected with feedback.');
     }
 
     public function request()
