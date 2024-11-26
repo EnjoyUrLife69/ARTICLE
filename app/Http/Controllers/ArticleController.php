@@ -42,7 +42,7 @@ class ArticleController extends Controller
         Notification::create([
             'user_id' => $article->user_id,
             'title' => 'Article Approved',
-            'message' => "Your Article titled '{$article->title}' has been approved.",
+            'message' => "Your Article titled '{$article->title}' has been Approved.",
         ]);
 
         return redirect()->route('request')->with('success', 'The article has been Approved');
@@ -51,21 +51,22 @@ class ArticleController extends Controller
     public function reject(Request $request, $id)
     {
         $request->validate([
-            'review_notes' => 'required|string',
+            'review_notes' => 'required|string', // Validasi review notes
         ]);
 
         $article = Article::findOrFail($id);
-        $article->status = 'rejected'; // Ubah status menjadi rejected
-        $article->review_notes = $request->input('review_notes'); // Simpan feedback
+        $article->status = 'rejected';
         $article->save();
 
         Notification::create([
             'user_id' => $article->user_id,
             'title' => 'Article Rejected',
             'message' => "Your Article titled '{$article->title}' has been Rejected.",
+            'review_notes' => $request->input('review_notes'),
         ]);
 
-        return redirect()->route('articles.request')->with('success', 'Article rejected with feedback.');
+        // Redirect kembali dengan pesan sukses
+        return redirect()->route('request')->with('success', 'Article rejected with feedback.');
     }
 
     public function request()

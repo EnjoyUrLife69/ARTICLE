@@ -6,7 +6,10 @@
             <div class="card-body">
                 <h3 style="font-weight: bold; font-size: 30px">
                     <div data-aos="flip-left">
-                        <center>Article's Request</center>
+                        <center class="mt-2">
+                            <i class='bx bx-git-pull-request' style="font-size: 31px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);"></i>
+                            <em style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);"> Articles Request </em>
+                        </center>
                     </div>
                 </h3>
             </div>

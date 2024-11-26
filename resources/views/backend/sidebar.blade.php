@@ -71,8 +71,8 @@
             </a>
         </li>
         <li
-            class="menu-item">
-            <a href="" class="menu-link">
+            class="menu-item {{ request()->routeIs('notifications.index') ? 'active' : '' }}">
+            <a href="{{ route('notifications.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div data-i18n="Analytics">Notification</div>
             </a>

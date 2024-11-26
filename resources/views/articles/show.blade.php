@@ -66,10 +66,10 @@
                     </div>
                     <div class="col-10" style="margin-left: -30px; margin-top: -5px">
                         <div class="row">
-                            <div class="col-10">
+                            <div class="col-9">
                                 <b>{{ $data->user->name }}</b>
                             </div>
-                            <div class="col-2">
+                            <div class="col-3">
                                 <span style="margin-left: 20px;"
                                     class="badge bg-primary">{{ $data->categorie->name }}</span>
                             </div>

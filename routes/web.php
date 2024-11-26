@@ -4,7 +4,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\Notification;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +52,9 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
 
         return response()->json(['success' => true]);
     })->name('notifications.markAsRead');
+
+    Route::resource('notifications' , NotificationController::class);
+    Route::delete('/notifications/clear', [NotificationController::class, 'destroy'])->name('notifications.clear');
 
     Route::get('/profile/activities', [UserController::class, 'getActivities'])->name('profile.activities');
 

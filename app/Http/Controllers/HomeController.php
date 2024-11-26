@@ -26,7 +26,7 @@ class HomeController extends Controller
 
     public function getNotifications()
     {
-        $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->take(10)->get();
+        $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->take(3)->get();
         $unreadCount = auth()->user()->notifications()->where('status', 'unread')->count();
 
         return view('backend.header', compact('notifications', 'unreadCount'));

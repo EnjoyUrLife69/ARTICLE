@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('title'); 
             $table->text('message'); 
+            $table->longtext('review_notes')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
 
