@@ -22,7 +22,7 @@
             </div>
             <div class="modal-body" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word;">
                 <center><img src="{{ asset('storage/images/articles/' . $data->cover) }}" alt=""
-                        style="max-width: 30rem"></center><br>
+                        style="max-width: 30rem; box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3); border-radius: 5px;"></center><br>
                 <div class="row">
                     <div class="col-9">
                         <b
@@ -56,7 +56,7 @@
             </div>
             <div class="modal-body" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word;">
                 <center><img src="{{ asset('storage/images/articles/' . $data->cover) }}" alt=""
-                        style="max-width: 30rem"></center><br>
+                        style="max-width: 30rem; box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3); border-radius: 5px; "></center><br>
                 <div class="row" style="margin-left: -30px">
                     <div class="col-2">
                         <center><img src="{{ asset('storage/images/users/' . $data->user->image) }}"

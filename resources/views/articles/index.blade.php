@@ -87,9 +87,9 @@
                                             <td>
                                                 <b
                                                     class="badge 
-                                                        {{ $data->status == 'approved' ? 'bg-label-success' : '' }}
-                                                        {{ $data->status == 'pending' ? 'bg-label-warning' : '' }}
-                                                        {{ $data->status == 'rejected' ? 'bg-label-danger' : '' }}">
+                                                        {{ $data->status == 'approved' ? 'bg-success' : '' }}
+                                                        {{ $data->status == 'pending' ? 'bg-warning' : '' }}
+                                                        {{ $data->status == 'rejected' ? 'bg-danger' : '' }}">
                                                     <i
                                                         class="{{ $data->status == 'approved' ? 'bx bx-check-double' : '' }}
                                                                {{ $data->status == 'pending' ? 'bx bx-time-five' : '' }}

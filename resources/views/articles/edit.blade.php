@@ -6,7 +6,10 @@
             <div class="card-body">
                 <h3 style="font-weight: bold; font-size: 30px">
                     <div data-aos="flip-left">
-                        <center>Edit Article's</center>
+                        <center class="mt-2">
+                            <i class='bx bxs-book-content' style="font-size: 31px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);"></i>
+                            <em style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);">Edit Article </em>
+                        </center>
                     </div>
                 </h3>
             </div>
@@ -98,6 +101,8 @@
                             <!-- Input file -->
                             <input class="form-control" type="file" id="formFile" name="cover" accept="image/*"
                                 onchange="previewImage(); displayFileName();" {{ !$articles->cover ? 'required' : '' }} />
+                                <img id="imagePreview" src="#" alt="Preview" style="display: none; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); border-radius: 5px; max-width: 100%; margin-top: 10px;" />
+
                             @error('cover')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -113,7 +118,7 @@
                                         <img id="previewImage"
                                             src="{{ $articles->cover ? asset('storage/images/articles/' . $articles->cover) : asset('assets/img/img_placeholder.png') }}"
                                             alt="Preview Image" class="mt-3"
-                                            style="max-height: 228px; max-width: 100%; display: block;" />
+                                            style="max-height: 228px; max-width: 100%; display: block; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); border-radius: 5px;" />
                                     </label>
                                 </center>
                             </div>

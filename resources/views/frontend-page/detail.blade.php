@@ -10,7 +10,6 @@
                     <div class="col-lg-12">
                         <div class="trending-tittle">
                             <strong>Trending now</strong>
-                            <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
                             <div class="trending-animated">
                                 <ul id="js-news" class="js-hidden">
                                     @foreach ($article as $data)
@@ -23,7 +22,6 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8">
-                        <!-- Trending Tittle -->
                         <div class="about-right mb-90">
                             <div class="about-img">
                                 <img src="{{ asset('storage/images/articles/' . $articles->cover) }}" alt=""
@@ -55,6 +53,7 @@
                             </div>
                         </div>
                         <hr>
+                        {{-- Comment --}}
                         <div>
                             @foreach ($comments as $data)
                                 <div class="row">
@@ -116,6 +115,7 @@
                         </div>
                         <br><br><br><br><br><br><br>
                     </div>
+                    {{-- About this article --}}
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="col-lg-12">

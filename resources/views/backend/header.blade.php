@@ -61,7 +61,7 @@
                         </li>
                     @empty
                         <li>
-                            <p class="dropdown-item text-center">Tidak ada notifikasi.</p>
+                            <p class="dropdown-item text-center">Nothing to see here.</p>
                         </li>
                     @endforelse
                     <!-- View All Notifications -->
