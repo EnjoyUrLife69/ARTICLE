@@ -1,5 +1,37 @@
 @extends('layouts.frontend')
 
+@section('styles')
+    <style>
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .trand-right-single img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .trand-right-single img:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .trand-right-cap em {
+            color: #FF5E5E;
+        }
+
+        .trand-right-cap h6 {
+            height: 3.6rem;
+            /* Sesuaikan dengan tinggi teks rata-rata */
+            overflow: hidden;
+        }
+
+
+        .card-header {
+            background: rgba(255, 94, 94, 0.8);
+            border-bottom: 2px solid #FF3B3B;
+        }
+    </style>
+@endsection
 @section('content')
     <main>
         <!-- About US Start -->
@@ -119,74 +151,93 @@
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="card" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
-                                    <div class="card header">
-                                        <center><b>ABOUT THIS ARTICLE</b></center>
+                                <div class="card shadow-sm rounded-lg mb-3 border-0"
+                                    style="background: linear-gradient(135deg, #FF0B0B, #ff7676); max-width: 100%; margin: auto; border-radius: 9px;">
+                                    <div class="card-header text-white text-center py-2"
+                                        style="font-size: 1rem; font-weight: bold; letter-spacing: 1px; border-radius: 9px;">
+                                        ABOUT THIS ARTICLE
                                     </div>
                                 </div>
-                                <div class="card mt-2" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
-                                    <div class="card header">
-                                        <em>&nbsp;&nbsp;Written By :</em>
+                                <div class="card mt-3 shadow-lg border-0 rounded-lg" style="background-color: #ffffff;">
+                                    <div class="card-header bg-light text-secondary py-2"
+                                        style="font-style: italic; font-size: 1rem; font-weight: bold;">
+                                        &nbsp;&nbsp;Written By :
                                     </div>
-                                    <div class="card body">
+                                    <div class="card-body">
                                         <center>
-                                            <img class="mt-2"
+                                            <img class="mt-2 shadow-sm"
                                                 src="{{ asset('storage/images/users/' . $articles->user->image) }}"
-                                                alt="Profile Image" style="border-radius: 50%; max-width: 120px">
-                                            <h5 class="mt-2">{{ $articles->user->name }}</h5>
+                                                alt="Profile Image"
+                                                style="border-radius: 50%; width: 100px; border: 3px solid #ACB6E5; transition: transform 0.3s ease;">
+                                            <h5 class="mt-3" style="font-weight: bold; color: #5A5A5A;">
+                                                {{ $articles->user->name }}</h5>
                                         </center>
-                                        <table border="0" class="mt-3">
+                                        <table class="table table-borderless mt-4" style="width: 100%; font-size: 0.95rem;">
                                             <tr>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;Release Date</td>
-                                                <td>&nbsp;&nbsp;:</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}
+                                                <td class="text-muted"><i class="bx bx-calendar"></i> Release Date:</td>
+                                                <td>{{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;Category</td>
-                                                <td>&nbsp;&nbsp;:</td>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ $articles->categorie->name }}</td>
+                                                <td class="text-muted"><i class="bx bx-category"></i> Category:</td>
+                                                <td>{{ $articles->categorie->name }}</td>
                                             </tr>
                                             <tr>
-                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;Description</td>
-                                                <td>&nbsp;&nbsp;:</td>
+                                                <td class="text-muted"><i class="bx bx-info-circle"></i> Description:</td>
                                             </tr>
                                         </table>
-                                        <br>
                                         <center>
-                                            <p>&nbsp;&nbsp;"{{ $articles->description }}"</p>
+                                            <blockquote class="blockquote text-center mt-3"
+                                                style="font-size: 1rem; color: #333;">
+                                                "{{ $articles->description }}"
+                                            </blockquote>
                                         </center>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-lg-12 mt-5">
-                                <div class="card" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
-                                    <div class="card-header">
-                                        <center class="mt-2"><h5 style="color: #FF0B0B"><b style="text-transform: uppercase;">Explore more articles</b></h5></center>
-                                    </div>
-                                    <div class="card-body">
-                                        @foreach ($article_trending as $data)
-                                    <div class="trand-right-single d-flex mt-3">
-                                        <div class="trand-right-img">
-                                            <a href="{{ url('/article/' . $data->id) }}"><img src="{{ asset('storage/images/articles/' . $data->cover) }}"
-                                                alt="" style="max-width: 8rem; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); border-radius: 4%;"></a>
-                                        </div>
-                                        <div class="trand-right-cap" style="margin-left: 1rem;">
-                                            <span class="color1"><em style="font-size: 12px; text-transform: uppercase;">{{ $data->categorie->name }}</em></span>
-                                            <h6>
-                                                <a href="{{ url('/article/' . $data->id) }}"
-                                                    style="color: inherit; text-decoration: none;"
-                                                    onmouseover="this.style.color='red'"
-                                                    onmouseout="this.style.color='inherit'">
-                                                    {{ $data->title }}
-                                                </a>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                    @endforeach
+                                <div class="card shadow-sm rounded-lg mb-4 border-0"
+                                    style="background: linear-gradient(135deg, #FF0B0B, #ff7676); max-width: 100%; margin: auto; border-radius: 9px;">
+                                    <div class="card-header text-white text-center py-2"
+                                        style="font-size: 1rem; font-weight: bold; letter-spacing: 1px; border-radius: 9px;">
+                                        EXPLORE MORE ARTICLES
                                     </div>
                                 </div>
+                                <div class="card mt-3 shadow-lg border-0 rounded-lg" style="background-color: #ffffff;">
+                                    <div class="card-body">
+                                        @foreach ($article_trending as $data)
+                                            <div class="trand-right-single d-flex mt-3">
+                                                <div class="trand-right-img">
+                                                    <a href="{{ url('/article/' . $data->id) }}">
+                                                        <img src="{{ asset('storage/images/articles/' . $data->cover) }}"
+                                                            alt=""
+                                                            style="max-width: 8rem; box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); border-radius: 4%;">
+                                                    </a>
+                                                </div>
+                                                <div class="trand-right-cap" style="margin-left: 1rem;">
+                                                    <span class="color1">
+                                                        <em
+                                                            style="font-size: 12px; text-transform: uppercase; color: #FF5E5E;">
+                                                            {{ $data->categorie->name }}
+                                                        </em>
+                                                    </span>
+                                                    <h6>
+                                                        <a href="{{ url('/article/' . $data->id) }}"
+                                                            style="color: inherit; text-decoration: none;"
+                                                            onmouseover="this.style.color='red'"
+                                                            onmouseout="this.style.color='inherit'">
+                                                            {{ $data->title }}
+                                                        </a>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
                             </div>
+
                         </div>
                     </div>
                 </div>

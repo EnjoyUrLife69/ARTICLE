@@ -36,7 +36,7 @@
             margin-right: 8px;
         }
     </style>
-
+    @yield('styles')
     <!-- BoxIcons CDN -->
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
