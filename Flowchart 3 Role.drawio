@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 OPR/114.0.0.0" version="26.0.4">
   <diagram name="Page-1" id="2PvMuuVXnrtu_wnbC9QU">
-    <mxGraphModel dx="1738" dy="553" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1849" dy="623" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -112,8 +112,14 @@
         <mxCell id="K7Be8ACF9KZPtc9YEbSb-48" value="&lt;pre&gt;&lt;b&gt;Halaman Website&lt;/b&gt;&lt;/pre&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#00FF09;strokeColor=#82b366;strokeWidth=1;opacity=50;" vertex="1" parent="1">
           <mxGeometry x="350" y="240" width="130" height="40" as="geometry" />
         </mxCell>
+        <mxCell id="K7Be8ACF9KZPtc9YEbSb-61" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="K7Be8ACF9KZPtc9YEbSb-56" target="K7Be8ACF9KZPtc9YEbSb-60">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="K7Be8ACF9KZPtc9YEbSb-56" value="&lt;pre&gt;&lt;b&gt;Berkomentar&lt;/b&gt;&lt;/pre&gt;" style="whiteSpace=wrap;html=1;fillColor=#00FF09;strokeColor=#82b366;strokeWidth=1;opacity=50;" vertex="1" parent="1">
           <mxGeometry x="-55" y="970" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="K7Be8ACF9KZPtc9YEbSb-60" value="&lt;pre style=&quot;line-height: 50%;&quot;&gt;&lt;b&gt;Komentar &lt;/b&gt;&lt;/pre&gt;&lt;pre style=&quot;line-height: 50%;&quot;&gt;&lt;b&gt;Terupload&lt;/b&gt;&lt;/pre&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#00FF09;strokeColor=#82b366;strokeWidth=1;opacity=50;" vertex="1" parent="1">
+          <mxGeometry x="-58" y="1060" width="125" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
