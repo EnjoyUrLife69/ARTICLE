@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 OPR/114.0.0.0" version="26.0.4">
   <diagram name="Page-1" id="eWWWpH5on5edJ62G0c14">
-    <mxGraphModel dx="1453" dy="905" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1776" dy="1107" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -355,6 +355,64 @@
         </mxCell>
         <mxCell id="gGqT2XXP1atRA9AdMmcA-164" value="&lt;pre&gt;&lt;b&gt;No&lt;/b&gt;&lt;/pre&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="656.91" y="1129" width="40" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-165" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); font-size: 20px; text-wrap: nowrap;&quot;&gt;&lt;b&gt;ADMIN&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1242" y="11" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-166" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gGqT2XXP1atRA9AdMmcA-173" target="gGqT2XXP1atRA9AdMmcA-169">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-167" value="&lt;pre&gt;START&lt;/pre&gt;" style="ellipse;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1229" y="67" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-168" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gGqT2XXP1atRA9AdMmcA-169" target="gGqT2XXP1atRA9AdMmcA-171">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-169" value="&lt;pre style=&quot;line-height: 10%;&quot;&gt;Halaman Website&lt;/pre&gt;&lt;pre style=&quot;line-height: 10%;&quot;&gt;/ Beranda&lt;/pre&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;labelBackgroundColor=none;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1214" y="200" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-170" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gGqT2XXP1atRA9AdMmcA-171" target="gGqT2XXP1atRA9AdMmcA-176">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1274" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-171" value="&lt;pre&gt;Login&lt;/pre&gt;" style="whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1219" y="270" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-172" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gGqT2XXP1atRA9AdMmcA-167" target="gGqT2XXP1atRA9AdMmcA-173">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1274" y="107" as="sourcePoint" />
+            <mxPoint x="1269" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-173" value="&lt;pre&gt;Akses Website&lt;/pre&gt;" style="whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1219" y="140" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-174" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="gGqT2XXP1atRA9AdMmcA-176" target="gGqT2XXP1atRA9AdMmcA-171">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1394" y="355" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1349" y="355" />
+              <mxPoint x="1349" y="285" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-175" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="gGqT2XXP1atRA9AdMmcA-176" target="gGqT2XXP1atRA9AdMmcA-178">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1274" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-176" value="&lt;pre style=&quot;line-height: 50%;&quot;&gt;Berhasil?&lt;/pre&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;labelBackgroundColor=none;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1224" y="330" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-177" value="&lt;pre&gt;&lt;b&gt;No&lt;/b&gt;&lt;/pre&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="297" width="40" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-178" value="&lt;pre style=&quot;line-height: 10%;&quot;&gt;Halaman Dashboard&lt;/pre&gt;&lt;pre style=&quot;line-height: 10%;&quot;&gt;Penulis&lt;/pre&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;labelBackgroundColor=none;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1214" y="410" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-179" value="&lt;pre data-mx-given-colors=&quot;{&amp;quot;color&amp;quot;:&amp;quot;rgb(20, 54, 66)&amp;quot;,&amp;quot;background-color&amp;quot;:&amp;quot;rgb(251, 251, 251)&amp;quot;}&quot; style=&quot;forced-color-adjust: none; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; color: light-dark(rgb(20, 54, 66), rgb(173, 202, 213)); font-weight: 700; text-align: center; background-color: light-dark(rgb(251, 251, 251), rgb(21, 21, 21));&quot;&gt;yes&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1279" y="360" width="50" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
