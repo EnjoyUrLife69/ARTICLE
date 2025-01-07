@@ -43,8 +43,35 @@
         <mxCell id="K7Be8ACF9KZPtc9YEbSb-16" value="t&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;idak&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="490" y="250" width="50" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="K7Be8ACF9KZPtc9YEbSb-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="K7Be8ACF9KZPtc9YEbSb-19">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="445" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="K7Be8ACF9KZPtc9YEbSb-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="K7Be8ACF9KZPtc9YEbSb-19" target="K7Be8ACF9KZPtc9YEbSb-26">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="K7Be8ACF9KZPtc9YEbSb-19" value="&lt;pre&gt;Ingin Berkomentar?&lt;br&gt;&lt;/pre&gt;" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=1;opacity=50;strokeColor=#82b366;fillColor=#00FF09;" vertex="1" parent="1">
           <mxGeometry x="345" y="410" width="130" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="K7Be8ACF9KZPtc9YEbSb-22" value="t&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;idak&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="490" y="420" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K7Be8ACF9KZPtc9YEbSb-25" value="ya" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="401" y="478" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="K7Be8ACF9KZPtc9YEbSb-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="K7Be8ACF9KZPtc9YEbSb-26" target="K7Be8ACF9KZPtc9YEbSb-33">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="590" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="K7Be8ACF9KZPtc9YEbSb-26" value="&lt;pre&gt;Login/Daftar&lt;/pre&gt;" style="whiteSpace=wrap;html=1;strokeWidth=1;opacity=50;strokeColor=#82b366;fillColor=#00FF09;" vertex="1" parent="1">
+          <mxGeometry x="345" y="510" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="K7Be8ACF9KZPtc9YEbSb-33" value="&lt;pre&gt;Berhasil?&lt;br&gt;&lt;/pre&gt;" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=1;opacity=50;strokeColor=#82b366;fillColor=#00FF09;" vertex="1" parent="1">
+          <mxGeometry x="345" y="580" width="130" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
