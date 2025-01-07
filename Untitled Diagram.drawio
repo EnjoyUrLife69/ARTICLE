@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 OPR/114.0.0.0" version="26.0.4">
   <diagram name="Page-1" id="eWWWpH5on5edJ62G0c14">
-    <mxGraphModel dx="799" dy="498" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="841" dy="524" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -278,8 +278,14 @@
         <mxCell id="gGqT2XXP1atRA9AdMmcA-127" value="&lt;pre style=&quot;line-height: 10%;&quot;&gt;Pilih Tindakan&lt;/pre&gt;" style="whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;fontStyle=1" vertex="1" parent="1">
           <mxGeometry x="651" y="870" width="110" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="gGqT2XXP1atRA9AdMmcA-131" value="&lt;pre style=&quot;line-height: 50%;&quot;&gt;Berhasil?&lt;/pre&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;labelBackgroundColor=none;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="656" y="940" width="100" height="50" as="geometry" />
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-131" value="&lt;pre style=&quot;line-height: 50%;&quot;&gt;Edit?&lt;/pre&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FAE5C7;strokeColor=#0F8B8D;fontColor=#143642;labelBackgroundColor=none;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="656" y="930" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-132" value="&lt;pre data-mx-given-colors=&quot;{&amp;quot;color&amp;quot;:&amp;quot;rgb(20, 54, 66)&amp;quot;,&amp;quot;background-color&amp;quot;:&amp;quot;rgb(251, 251, 251)&amp;quot;}&quot; style=&quot;forced-color-adjust: none; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; color: light-dark(rgb(20, 54, 66), rgb(173, 202, 213)); font-weight: 700; text-align: center; background-color: light-dark(rgb(251, 251, 251), rgb(21, 21, 21));&quot;&gt;yes&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="455" y="690" width="50" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gGqT2XXP1atRA9AdMmcA-133" value="&lt;pre&gt;&lt;b&gt;No&lt;/b&gt;&lt;/pre&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="656" y="690" width="40" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
