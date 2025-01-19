@@ -22,7 +22,8 @@
             </div>
             <div class="modal-body" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word;">
                 <center><img src="{{ asset('storage/images/articles/' . $data->cover) }}" alt=""
-                        style="max-width: 30rem; box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3); border-radius: 5px;"></center><br>
+                        style="max-width: 30rem; box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3); border-radius: 5px;">
+                </center><br>
                 <div class="row">
                     <div class="col-9">
                         <b
@@ -56,7 +57,8 @@
             </div>
             <div class="modal-body" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word;">
                 <center><img src="{{ asset('storage/images/articles/' . $data->cover) }}" alt=""
-                        style="max-width: 30rem; box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3); border-radius: 5px; "></center><br>
+                        style="max-width: 30rem; box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3); border-radius: 5px; ">
+                </center><br>
                 <div class="row" style="margin-left: -30px">
                     <div class="col-2">
                         <center><img src="{{ asset('storage/images/users/' . $data->user->image) }}"
@@ -104,29 +106,35 @@
                 <h5 class="modal-title" id="modalToggleLabel2">Feedback</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
             <form action="{{ route('articles.reject', $data->id) }}" method="POST" style="display: inline;">
                 @csrf
                 @method('PUT')
-                <div class="modal-body">Please provide a <b>Reason</b> for rejecting this article. <br> Your feedback
-                    will
-                    help the
-                    writer understand the issues and improve <br> their content. <br><br>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    Please provide a <b>Reason</b> for rejecting this article. <br>
+                    Your feedback will help the writer understand the issues and improve their content. <br><br>
                     <textarea style="height: 200px" id="basic-default-message" class="form-control" name="review_notes"
                         placeholder="Write your feedback here..." aria-describedby="basic-icon-default-message2"></textarea>
                 </div>
 
+                <!-- Modal Footer -->
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-primary" data-bs-target="#Show-request{{ $data->id }}"
-                        data-bs-toggle="modal" data-bs-dismiss="modal">
+                    <!-- Tombol Cancel -->
+                    <button type="button" class="btn btn-sm btn-primary"
+                        data-bs-target="#Show-request{{ $data->id }}" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">
                         Cancel
                     </button>
 
-                    <button class="btn btn-sm  btn-danger" data-bs-target="#Show-request{{ $data->id }}"
-                        data-bs-toggle="modal" data-bs-dismiss="modal">
+                    <!-- Tombol Submit -->
+                    <button type="submit" class="btn btn-sm btn-danger">
                         Submit
                     </button>
                 </div>
             </form>
+            
         </div>
     </div>
 </div>

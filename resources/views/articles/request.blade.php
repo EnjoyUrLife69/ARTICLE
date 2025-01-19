@@ -43,15 +43,13 @@
                                             data-bs-placement="top" title="{{ $data->user->name }}" data-bs-offset="0,4" data-bs-html="true"
                                             style="width: 35px; height: 35px"></center></td>
                                     <td style="font-weight: bold">{{ Str::limit($data->title, 45) }}</td>
+                                    <td style="font-weight: bold">{{ $data->categorie->name }}</td>
                                     <td style="font-weight: bold">
                                         {{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D ,jS M Y') }}
                                     </td>
-                                    <td style="font-weight: bold">{{ $data->categorie->name }}</td>
                                     <td><b
                                             class="badge 
-                                    {{ $data->status == 'approved' ? 'bg-label-success' : '' }}
-                                    {{ $data->status == 'pending' ? 'bg-label-warning' : '' }}
-                                    {{ $data->status == 'rejected' ? 'bg-label-danger' : '' }}"><i
+                                    {{ $data->status == 'pending' ? 'bg-warning' : '' }}"><i
                                                 class='bx bx-time-five'></i>
                                             {{ ucfirst($data->status) }} </b>
                                     </td>

@@ -12,14 +12,7 @@
 =========================================================
  -->
 <!-- beautify ignore:start -->
-<html
-  lang="en"
-  class="light-style customizer-hide"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="{{ asset('assets') }}"
-  data-template="vertical-menu-template-free"
->
+<html lang="en" class="light-style customizer-hide" dir="ltr" data-theme="theme-default" data-assets-path="{{ asset('assets') }}" data-template="vertical-menu-template-free">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -64,8 +57,6 @@
   </head>
 
   <body>
-    <!-- Content -->
-
     <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
@@ -79,18 +70,18 @@
               </a>
               </div>
               <!-- /Logo -->
+
+              {{-- FORM --}}
               <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('login') }}">
                 @csrf
-
                 <div class="mb-3">
                   <label for="email" class="form-label">Email or Username</label>
                   <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
                     @error('email')
-    <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-@enderror
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
@@ -101,13 +92,11 @@
                   </div>
                   <div class="input-group input-group-merge">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
                         @error('password')
-    <span class="invalid-feedback" role="alert">
+                          <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-@enderror
-
+                        @enderror
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
                 </div>
@@ -123,6 +112,7 @@
                   <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                 </div>
               </form>
+              {{-- END FORM --}}
 
               <p class="text-center">
             </div>

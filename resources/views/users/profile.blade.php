@@ -154,11 +154,11 @@
                     </div>
                 </div>
                 <div class="row ms-0" style="padding-left: 0.1rem;">
-                    <div class="card mt-3" data-aos="zoom-in" data-aos-delay="200"
+                    <div class="card mt-3"
                         style="height: 3rem; display: flex; justify-content: center; align-items: center; font-size: 15px; ">
                         <b><em>OVERVIEW</em></b>
                     </div>
-                    <div class="card mt-3" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card mt-3">
                         <div class="card-body">
                             <table border="0">
                                 <tr>
@@ -183,6 +183,17 @@
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
+                                    <td><i class='bx bx-user'></i>&nbsp;&nbsp;Article <b style="color: rgb(136, 136, 0);">Pending</b>
+                                    </td>
+                                    <td>:</td>
+                                    <td><b>{{ $user->article()->status('pending')->count() }}</b> Article</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
                                     <td><i class='bx bx-user'></i>&nbsp;&nbsp;Article <b style="color: red;">Rejected</b>
                                     </td>
                                     <td>:</td>
@@ -196,7 +207,7 @@
                                 <tr>
                                     <td><i class='bx bx-badge-check'></i>&nbsp;&nbsp; View</td>
                                     <td>:</td>
-                                    <td><em>-- coming soon --</em></td>
+                                    <td><em>- coming soon -</em></td>
                                 </tr>
                             </table>
                         </div>

@@ -35,6 +35,8 @@
         .custom-dropdown-item i {
             margin-right: 8px;
         }
+
+        
     </style>
     @yield('styles')
     <!-- BoxIcons CDN -->

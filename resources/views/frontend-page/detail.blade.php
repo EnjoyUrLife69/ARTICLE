@@ -25,6 +25,25 @@
             overflow: hidden;
         }
 
+        #content-card {
+            border-radius: 8px;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        #disqus_thread {
+            margin-top: 20px;
+        }
+
+        #disqus_thread-card {
+            border-radius: 8px;
+            background: #506172;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            /* Menambahkan shadow lembut */
+        }
+
 
         .card-header {
             background: rgba(255, 94, 94, 0.8);
@@ -59,35 +78,29 @@
                                 <img src="{{ asset('storage/images/articles/' . $articles->cover) }}" alt=""
                                     style="max-width: 48rem; border-radius: 2%; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                             </div>
-                            <div class="section-tittle mb-30 pt-30">
-                                <h2>{{ $articles->title }}</h2>
+                            <div class="card mt-4" id="content-card">
+                                <div class="card-body">
+                                    <div class="section-tittle mb-30 pt-30">
+                                        <h2><b>{{ $articles->title }}</b></h2>
+                                    </div>
+                                    <div class="about-prea">
+                                        <p class="about-pera1 mb-15">{!! $articles->content !!}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="about-prea">
-                                <p class="about-pera1 mb-25">{!! $articles->content !!}</p>
-                            </div>
-                            <hr>
+
                             <div class="social-share pt-30">
-                                <div class="section-tittle">
-                                    <h3 class="mr-20">Comment</h3>
-                                </div>
-                                <div class="comment" class="commentList">
-                                    <form id="commentForm" action="{{ route('comments.store') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="article_id" value="{{ $articles->id }}">
-                                        <div class="form-group">
-                                            <textarea name="content" class="form-control mb-10" rows="5" placeholder="Write a comment..."></textarea>
-                                            <button id="commentList" type="submit"
-                                                class="button button-contactForm boxed-btn"
-                                                style="float: right;">Send</button>
-                                        </div>
-                                    </form>
+                                <div class="card" id="disqus_thread-card">
+                                    {{-- Disqus Comment Section --}}
+                                    <div class="card-body" id="disqus_thread"></div>
                                 </div>
                             </div>
+
                         </div>
                         <hr>
                         {{-- Comment --}}
                         <div>
-                            @foreach ($comments as $data)
+                            {{-- @foreach ($comments as $data)
                                 <div class="row">
                                     <div class="col-1">
                                         <img src="{{ asset('storage/images/users/' . $data->user->image) }}" alt="img"
@@ -143,13 +156,15 @@
                                         &nbsp;
                                     </div>
                                 </div>
-                            @endforeach
+                            @endforeach --}}
                         </div>
                         <br><br><br><br><br><br><br>
                     </div>
-                    {{-- About this article --}}
+
                     <div class="col-lg-4">
                         <div class="row">
+
+                            {{-- About this article --}}
                             <div class="col-lg-12">
                                 <div class="card shadow-sm rounded-lg mb-3 border-0"
                                     style="background: linear-gradient(135deg, #FF0B0B, #ff7676); max-width: 100%; margin: auto; border-radius: 9px;">
@@ -196,6 +211,7 @@
                                 </div>
                             </div>
 
+                            {{-- Trending Articles --}}
                             <div class="col-lg-12 mt-5">
                                 <div class="card shadow-sm rounded-lg mb-4 border-0"
                                     style="background: linear-gradient(135deg, #FF0B0B, #ff7676); max-width: 100%; margin: auto; border-radius: 9px;">
@@ -267,4 +283,36 @@
             });
         }
     </script>
+
+    <script>
+        var disqus_config = function() {
+            this.page.url = "{{ url()->current() }}"; // URL halaman artikel
+            this.page.identifier = "{{ $articles->id }}"; // ID artikel sebagai identifier
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document,
+                s = d.createElement('script');
+            s.src = 'https://article-blog-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a>
+    </noscript>
 @endsection
+
+{{-- comment --}}
+{{-- <div class="comment" class="commentList">
+                                    <form id="commentForm" action="{{ route('comments.store') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="article_id" value="{{ $articles->id }}">
+                                        <div class="form-group">
+                                            <textarea name="content" class="form-control mb-10" rows="5" placeholder="Write a comment..."></textarea>
+                                            <button id="commentList" type="submit"
+                                                class="button button-contactForm boxed-btn"
+                                                style="float: right;">Send</button>
+                                        </div>
+                                    </form>
+                                </div> --}}

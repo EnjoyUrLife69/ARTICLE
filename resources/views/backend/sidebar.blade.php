@@ -63,15 +63,16 @@
                 <div data-i18n="Analytics">Home</div>
             </a>
         </li>
-        <li
-            class="menu-item {{ request()->routeIs('articles.index') || request()->routeIs('articles.create') || request()->routeIs('articles.edit') ? 'active' : '' }}">
-            <a href="{{ route('articles.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-book-content"></i>
-                <div data-i18n="Analytics">Article</div>
-            </a>
-        </li>
-        <li
-            class="menu-item {{ request()->routeIs('notifications.index') ? 'active' : '' }}">
+        @if (auth()->user()->can('article-list'))
+            <li
+                class="menu-item {{ request()->routeIs('articles.index') || request()->routeIs('articles.create') || request()->routeIs('articles.edit') ? 'active' : '' }}">
+                <a href="{{ route('articles.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bxs-book-content"></i>
+                    <div data-i18n="Analytics">Article</div>
+                </a>
+            </li>
+        @endif
+        <li class="menu-item {{ request()->routeIs('notifications.index') ? 'active' : '' }}">
             <a href="{{ route('notifications.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div data-i18n="Analytics">Notification</div>
@@ -89,7 +90,7 @@
                 <div data-i18n="Analytics">Go to Site</div>
             </a>
         </li>
-        
+
 
         {{-- <!-- Layouts -->
         <li class="menu-item">
@@ -112,7 +113,7 @@
             </ul>
         </li> --}}
 
-        @if (auth()->user()->can('user-list') && auth()->user()->can('role-list') && auth()->user()->can('categorie-list')) 
+        @if (auth()->user()->can('user-list') && auth()->user()->can('role-list') && auth()->user()->can('categorie-list'))
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">( Super Admin Only )</span>
             </li>

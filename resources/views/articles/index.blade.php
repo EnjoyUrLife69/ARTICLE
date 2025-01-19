@@ -23,14 +23,14 @@
             <ul class="nav nav-pills" role="tablist">
                 <li class="nav-item">
                     <button type="button" class="nav-link active" role="tab" data-bs-toggle="pill"
-                        data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="true">
-                        Table
+                        data-bs-target="#navs-pills-top-card" aria-controls="navs-pills-top-profile" aria-selected="true">
+                        Card
                     </button>
                 </li>
                 <li class="nav-item">
                     <button type="button" class="nav-link" role="tab" data-bs-toggle="pill"
-                        data-bs-target="#navs-pills-top-card" aria-controls="navs-pills-top-profile" aria-selected="false">
-                        Card
+                        data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="false">
+                        Detail
                     </button>
                 </li>
                 <li class="nav-item">
@@ -41,8 +41,38 @@
                     </button>
                 </li>
             </ul>
+
             <div class="card mt-4 tab-content" id="navs-pills-top-table">
-                <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
+
+                <!-- Other tab contents can go here -->
+                <div class="tab-pane fade show active" id="navs-pills-top-card" role="tabpanel">
+                    <div class="row g-4">
+                        @foreach ($articles as $data)
+                            <div class="col-md-4 d-flex">
+                                <div class="card w-100" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                                    <!-- Wrapper for image and category -->
+                                    <div class="position-relative">
+                                        <!-- Category placed on top right of the image -->
+                                        <span class="badge bg-primary position-absolute top-0 end-0 m-2"
+                                            style="z-index: 10;">{{ $data->categorie->name }}</span>
+
+                                        <img src="{{ asset('storage/images/articles/' . $data->cover) }}"
+                                            class="card-img-top" alt="Card image"
+                                            style="height: 200px; object-fit: cover; width: 100%;">
+                                    </div>
+
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title">{{ $data->title }}</h5>
+                                        <p class="card-text flex-grow-1">{{ Str::limit($data->description, 99) }}</p>
+                                        <a href="{{ url('/article/' . $data->id) }}" class="btn btn-primary mt-auto">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="navs-pills-top-home" role="tabpanel">
                     <!-- Table content goes here -->
                     <div class="row" style="margin-top: 10px;">
                         <div class="col-10">
@@ -69,8 +99,8 @@
                                     <tr style="font-weight: bold">
                                         <th>No</th>
                                         <th>Title</th>
-                                        <th>Release Date</th>
                                         <th>Category</th>
+                                        <th>Release Date</th>
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
@@ -80,10 +110,10 @@
                                         <tr>
                                             <td style="font-weight: bold">{{ $loop->iteration }}</td>
                                             <td style="font-weight: bold">{{ Str::limit($data->title, 35) }}</td>
+                                            <td style="font-weight: bold">{{ $data->categorie->name }}</td>
                                             <td style="font-weight: bold">
                                                 {{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('D , jS F Y') }}
                                             </td>
-                                            <td style="font-weight: bold">{{ $data->categorie->name }}</td>
                                             <td>
                                                 <b
                                                     class="badge 
@@ -142,40 +172,11 @@
                     </div>
                 </div>
 
-                <!-- Other tab contents can go here -->
-                <div class="tab-pane fade" id="navs-pills-top-card" role="tabpanel">
-                    <div class="row g-4">
-                        @foreach ($articles as $data)
-                            <div class="col-md-4 d-flex">
-                                <div class="card w-100" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-                                    <!-- Wrapper for image and category -->
-                                    <div class="position-relative">
-                                        <!-- Category placed on top right of the image -->
-                                        <span class="badge bg-primary position-absolute top-0 end-0 m-2"
-                                            style="z-index: 10;">{{ $data->categorie->name }}</span>
-
-                                        <img src="{{ asset('storage/images/articles/' . $data->cover) }}"
-                                            class="card-img-top" alt="Card image"
-                                            style="height: 200px; object-fit: cover; width: 100%;">
-                                    </div>
-
-                                    <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title">{{ $data->title }}</h5>
-                                        <p class="card-text flex-grow-1">{{ Str::limit($data->description, 99) }}</p>
-                                        <a href="{{ url('/article/' . $data->id) }}" class="btn btn-primary mt-auto">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-
-
-                <div class="tab-pane fade" id="navs-pills-top-messages" role="tabpanel">
+                <div class="tab-panefade" id="navs-pills-top-messages" role="tabpanel">
                     <p>Lorem content goes here</p>
                 </div>
             </div>
-        </div>
+        </div> 
 
     </div>
 @endsection

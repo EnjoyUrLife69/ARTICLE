@@ -19,7 +19,6 @@
                                     </li>
                                 </ul>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -93,7 +92,7 @@
                                 <div class="trand-right-img">
                                     <a href="{{ url('/article/' . $data->id) }}"><img
                                             src="{{ asset('storage/images/articles/' . $data->cover) }}" alt=""
-                                            style="max-width: 10rem">
+                                            style="max-width: 12rem">
                                     </a>
                                 </div>
                                 <div class="trand-right-cap">
