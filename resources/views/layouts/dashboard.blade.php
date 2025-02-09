@@ -199,9 +199,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             tinymce.init({
                 selector: '#exampleFormControlTextarea2',
-                height: 500, // Anda bisa menyesuaikan tinggi awal
-                toolbar: 'undo redo | styles | bold italic | bullist numlist | alignleft aligncenter alignright | outdent indent',
+                width: '100%',
+                height: 600, // ngatur tinggi editor na
+                toolbar: 'undo redo | styles | bold italic | bullist numlist | alignleft aligncenter alignright | outdent indent', // Tampilan toolbar
                 plugins: 'lists link image',
+                menubar: 'file edit view format', // Tampilkan menu bar
                 setup: function(editor) {
                     editor.on('init', function() {
                         editor.getBody().style.width = '100%';

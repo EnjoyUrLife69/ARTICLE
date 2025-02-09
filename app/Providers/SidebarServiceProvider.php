@@ -22,7 +22,6 @@ class SidebarServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view) {
             $newArticlesCount = Article::where('status', 'pending')
-                ->whereDate('created_at', '>=', now()->subDay())
                 ->count();
 
             $view->with('newArticlesCount', $newArticlesCount);

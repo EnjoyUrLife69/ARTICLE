@@ -15,7 +15,6 @@ Route::get('/', [FrontendController::class, 'home']);
 Route::get('/article/{id}', [FrontendController::class, 'details']);
 
 Auth::routes();
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 // BACKEND ROUTE
 Route::middleware('auth')->prefix('dashboard')->group(function () {

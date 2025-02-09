@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Providers;
 
 use Illuminate\Support\Facades\View;
@@ -35,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
 
             } else {
                 $notifications = collect(); // Koleksi kosong jika belum login
-                $unreadCount = 0;
+                $unreadCount   = 0;
             }
 
             $view->with(compact('notifications', 'unreadCount'));

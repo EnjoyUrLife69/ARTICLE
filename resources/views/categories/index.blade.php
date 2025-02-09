@@ -7,7 +7,8 @@
                 <h3 style="font-weight: bold; font-size: 30px;">
                     <div data-aos="flip-left">
                         <center class="mt-2">
-                            <i class='bx bxs-category' style="font-size: 31px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);"></i>
+                            <i class='bx bxs-category'
+                                style="font-size: 31px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);"></i>
                             <em style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);"> Categories </em>
                         </center>
                     </div>
@@ -73,17 +74,21 @@
 
                                         {{-- DELETE --}}
                                         @can('categorie-delete')
-                                            <form action="{{ route('categories.destroy', $data->id) }}" method="POST"
-                                                style="display: inline;" id="deleteForm{{ $data->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="tooltip"
-                                                    id="deleteButton{{ $data->id }}" data-bs-offset="0,4"
-                                                    data-bs-placement="top" data-bs-html="true" title="<span>Delete</span>">
-                                                    <i class='bx bx-trash'></i>
-                                                </button>
-                                            </form>
+                                            @if ($data->articles_count == 0)
+                                                <form action="{{ route('categories.destroy', $data->id) }}" method="POST"
+                                                    style="display: inline;" id="deleteForm{{ $data->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-sm btn-danger"
+                                                            data-bs-toggle="tooltip" id="deleteButton{{ $data->id }}"
+                                                            data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                                                            title="<span>Delete</span>">
+                                                            <i class='bx bx-trash'></i>
+                                                        </button>
+                                                </form>
+                                            @endif
                                         @endcan
+
 
                                         {{-- MODAL --}}
                                         @include('categories.modal')

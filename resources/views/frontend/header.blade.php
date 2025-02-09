@@ -93,7 +93,10 @@
                             @else
                                 <!-- Jika user tidak login -->
                                 <em id="navigation">
-                                    <a href="{{ route('login') }}" style="text-decoration: none; color: inherit;">Login</a>
+                                    <button onclick="window.location.href='{{ route('login') }}'"
+                                        style="border: none; padding: 5px 20px; background-color: #FF0B0B; color: white; border-radius: 5px; cursor: pointer; text-decoration: none;">
+                                        Login
+                                    </button>
                                 </em>
                             @endauth
                         </div>

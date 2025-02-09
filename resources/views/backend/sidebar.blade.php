@@ -66,9 +66,12 @@
         @if (auth()->user()->can('article-list'))
             <li
                 class="menu-item {{ request()->routeIs('articles.index') || request()->routeIs('articles.create') || request()->routeIs('articles.edit') ? 'active' : '' }}">
-                <a href="{{ route('articles.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bxs-book-content"></i>
-                    <div data-i18n="Analytics">Article</div>
+                <a href="{{ route('articles.index') }}"
+                    class="menu-link d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="menu-icon tf-icons bx bxs-book-content"></i>
+                        <span data-i18n="Analytics">Article</span>
+                    </div>
                 </a>
             </li>
         @endif
@@ -131,17 +134,19 @@
                 </a>
             </li> --}}
             <li class="menu-item {{ request()->routeIs('request') ? 'active' : '' }}">
-                <a href="{{ route('request') }}" class="menu-link">
-                    <i class='menu-icon tf-icons bx bx-git-pull-request'></i>
-                    <div data-i18n="Analytics">Request</div>
+                <a href="{{ route('request') }}" class="menu-link d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class='menu-icon tf-icons bx bx-git-pull-request'></i>
+                        <span data-i18n="Analytics">Request</span>
+                    </div>
                     @if ($newArticlesCount > 0)
-                        <span class="badge rounded-pill bg-danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="{{ $newArticlesCount }} Request" style="margin-left: 90px;">
-                            {{ $newArticlesCount }}
+                        <span
+                            class="badge bg-danger ms-auto">{{ isset($newArticlesCount) ? $newArticlesCount : 'Data tidak tersedia' }}
                         </span>
                     @endif
                 </a>
             </li>
+
             <li
                 class="menu-item {{ request()->routeIs('users.index') || request()->routeIs('roles.index') ? 'active open' : '' }} ">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">

@@ -26,10 +26,17 @@
         }
 
         #content-card {
-            border-radius: 8px;
             background: #ffffff;
             padding: 20px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2), 2px 2px 2px 1px rgba(0, 0, 0, 0.19);
+        }
+
+        #title-card {
+            position: relative;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2), 2px 2px 2px 1px rgba(0, 0, 0, 0.19);
+            height: 4.4%;
         }
 
         #disqus_thread {
@@ -37,7 +44,6 @@
         }
 
         #disqus_thread-card {
-            border-radius: 8px;
             background: #506172;
             padding: 20px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -73,16 +79,22 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8">
+                        <div class="card mb-3 rounded-lg" id="title-card">
+                            <div class="section-tittle mb-30">
+                                <h2 style="font-weight: bold;"><b>{{ $articles->title }}</b></h2>
+                            </div>
+                            <div class="card-footer text-end" style="position: absolute; bottom: 10px; right: 10px;">
+                                <span class="me-1"><i class="fas fa-eye"></i>&nbsp; {{ $articles->view_count }}</span>
+                            </div>
+                        </div>
+
                         <div class="about-right mb-90">
                             <div class="about-img">
                                 <img src="{{ asset('storage/images/articles/' . $articles->cover) }}" alt=""
-                                    style="max-width: 48rem; border-radius: 2%; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                                    style="max-width: 48rem; border-radius: 2%; box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2), 2px 2px 5px 1px rgba(0, 0, 0, 0.19);">
                             </div>
-                            <div class="card mt-4" id="content-card">
+                            <div class="card mt-4 rounded-lg" id="content-card">
                                 <div class="card-body">
-                                    <div class="section-tittle mb-30 pt-30">
-                                        <h2><b>{{ $articles->title }}</b></h2>
-                                    </div>
                                     <div class="about-prea">
                                         <p class="about-pera1 mb-15">{!! $articles->content !!}</p>
                                     </div>
@@ -92,7 +104,7 @@
                             <div class="social-share pt-30">
                                 <div class="card" id="disqus_thread-card">
                                     {{-- Disqus Comment Section --}}
-                                    <div class="card-body" id="disqus_thread"></div>
+                                    <div class="card-body rounded-lg" id="disqus_thread"></div>
                                 </div>
                             </div>
 
@@ -166,14 +178,15 @@
 
                             {{-- About this article --}}
                             <div class="col-lg-12">
-                                <div class="card shadow-sm rounded-lg mb-3 border-0"
-                                    style="background: linear-gradient(135deg, #FF0B0B, #ff7676); max-width: 100%; margin: auto; border-radius: 9px;">
+                                <div class="card rounded-lg mb-3 border-0"
+                                    style="background: linear-gradient(135deg, #FF0B0B, #ff7676); max-width: 100%; margin: auto; border-radius: 9px; box-shadow: 1px 1px 2px 2px rgba(255, 67, 67, 0.2), 2px 2px 5px 1px rgba(0, 0, 0, 0.19);">
                                     <div class="card-header text-white text-center py-2"
                                         style="font-size: 1rem; font-weight: bold; letter-spacing: 1px; border-radius: 9px;">
                                         ABOUT THIS ARTICLE
                                     </div>
                                 </div>
-                                <div class="card mt-3 shadow-lg border-0 rounded-lg" style="background-color: #ffffff;">
+                                <div class="card mt-3 border-0 rounded-lg"
+                                    style="background-color: #ffffff; box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2), 2px 2px 5px 1px rgba(0, 0, 0, 0.19);">
                                     <div class="card-header bg-light text-secondary py-2"
                                         style="font-style: italic; font-size: 1rem; font-weight: bold;">
                                         &nbsp;&nbsp;Written By :
@@ -220,7 +233,8 @@
                                         EXPLORE MORE ARTICLES
                                     </div>
                                 </div>
-                                <div class="card mt-3 shadow-lg border-0 rounded-lg" style="background-color: #ffffff;">
+                                <div class="card mt-3 border-0 rounded-lg"
+                                    style="background-color: #ffffff; box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2), 2px 2px 5px 1px rgba(0, 0, 0, 0.19);">
                                     <div class="card-body">
                                         @foreach ($article_trending as $data)
                                             <div class="trand-right-single d-flex mt-3">

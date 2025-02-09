@@ -71,9 +71,9 @@
                                                 @endphp
                                                 <label
                                                     class="badge 
-                                                        @if ($role == 'admin') bg-primary
+                                                        @if ($role == 'guest') bg-primary
                                                         @elseif($role == 'superadmin') bg-danger
-                                                        @elseif($role == 'user') bg-info
+                                                        @elseif($role == 'writer') bg-info
                                                         @else bg-success @endif">
                                                     {{ ucfirst($v) }}
                                                 </label>
