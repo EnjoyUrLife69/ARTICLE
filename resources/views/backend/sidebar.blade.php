@@ -81,6 +81,17 @@
                 <div data-i18n="Analytics">Notification</div>
             </a>
         </li>
+
+        @if (auth()->user()->hasRole('Writer'))
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class='menu-icon tf-icons bx bx-wallet'></i>
+                    <div data-i18n="Analytics">Income</div>
+                </a>
+            </li>
+        @endif
+
+
         <li class="menu-item {{ request()->routeIs('profile') ? 'active' : '' }}">
             <a href="{{ route('profile') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>

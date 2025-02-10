@@ -650,63 +650,50 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-tittle mb-30">
-                            <h3>Weekly Top News</h3>
+                            <h3>Your History</h3>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="weekly2-news-active dot-style d-flex dot-style">
-                            <div class="weekly2-single">
-                                <div class="weekly2-img">
-                                    <img src="{{ asset('assets-front/img/news/weekly2News1.jpg') }}" alt="">
+                            @foreach ($article_trending as $data)
+                                <div class="weekly2-single">
+                                    <div class="weekly2-img">
+                                        <a href="{{ url('/article/' . $data->id) }}"><img
+                                                src="{{ asset('storage/images/articles/' . $data->cover) }}"
+                                                alt="">
+                                        </a>
+                                    </div>
+                                    <div class="weekly2-caption">
+                                        <span class="color1"></span>
+                                        <p> {{$data->release_date }}</p>
+                                        <h4><a href="{{ url('/article/' . $data->id) }}">{{$data->title}}</a></h4>
+                                    </div>
                                 </div>
-                                <div class="weekly2-caption">
-                                    <span class="color1">Corporate</span>
-                                    <p>25 Jan 2020</p>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                            @endforeach
+
+                            {{-- @foreach ($article_trending as $data)
+                                <div class="trand-right-single d-flex">
+                                    <div class="trand-right-img">
+                                        <a href="{{ url('/article/' . $data->id) }}"><img
+                                                src="{{ asset('storage/images/articles/' . $data->cover) }}"
+                                                alt="" style="max-width: 12rem">
+                                        </a>
+                                    </div>
+                                    <div class="trand-right-cap">
+                                        <span class="color1">{{ $data->categorie->name }}</span>
+                                        <h6>
+                                            <a href="{{ url('/article/' . $data->id) }}"
+                                                style="color: inherit; text-decoration: none;"
+                                                onmouseover="this.style.color='red'"
+                                                onmouseout="this.style.color='inherit'">
+                                                {{ $data->title }}
+                                            </a>
+                                        </h6>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="weekly2-single">
-                                <div class="weekly2-img">
-                                    <img src="{{ asset('assets-front/img/news/weekly2News2.jpg') }}" alt="">
-                                </div>
-                                <div class="weekly2-caption">
-                                    <span class="color1">Event night</span>
-                                    <p>25 Jan 2020</p>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="weekly2-single">
-                                <div class="weekly2-img">
-                                    <img src="{{ asset('assets-front/img/news/weekly2News3.jpg') }}" alt="">
-                                </div>
-                                <div class="weekly2-caption">
-                                    <span class="color1">Corporate</span>
-                                    <p>25 Jan 2020</p>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="weekly2-single">
-                                <div class="weekly2-img">
-                                    <img src="{{ asset('assets-front/img/news/weekly2News4.jpg') }}" alt="">
-                                </div>
-                                <div class="weekly2-caption">
-                                    <span class="color1">Event time</span>
-                                    <p>25 Jan 2020</p>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="weekly2-single">
-                                <div class="weekly2-img">
-                                    <img src="{{ asset('assets-front/img/news/weekly2News4.jpg') }}" alt="">
-                                </div>
-                                <div class="weekly2-caption">
-                                    <span class="color1">Corporate</span>
-                                    <p>25 Jan 2020</p>
-                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
-                                </div>
-                            </div>
+                            @endforeach --}}
                         </div>
                     </div>
                 </div>

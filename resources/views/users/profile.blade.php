@@ -172,7 +172,7 @@
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td><i class='bx bx-user'></i>&nbsp;&nbsp;Article <b style="color: green;">Approved</b>
+                                    <td><i class='bx bx-badge-check'></i>&nbsp;&nbsp;Article <b style="color: green;">Approved</b>
                                     </td>
                                     <td>:</td>
                                     <td><b>{{ $user->article()->status('approved')->count() }}</b> Article</td>
@@ -183,7 +183,8 @@
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td><i class='bx bx-user'></i>&nbsp;&nbsp;Article <b style="color: rgb(136, 136, 0);">Pending</b>
+                                    <td><i class='bx bx-user'></i>&nbsp;&nbsp;Article <b
+                                            style="color: rgb(136, 136, 0);">Pending</b>
                                     </td>
                                     <td>:</td>
                                     <td><b>{{ $user->article()->status('pending')->count() }}</b> Article</td>
@@ -205,9 +206,9 @@
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td><i class='bx bx-badge-check'></i>&nbsp;&nbsp; View</td>
+                                    <td><i class='bx bx-show'></i>&nbsp;&nbsp;Article Views</td>
                                     <td>:</td>
-                                    <td><em>- coming soon -</em></td>
+                                    <td><b> {{$user->article->sum('view_count')}}</b>  Views</td>
                                 </tr>
                             </table>
                         </div>

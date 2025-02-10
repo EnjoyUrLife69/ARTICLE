@@ -36,7 +36,7 @@
             background: #ffffff;
             padding: 20px;
             box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2), 2px 2px 2px 1px rgba(0, 0, 0, 0.19);
-            height: 4.4%;
+            height: 4.2%;
         }
 
         #disqus_thread {
@@ -230,7 +230,7 @@
                                     style="background: linear-gradient(135deg, #FF0B0B, #ff7676); max-width: 100%; margin: auto; border-radius: 9px;">
                                     <div class="card-header text-white text-center py-2"
                                         style="font-size: 1rem; font-weight: bold; letter-spacing: 1px; border-radius: 9px;">
-                                        EXPLORE MORE ARTICLES
+                                        TOP POPULAR ARTICLES
                                     </div>
                                 </div>
                                 <div class="card mt-3 border-0 rounded-lg"
