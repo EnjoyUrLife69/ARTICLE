@@ -36,7 +36,24 @@
             margin-right: 8px;
         }
 
-        
+        .weekly2-news-active {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+            gap: 15px;
+        }
+
+        .weekly2-single {
+            max-width: 250px;
+            flex: 1;
+        }
+
+        .weekly2-img img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
     </style>
     @yield('styles')
     <!-- BoxIcons CDN -->
@@ -75,7 +92,20 @@
         @include('frontend.footer')
     </footer>
 
+    <script>
+        $(document).ready(function() {
+            $('.weekly2-news-active').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: true,
+                autoplay: false,
+                startPosition: 0,
+            });
 
+            $('.weekly2-news-active').trigger('to.owl.carousel', [0, 0]);
+        });
+    </script>
 
     <!-- All JS Custom Plugins Link Here here -->
     <script src="{{ asset('./assets-front/js/vendor/modernizr-3.5.0.min.js') }}"></script>

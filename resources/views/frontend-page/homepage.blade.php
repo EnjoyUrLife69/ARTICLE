@@ -96,7 +96,7 @@
                                     </a>
                                 </div>
                                 <div class="trand-right-cap">
-                                    <span class="color1">{{ $data->categorie->name }}</span>
+                                    <span class="color1"><b>{{ $data->categorie->name }}</b></span>
                                     <h6>
                                         <a href="{{ url('/article/' . $data->id) }}"
                                             style="color: inherit; text-decoration: none;"
@@ -643,63 +643,49 @@
     <!-- Whats New End -->
 
     <!--   Weekly2-News start -->
-    <div class="weekly2-news-area  weekly2-pading gray-bg">
-        <div class="container">
-            <div class="weekly2-wrapper">
-                <!-- section Tittle -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-tittle mb-30">
-                            <h3>Your History</h3>
+    @php
+        $totalArticles = $article_history->count();
+    @endphp
+    @if ($article_history->isNotEmpty())
+        <div class="weekly2-news-area  weekly2-pading gray-bg">
+            <div class="container">
+                <div class="weekly2-wrapper">
+                    <!-- section Tittle -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="section-tittle mb-30">
+                                <h3><em>Recently Viewed</em></h3>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="weekly2-news-active dot-style d-flex dot-style">
-                            @foreach ($article_trending as $data)
-                                <div class="weekly2-single">
-                                    <div class="weekly2-img">
-                                        <a href="{{ url('/article/' . $data->id) }}"><img
-                                                src="{{ asset('storage/images/articles/' . $data->cover) }}"
-                                                alt="">
-                                        </a>
-                                    </div>
-                                    <div class="weekly2-caption">
-                                        <span class="color1"></span>
-                                        <p> {{$data->release_date }}</p>
-                                        <h4><a href="{{ url('/article/' . $data->id) }}">{{$data->title}}</a></h4>
-                                    </div>
-                                </div>
-                            @endforeach
-
-                            {{-- @foreach ($article_trending as $data)
-                                <div class="trand-right-single d-flex">
-                                    <div class="trand-right-img">
-                                        <a href="{{ url('/article/' . $data->id) }}"><img
-                                                src="{{ asset('storage/images/articles/' . $data->cover) }}"
-                                                alt="" style="max-width: 12rem">
-                                        </a>
-                                    </div>
-                                    <div class="trand-right-cap">
-                                        <span class="color1">{{ $data->categorie->name }}</span>
-                                        <h6>
-                                            <a href="{{ url('/article/' . $data->id) }}"
-                                                style="color: inherit; text-decoration: none;"
-                                                onmouseover="this.style.color='red'"
-                                                onmouseout="this.style.color='inherit'">
-                                                {{ $data->title }}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="weekly2-news-active dot-style d-flex dot-style"
+                                data-slick='{"slidesToShow": {{ min(4, count($article_history)) }}, "slidesToScroll": 1, "infinite": false, "dots": true, "centerMode": false, "initialSlide": 0, "autoplay": false, "variableWidth": false}'>
+                                @foreach ($article_history as $data)
+                                    <div class="weekly2-single">
+                                        <div class="weekly2-img">
+                                            <a href="{{ url('/article/' . $data->id) }}"><img
+                                                    src="{{ asset('storage/images/articles/' . $data->cover) }}"
+                                                    alt="">
                                             </a>
-                                        </h6>
+                                        </div>
+                                        <div class="weekly2-caption">
+                                            <span class="color1"></span>
+                                            <p>{{ \Carbon\Carbon::parse($data->release_date)->translatedFormat('d F Y') }}
+                                            </p>
+                                            <h4><a href="{{ url('/article/' . $data->id) }}">{{ $data->title }}</a></h4>
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach --}}
+                                @endforeach
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
-    </div>
+    @endif
     <!-- End Weekly-News -->
 
     <!-- Start Youtube -->
