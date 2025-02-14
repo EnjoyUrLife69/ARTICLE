@@ -43,6 +43,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'user_id', 'id');
     }
+    public function earning()
+    {
+        return $this->hasMany(Earning::class);
+    }
+    public function AricleEarning()
+    {
+        return $this->hasMany(ArticleEarning::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

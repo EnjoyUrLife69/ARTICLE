@@ -10,7 +10,6 @@
                     <div class="col-lg-12">
                         <div class="trending-tittle">
                             <strong>Trending now</strong>
-                            <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
                             <div class="trending-animated">
                                 <ul id="js-news" class="js-hidden">
                                     @foreach ($articles as $data)
@@ -661,8 +660,8 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="weekly2-news-active dot-style d-flex dot-style"
-                                data-slick='{"slidesToShow": {{ min(4, count($article_history)) }}, "slidesToScroll": 1, "infinite": false, "dots": true, "centerMode": false, "initialSlide": 0, "autoplay": false, "variableWidth": false}'>
-                                @foreach ($article_history as $data)
+                                data-slick='{"slidesToShow": {{ min(4, count($article_history)) }}, "slidesToScroll": 1, "infinite": true, "dots": true, "centerMode": false, "initialSlide": 0, "autoplay": true, "autoplaySpeed": 5000, "variableWidth": false}'>
+                                @foreach ($article_history->take(5) as $data)
                                     <div class="weekly2-single">
                                         <div class="weekly2-img">
                                             <a href="{{ url('/article/' . $data->id) }}"><img
@@ -681,7 +680,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

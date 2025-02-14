@@ -7,6 +7,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EarningController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -56,5 +57,8 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::delete('/notifications/clear', [NotificationController::class, 'destroy'])->name('notifications.clear');
 
     Route::get('/profile/activities', [UserController::class, 'getActivities'])->name('profile.activities');
+
+    Route::resource('earning', EarningController::class);
+
 
 });

@@ -10,7 +10,6 @@ class Article extends Model
 {
     use HasFactory;
 
-    // Pada model Article
     protected $fillable = [
         'title', 'release_date', 'categorie_id', 'user_id', 'description', 'content', 'status', 'cover',
     ];

@@ -21,7 +21,7 @@ class CreateAdminUserSeeder extends Seeder
         $superAdminUser = User::create([
             'name' => 'Prince Meow Meow III',
             'email' => 'superadmin@gmail.com',
-            'password' => bcrypt('000'),
+            'password' => bcrypt(']'),
             'image' => 'default.jpg',
         ]);
 
@@ -42,7 +42,7 @@ class CreateAdminUserSeeder extends Seeder
         $writerUser = User::create([
             'name' => 'Queen Elizabeth II',
             'email' => 'writer@gmail.com',
-            'password' => bcrypt('000'),
+            'password' => bcrypt(']'),
             'image' => 'default.jpg',
         ]);
         $writerUser->assignRole([$writerRole->id]);
@@ -56,7 +56,7 @@ class CreateAdminUserSeeder extends Seeder
         $guestUser = User::create([
             'name' => 'King Arthur IV',
             'email' => 'guest@gmail.com',
-            'password' => bcrypt('000'),
+            'password' => bcrypt(']'),
             'image' => 'default.jpg',
         ]);
         $guestUser->assignRole([$guestRole->id]);

@@ -79,14 +79,32 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8">
-                        <div class="card mb-3 rounded-lg" id="title-card">
-                            <div class="section-tittle mb-30">
-                                <h2 style="font-weight: bold;"><b>{{ $articles->title }}</b></h2>
+                        <div class="card mb-3 rounded-lg" id="title-cardd">
+                            <h2 style="font-weight: bold;"><b>{{ $articles->title }}</b></h2>
+                            <hr style="margin-top: 1vh; margin-bottom: 2vh;">
+                            <div class="row">
+                                <div class="col-1">
+                                    <div class="card" id="view">
+                                        <i class='bx bx-show' ><b> {{ $articles->view_count}} </b></i>
+                                    </div>
+                                </div>
+
+                                <div class="col d-flex justify-content-end">
+                                    <div class="col-1">
+                                        <div class="card" id="button">
+                                            <i class='bx bx-like' ></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-1">
+                                        <div class="card" id="button">
+                                            <i class='bx bx-share-alt' ></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-footer text-end" style="position: absolute; bottom: 10px; right: 10px;">
-                                <span class="me-1"><i class="fas fa-eye"></i>&nbsp; {{ $articles->view_count }}</span>
-                            </div>
+
                         </div>
+
 
                         <div class="about-right mb-90">
                             <div class="about-img">

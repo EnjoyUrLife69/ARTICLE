@@ -44,15 +44,47 @@
         }
 
         .weekly2-single {
-            max-width: 250px;
+            max-width: 270px;
             flex: 1;
         }
 
         .weekly2-img img {
-            width: 100%;
+            width: 105%;
             height: 170px;
             object-fit: cover;
             border-radius: 10px;
+        }
+
+        #title-cardd {
+            background-color: #FFFFFF;
+            box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2), 2px 2px 5px 1px rgba(0, 0, 0, 0.19);
+            padding: 1rem;
+        }
+
+        #view {
+            border-radius: 5%;
+            box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2), 2px 2px 5px 1px rgba(0, 0, 0, 0.19);
+            text-align: center;
+            justify-content: center;
+            width: 20vh;
+            height: 6vh;
+        }
+
+        #button {
+            border-radius: 50%;
+            box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2), 2px 2px 5px 1px rgba(0, 0, 0, 0.19);
+            text-align: center;
+            justify-content: center;
+            width: 6vh;
+            height: 6vh;
+            cursor: pointer;
+        }
+
+        #button:hover {
+            transform: translateY(-5px);
+            /* Loncat ke atas */
+            box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.2);
+            /* Tambah efek bayangan */
         }
     </style>
     @yield('styles')
@@ -108,6 +140,12 @@
     </script>
 
     <!-- All JS Custom Plugins Link Here here -->
+    <script>
+        $(document).ready(function() {
+            $('.weekly2-news-active').slick();
+        });
+    </script>
+
     <script src="{{ asset('./assets-front/js/vendor/modernizr-3.5.0.min.js') }}"></script>
     <!-- Jquery, Popper, Bootstrap -->
     <script src="{{ asset('./assets-front/js/vendor/jquery-1.12.4.min.js') }}"></script>

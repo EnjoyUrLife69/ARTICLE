@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activitie extends Model
 {
-    // Tentukan nama tabel, jika tidak sesuai dengan konvensi Laravel
     protected $table = 'activities';
-
-    // Tentukan kolom-kolom yang bisa diisi secara massal
     protected $fillable = [
         'user_id',
         'action',
