@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,15 +13,15 @@ class Article extends Model
         'title', 'release_date', 'categorie_id', 'user_id', 'description', 'content', 'status', 'cover',
     ];
 
-    public $timestamps = true;
-    public $incrementing = false; // Non-aktifkan auto-increment
-    protected $keyType = 'string'; // Tentukan tipe ID sebagai string (UUID)
+    public $timestamps    = true;
+    public $incrementing  = false;    // Non-aktifkan auto-increment
+    protected $keyType    = 'string'; // Tentukan tipe ID sebagai string (UUID)
 
     protected static function boot()
     {
         parent::boot();
         static::creating(function ($model) {
-            if (empty($model->id)) { // Cek apakah id kosong
+            if (empty($model->id)) {           // Cek apakah id kosong
                 $model->id = (string) Str::uuid(); // Generate UUID sebagai id
             }
         });
@@ -59,6 +58,11 @@ class Article extends Model
     public function scopeStatus($query, $status)
     {
         return $query->where('status', $status);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'article_id', 'id');
     }
 
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Categorie;
 use App\Models\Comment;
+use App\Models\Like;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -12,7 +15,7 @@ class FrontendController extends Controller
         $articles         = Article::all();
         $article_trending = Article::where('status', 'approved')
             ->orderBy('view_count', 'desc')
-            ->take(5)
+            ->take(4)
             ->get();
 
         $history = session()->get('article_history', []);
@@ -34,7 +37,7 @@ class FrontendController extends Controller
         $articles         = Article::findOrFail($id);
         $article_trending = Article::where('status', 'approved')
             ->orderBy('view_count', 'desc')
-            ->take(5)
+            ->take(4)
             ->get();
         $article    = Article::all();
         $categories = Categorie::all();
@@ -58,4 +61,27 @@ class FrontendController extends Controller
         return view('frontend-page.detail', compact('articles', 'categories', 'article', 'comments', 'article_trending'));
     }
 
+    public function toggleLike($id)
+    {
+        $user    = Auth::user();
+        $article = Article::findOrFail($id);
+
+        // Cek apakah user sudah like
+        $existingLike = Like::where('user_id', $user->id)
+            ->where('article_id', $article->id)
+            ->first();
+
+        if ($existingLike) {
+            // Jika sudah like, hapus dari database (Unlike)
+            $existingLike->delete();
+            return response()->json(['liked' => false]);
+        } else {
+            // Jika belum like, tambahkan ke database
+            Like::create([
+                'user_id'    => $user->id,
+                'article_id' => $article->id,
+            ]);
+            return response()->json(['liked' => true]);
+        }
+    }
 }

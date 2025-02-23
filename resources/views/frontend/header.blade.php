@@ -1,135 +1,128 @@
-<div class="header-area">
-    <div class="main-header ">
-        <div class="header-top black-bg d-none d-md-block">
-            <div class="container">
-                <div class="col-xl-12">
-                    <div class="row d-flex justify-content-between align-items-center">
-                        <div class="header-info-left">
-                            <ul>
-                                {{-- <li><img src="{{ asset('assets-front/img/icon/header_icon1.png') }}"
-                                        alt="">{{ now()->format('d') }}ºC,
-                                    Sunny </li> --}}
-                                <li><img src="{{ asset('assets-front/img/icon/header_icon1.png') }}"
-                                        alt="">{{ now()->format('l, jS F, Y') }}</li>
-                            </ul>
-
-                        </div>
-                        <div class="header-info-right">
-                            <ul class="header-social">
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                <li> <a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+<h1 class="site-title">LOREM IPSUM</h1>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-left">
+            <div class="datetime">
+                <i class="far fa-calendar-alt"></i>
+                <span id="date"></span>
             </div>
         </div>
-
-        <div class="header-bottom header-sticky">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
-                        <!-- sticky -->
-                        <div class="sticky-logo">
-                            <a href="index.html"><img src="#" alt="Logo"></a>
-                        </div>
-                        <!-- Main-menu -->
-                        <div class="main-menu d-none d-md-block">
-                            <nav>
-                                <ul id="navigation">
-                                    <li><a href="{{ url('/') }}">Home</a></li>
-                                    <li><a href="categori.html">Category</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="latest_news.html">Latest News</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="submenu">
-                                            <li><a href="elements.html">Element</a></li>
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="single-blog.html">Blog Details</a></li>
-                                            <li><a href="details.html">Categori Details</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-2 col-md-4">
-                        <div class="header-right-btn f-right d-none d-lg-block">
-                            @auth
-                                <!-- Jika user sedang login -->
-                                <div class="dropdown">
-                                    <img src="{{ asset('storage/images/users/' . Auth::user()->image) }}" alt="User Image"
-                                        height="40" width="40" style="border-radius: 50%; cursor: pointer;"
-                                        onclick="toggleDropdown(this)">
-                                    <ul class="custom-dropdown-menu"
-                                        style="display: none; position: absolute; right: 0; margin-top: 10px; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); z-index: 1000; list-style: none; padding: 0; width: 150px;">
-                                        <li>
-                                            <a href="{{ route('profile') }}"
-                                                style="padding: 10px; display: block; color: black; text-decoration: none;">
-                                                <i class='bx bx-user'></i> Profile
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('home') }}"
-                                                style="padding: 10px; display: block; color: black; text-decoration: none;">
-                                                <i class='bx bx-home'></i> Dashboard
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('logout') }}"
-                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                                style="padding: 10px; display: block; color: red; text-decoration: none;">
-                                                <i class='bx bx-power-off'></i> Logout
-                                            </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                style="display: none;">
-                                                @csrf
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            @else
-                                <!-- Jika user tidak login -->
-                                <em id="navigation">
-                                    <button onclick="window.location.href='{{ route('login') }}'"
-                                        style="border: none; padding: 5px 20px; background-color: #FF0B0B; color: white; border-radius: 5px; cursor: pointer; text-decoration: none;">
-                                        Login
-                                    </button>
-                                </em>
-                            @endauth
-                        </div>
-                    </div>
-
-                    <!-- Mobile Menu -->
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-md-none"></div>
-                    </div>
+        <button class="menu-button" onclick="toggleMenu(this)">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="{{ url('/') }}" class="nav-link">HOME</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">FASHION</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">BEAUTY</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">FOOD</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">ENTERTAINMENT</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">ZODIAC</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link">MORE</a>
+                <div class="dropdown-content">
+                    <a href="#"><i class="fas fa-heart"></i>&nbsp;&nbsp;LOREM IPSUM</a>
+                    <a href="#"><i class="fas fa-plane"></i>&nbsp;&nbsp;LOREM IPSUM</a>
+                    <a href="#"><i class="fas fa-briefcase"></i>&nbsp;&nbsp;LOREM IPSUM</a>
+                </div>
+            </li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fas fa-search nav-icon"></i>
+            <div class="user-dropdown">
+                <i class="fas fa-user nav-icon"></i>
+                <div class="user-dropdown-content">
+                    <a href="{{ route('login') }}"><i class="fas fa-user-circle"></i>&nbsp;&nbsp;LOGIN</a>
+                    <a href="#"><i class="fas fa-cog"></i>&nbsp;&nbsp;Lorem Ipsum</a>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Lorem Ipsum</a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</nav>
 
-@section('scripts')
-    <script>
-        function toggleDropdown(element) {
-            const dropdownMenu = element.nextElementSibling;
+<script>
+    // Add sticky class on scroll
+    window.onscroll = function() {
+        const navbar = document.querySelector('.navbar');
+        const title = document.querySelector('.site-title');
+        const titleBottom = title.offsetTop + title.offsetHeight;
 
-            // Tampilkan atau sembunyikan dropdown
-            if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
-                dropdownMenu.style.display = "block";
-            } else {
-                dropdownMenu.style.display = "none";
-            }
+        if (window.pageYOffset >= titleBottom) {
+            navbar.classList.add('sticky');
+        } else {
+            navbar.classList.remove('sticky');
+        }
+    };
 
-            // Tutup dropdown lain saat yang ini dibuka
-            document.addEventListener('click', function(event) {
-                if (!element.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                    dropdownMenu.style.display = "none";
-                }
+    // Toggle mobile menu with animation
+    function toggleMenu(button) {
+        const menu = document.querySelector('.nav-menu');
+        button.classList.toggle('active');
+        menu.classList.toggle('active');
+    }
+
+    // Handle dropdown on mobile
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        if (window.innerWidth <= 768) {
+            dropdown.querySelector('.nav-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
             });
         }
-    </script>
-@endsection
+    });
+
+    // Update date and time
+    function updateDateTime() {
+        const now = new Date();
+
+        // Format date: Tuesday, February 18, 2024
+        const dateOptions = {
+            weekday: 'long',
+            month: 'long',
+            day: 'numeric'
+        };
+        const dateStr = now.toLocaleDateString('en-US', dateOptions);
+
+        // Format time: 14:30:45
+        const timeStr = now.toLocaleTimeString('en-US', {
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+
+        document.getElementById('date').textContent = dateStr;
+    }
+
+    // Update immediately and then every second
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+</script>
+
+<script>
+    document.querySelector('.user-dropdown').addEventListener('click', function(e) {
+        this.classList.toggle('active');
+        e.stopPropagation();
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.user-dropdown')) {
+            document.querySelector('.user-dropdown').classList.remove('active');
+        }
+    });
+</script>

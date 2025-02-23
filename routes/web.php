@@ -3,17 +3,21 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\EarningController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\EarningController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // FRONTEND ROUTE
 Route::get('/', [FrontendController::class, 'home']);
 Route::get('/article/{id}', [FrontendController::class, 'details']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/like/{id}', [FrontendController::class, 'toggleLike'])->middleware('auth');
+});
 
 Auth::routes();
 
@@ -37,7 +41,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::put('/articles/{id}/reject', [ArticleController::class, 'reject'])->name('articles.reject');
 
     Route::get('/notification/read/{id}', function ($id) {
-        $notification = Notification::findOrFail($id);
+        $notification         = Notification::findOrFail($id);
         $notification->status = 'read'; // Tandai sebagai sudah dibaca
         $notification->save();
 
@@ -53,12 +57,11 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
         return response()->json(['success' => true]);
     })->name('notifications.markAsRead');
 
-    Route::resource('notifications' , NotificationController::class);
+    Route::resource('notifications', NotificationController::class);
     Route::delete('/notifications/clear', [NotificationController::class, 'destroy'])->name('notifications.clear');
 
     Route::get('/profile/activities', [UserController::class, 'getActivities'])->name('profile.activities');
 
     Route::resource('earning', EarningController::class);
-
 
 });
