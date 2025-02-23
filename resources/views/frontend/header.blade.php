@@ -45,10 +45,28 @@
             <div class="user-dropdown">
                 <i class="fas fa-user nav-icon"></i>
                 <div class="user-dropdown-content">
-                    <a href="{{ route('login') }}"><i class="fas fa-user-circle"></i>&nbsp;&nbsp;LOGIN</a>
-                    <a href="#"><i class="fas fa-cog"></i>&nbsp;&nbsp;Lorem Ipsum</a>
-                    <a href="#"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Lorem Ipsum</a>
+                    @if (Auth::check())
+                        <!-- Tombol Profile -->
+                        <a href="{{ route('profile') }}">
+                            <i class="fas fa-user-circle"></i>&nbsp;&nbsp;<b>PROFILE</b>
+                        </a>
+                        <!-- Tombol Logout -->
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;<b>LOGOUT</b>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    @else
+                        <!-- Tombol Login (hanya muncul jika belum login) -->
+                        <a href="{{ route('login') }}">
+                            <i class="fas fa-user-circle"></i>&nbsp;&nbsp;<b>LOGIN</b>
+                        </a>
+                    @endif
+                    <a href="#"><i class="fas fa-cog"></i>&nbsp;&nbsp;<b>SETTING</b></a>
                 </div>
+
             </div>
         </div>
     </div>

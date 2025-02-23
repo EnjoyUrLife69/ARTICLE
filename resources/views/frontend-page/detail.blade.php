@@ -602,7 +602,8 @@
                         $isLiked = Auth::check() && $articles->likes->contains('user_id', Auth::id());
                     @endphp
 
-                    <button id="like-btn" class="tooltip-container share-btn" onclick="toggleLike('{{ $articles->id }}')">
+                    <button id="like-btn" class="tooltip-container share-btn"
+                        onclick="toggleLike('{{ $articles->id }}', {{ Auth::check() ? 'true' : 'false' }})">
                         <span id="tooltip-text" class="tooltip-text">
                             {{ $isLiked ? 'Unlike this article' : 'Like this article' }}
                         </span>
@@ -614,7 +615,6 @@
                             </path>
                         </svg>
 
-                        <!-- Heart Filled (Diperbesar Lebarnya) -->
                         <svg id="heart-filled" class="{{ $isLiked ? '' : 'hidden' }}" width="24" height="24"
                             viewBox="0 -2 24 24" fill="currentColor" transform="scale(1.2, 1.05)">
                             <path
@@ -678,9 +678,23 @@
     <br>
 
     <script>
-        function toggleLike(articleId) {
-            let baseUrl = window.location.origin + '/ARTICLE/public';
+        function toggleLike(articleId, isLoggedIn) {
+            // Check if user is logged in
+            if (!isLoggedIn) {
+                Toastify({
+                    text: "Sign in to like this article",
+                    duration: 3000,
+                    gravity: "center",
+                    position: "right",
+                    style: {
+                        background: "black",
+                        color: "white"
+                    }
+                }).showToast();
+                return;
+            }
 
+            let baseUrl = window.location.origin + '/ARTICLE/public';
             let button = document.getElementById('like-btn');
             let tooltipText = document.getElementById('tooltip-text');
             let heartOutline = document.getElementById('heart-outline');
@@ -716,7 +730,6 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-
                     // Jika error, kembalikan UI seperti sebelumnya
                     if (isCurrentlyLiked) {
                         heartOutline.classList.remove('hidden');
