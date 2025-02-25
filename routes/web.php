@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 // FRONTEND ROUTE
 Route::get('/', [FrontendController::class, 'home']);
 Route::get('/article/{id}', [FrontendController::class, 'details']);
-
 Route::middleware(['auth'])->group(function () {
     Route::post('/like/{id}', [FrontendController::class, 'toggleLike'])->middleware('auth');
 });
+Route::post('/update-share/{id}', [FrontendController::class, 'updateShare'])->name('articles.share');
 
 Auth::routes();
 

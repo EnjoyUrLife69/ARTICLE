@@ -95,7 +95,7 @@ class ArticleController extends Controller
         $request->validate([
             'title'        => 'required',
             'content'      => 'required',
-            'cover'        => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'cover'        => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
             'categorie_id' => 'required',
             'description'  => 'required',
         ]);

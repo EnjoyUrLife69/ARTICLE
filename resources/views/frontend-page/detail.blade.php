@@ -621,8 +621,6 @@
                                 d="M12.75 20.66l6.184-7.098c2.677-2.884 2.559-6.506.754-8.705-.898-1.095-2.206-1.816-3.72-1.855-1.293-.034-2.652.43-3.963 1.442-1.315-1.012-2.678-1.476-3.973-1.442-1.515.04-2.825.76-3.724 1.855-1.806 2.201-1.915 5.823.772 8.706l6.183 7.097c.19.216.46.34.743.34a.985.985 0 0 0 .743-.34Z" />
                         </svg>
                     </button>
-
-
                 </div>
             </div>
             <div class="main-image"><img src="{{ asset('storage/images/articles/' . $articles->cover) }}" alt="">
@@ -751,32 +749,62 @@
 
             if (container.classList.contains('active')) {
                 shareIcon.innerHTML =
-                    `
-            <path fill="white" d="M17.5 3a3.5 3.5 0 0 0-3.456 4.06L8.143 9.704a3.5 3.5 0 1 0-.01 4.6l5.91 2.65a3.5 3.5 0 1 0 .863-1.805l-5.94-2.662a3.53 3.53 0 0 0 .002-.961l5.948-2.667A3.5 3.5 0 1 0 17.5 3Z"/>`;
+                    `<path fill="white" d="M17.5 3a3.5 3.5 0 0 0-3.456 4.06L8.143 9.704a3.5 3.5 0 1 0-.01 4.6l5.91 2.65a3.5 3.5 0 1 0 .863-1.805l-5.94-2.662a3.53 3.53 0 0 0 .002-.961l5.948-2.667A3.5 3.5 0 1 0 17.5 3Z"/>`;
             } else {
                 shareIcon.innerHTML =
-                    `
-            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                d="M7.926 10.898 15 7.727m-7.074 5.39L15 16.29M8 12a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm12 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm0-11a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />`;
+                    `<path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7.926 10.898 15 7.727m-7.074 5.39L15 16.29M8 12a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm12 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm0-11a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />`;
             }
+        }
+
+        // Fungsi untuk update share count
+        function updateShareCount() {
+            const articleId = document.querySelector('#like-btn').getAttribute('onclick').match(/'([^']+)'/)[1];
+            const baseUrl = window.location.origin + '/ARTICLE/public';
+
+            fetch(`${baseUrl}/update-share/${articleId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Content-Type': 'application/json'
+                }
+            });
         }
 
         // COPY LINK KA CLIPBOARD
         function copyToClipboard() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                alert("Link telah disalin!");
-            }).catch(err => {
-                console.error("Gagal menyalin:", err);
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                updateShareCount();
+                Toastify({
+                    text: "Link copied to clipboard!",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "center",
+                    style: {
+                        background: "black",
+                        color: "white",
+                        borderRadius: "8px",
+                        padding: "12px 24px",
+                    },
+                    offset: {
+                        x: 20,
+                        y: 20
+                    },
+                }).showToast();
             });
         }
+
         // SHARE KA TWITTER
         function shareToTwitter() {
             const url = encodeURIComponent(window.location.href);
+            updateShareCount();
             window.open(`https://twitter.com/intent/tweet?url=${url}`, '_blank');
         }
-        // SHARE KA FACEBOOK
+
+        // Fungsi share ke Facebook
         function shareToFacebook() {
             const url = encodeURIComponent(window.location.href);
+            updateShareCount();
             const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
             window.open(facebookShareUrl, '_blank');
         }

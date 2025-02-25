@@ -60,7 +60,6 @@ class FrontendController extends Controller
 
         return view('frontend-page.detail', compact('articles', 'categories', 'article', 'comments', 'article_trending'));
     }
-
     public function toggleLike($id)
     {
         $user    = Auth::user();
@@ -74,6 +73,7 @@ class FrontendController extends Controller
         if ($existingLike) {
             // Jika sudah like, hapus dari database (Unlike)
             $existingLike->delete();
+            $article->decrement('like_count');
             return response()->json(['liked' => false]);
         } else {
             // Jika belum like, tambahkan ke database
@@ -81,7 +81,16 @@ class FrontendController extends Controller
                 'user_id'    => $user->id,
                 'article_id' => $article->id,
             ]);
+            $article->increment('like_count');
             return response()->json(['liked' => true]);
         }
+    }
+
+    public function updateShare($id)
+    {
+        $article = Article::findOrFail($id);
+        $article->increment('share_count');
+
+        return response()->json(['success' => true]);
     }
 }

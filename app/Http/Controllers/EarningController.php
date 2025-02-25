@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\Earning;
 use App\Models\Article;
+use App\Models\Earning;
 use Illuminate\Http\Request;
 
 class EarningController extends Controller
@@ -13,10 +12,27 @@ class EarningController extends Controller
      */
     public function index()
     {
-        $earnings = Earning::all();
-        $articles = Article::where('status', 'approved')->get();
-        
-        return view('earning.index', compact('earnings' , 'articles'));
+        $userId   = auth()->id(); // Ambil ID user yang sedang login
+        $earnings = Earning::where('user_id', $userId)->get();
+        $articles = Article::where('status', 'approved')
+            ->where('user_id', $userId) // Filter hanya artikel milik user yang login
+            ->get();
+        $totalEarnings = $articles->sum('total');
+
+        // Rincian total per kategori
+        $totalViewEarnings = $articles->sum(function ($article) {
+            return $article->view_count * Article::VIEW_RATE;
+        });
+
+        $totalLikeEarnings = $articles->sum(function ($article) {
+            return $article->like_count * Article::LIKE_RATE;
+        });
+
+        $totalShareEarnings = $articles->sum(function ($article) {
+            return $article->share_count * Article::SHARE_RATE;
+        });
+
+        return view('earning.index', compact('earnings', 'articles', 'totalEarnings', 'totalViewEarnings', 'totalLikeEarnings', 'totalShareEarnings'));
     }
 
     /**

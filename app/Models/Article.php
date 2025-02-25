@@ -13,9 +13,9 @@ class Article extends Model
         'title', 'release_date', 'categorie_id', 'user_id', 'description', 'content', 'status', 'cover',
     ];
 
-    public $timestamps    = true;
-    public $incrementing  = false;    // Non-aktifkan auto-increment
-    protected $keyType    = 'string'; // Tentukan tipe ID sebagai string (UUID)
+    public $timestamps   = true;
+    public $incrementing = false;    // Non-aktifkan auto-increment
+    protected $keyType   = 'string'; // Tentukan tipe ID sebagai string (UUID)
 
     protected static function boot()
     {
@@ -63,6 +63,46 @@ class Article extends Model
     public function likes()
     {
         return $this->hasMany(Like::class, 'article_id', 'id');
+    }
+
+    // TOTAL PENDAPATAN
+    protected $appends = ['total'];
+    // Harga per interaksi (dalam IDR)
+    const VIEW_RATE  = 15;  // Rp15 per view
+    const LIKE_RATE  = 150; // Rp150 per like
+    const SHARE_RATE = 550; // Rp750 per share
+
+
+    // Menghitung total pendapatan
+    public function getTotalAttribute()
+    {
+        $viewEarnings  = $this->view_count * self::VIEW_RATE;
+        $likeEarnings  = $this->like_count * self::LIKE_RATE;
+        $shareEarnings = $this->share_count * self::SHARE_RATE;
+
+        return $viewEarnings + $likeEarnings + $shareEarnings;
+    }
+
+    public function getEarningsBreakdown()
+    {
+        return [
+            'views'  => [
+                'count' => $this->view_count,
+                'rate'  => self::VIEW_RATE,
+                'total' => $this->view_count * self::VIEW_RATE,
+            ],
+            'likes'  => [
+                'count' => $this->like_count,
+                'rate'  => self::LIKE_RATE,
+                'total' => $this->like_count * self::LIKE_RATE,
+            ],
+            'shares' => [
+                'count' => $this->share_count,
+                'rate'  => self::SHARE_RATE,
+                'total' => $this->share_count * self::SHARE_RATE,
+            ],
+            'total'  => $this->total,
+        ];
     }
 
 }
