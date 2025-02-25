@@ -41,7 +41,22 @@
             </li>
         </ul>
         <div class="nav-icons">
-            <i class="fas fa-search nav-icon"></i>
+            <i class="fas fa-search nav-icon search-toggle"></i>
+
+            <!-- Search Overlay -->
+            <div class="search-wrapper">
+                <button class="search-close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <form action="{{ route('articles.search') }}" method="GET" class="search-form">
+                    <input type="text" name="query" class="search-input" placeholder="Search ..."
+                        autocomplete="off">
+                    <button type="submit" class="search-submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
             <div class="user-dropdown">
                 <i class="fas fa-user nav-icon"></i>
                 <div class="user-dropdown-content">
@@ -142,5 +157,42 @@
         if (!e.target.closest('.user-dropdown')) {
             document.querySelector('.user-dropdown').classList.remove('active');
         }
+    });
+</script>
+
+<script>
+    // Search Toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchToggle = document.querySelector('.search-toggle');
+        const searchWrapper = document.querySelector('.search-wrapper');
+        const searchClose = document.querySelector('.search-close');
+        const searchInput = document.querySelector('.search-input');
+
+        // Buka search overlay
+        searchToggle.addEventListener('click', function() {
+            searchWrapper.classList.add('active');
+            setTimeout(() => {
+                searchInput.focus();
+            }, 300);
+        });
+
+        // Tutup search overlay
+        searchClose.addEventListener('click', function() {
+            searchWrapper.classList.remove('active');
+        });
+
+        // Tutup search overlay saat Esc ditekan
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && searchWrapper.classList.contains('active')) {
+                searchWrapper.classList.remove('active');
+            }
+        });
+
+        // Hindari overlay tertutup saat mengklik di dalam form
+        searchWrapper.addEventListener('click', function(e) {
+            if (e.target === searchWrapper) {
+                searchWrapper.classList.remove('active');
+            }
+        });
     });
 </script>

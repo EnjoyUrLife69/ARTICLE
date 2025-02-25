@@ -225,4 +225,27 @@ class ArticleController extends Controller
 
         return redirect()->route('articles.index')->with('success', 'Data deleted successfully.');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Jika query kosong, kembalikan ke halaman sebelumnya
+        if (empty($query)) {
+            return back();
+        }
+
+        $articles = Article::where('status', 'approved')
+            ->where(function ($q) use ($query) {
+                $q->where('title', 'LIKE', "%{$query}%")
+                    ->orWhere('description', 'LIKE', "%{$query}%")
+                    ->orWhere('content', 'LIKE', "%{$query}%");
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        $categories = Categorie::all();
+
+        return view('articles.search', compact('articles', 'categories', 'query'));
+    }
 }

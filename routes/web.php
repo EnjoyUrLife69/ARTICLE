@@ -21,6 +21,10 @@ Route::post('/update-share/{id}', [FrontendController::class, 'updateShare'])->n
 
 Auth::routes();
 
+// Search
+Route::get('/search', [App\Http\Controllers\ArticleController::class, 'search'])->name('articles.search'); 
+
+
 // BACKEND ROUTE
 Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
