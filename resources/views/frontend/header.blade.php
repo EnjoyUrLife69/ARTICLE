@@ -1,10 +1,10 @@
-<h1 class="site-title">LOREM IPSUM</h1>
+<h1 class="site-title">ARTICLE'S</h1>
 <nav class="navbar">
     <div class="nav-container">
         <div class="nav-left">
             <div class="datetime">
                 <i class="far fa-calendar-alt"></i>
-                <span id="date"></span>
+                <b><span id="date"></span></b>
             </div>
         </div>
         <button class="menu-button" onclick="toggleMenu(this)">
@@ -17,10 +17,10 @@
                 <a href="{{ url('/') }}" class="nav-link">HOME</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">FASHION</a>
+                <a href="#" class="nav-link">CATEGORY</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">BEAUTY</a>
+                <a href="#" class="nav-link">LIFESTYLE</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">FOOD</a>
@@ -126,7 +126,7 @@
         const dateOptions = {
             weekday: 'long',
             month: 'long',
-            day: 'numeric'
+            day: 'numeric',
         };
         const dateStr = now.toLocaleDateString('en-US', dateOptions);
 

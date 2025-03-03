@@ -48,7 +48,7 @@
                                 <i class='bx bx-like'></i> <b> Rp. 150 </b> / like
                             </li>
                             <li class="list-group-item">
-                                <i class='bx bx-share-alt'></i> <b> Rp. 750 </b>/ share
+                                <i class='bx bx-share-alt'></i> <b> Rp. 550 </b>/ share
                             </li>
                         </ul>
                     </div>

@@ -12,9 +12,15 @@ class FrontendController extends Controller
 {
     public function home()
     {
-        $articles         = Article::all();
+        $articles                   = Article::all();
+        $article_trending_slideshow = Article::where('status', 'approved')
+            ->orderBy('view_count', 'desc')
+            ->take(4)
+            ->get();
+
         $article_trending = Article::where('status', 'approved')
             ->orderBy('view_count', 'desc')
+            ->skip(4)
             ->take(4)
             ->get();
 
@@ -30,7 +36,7 @@ class FrontendController extends Controller
         }
 
         $categories = Categorie::all();
-        return view('frontend-page.homepage', compact('articles', 'article_trending', 'categories', 'article_history'));
+        return view('frontend-page.homepage', compact('articles', 'article_trending', 'categories', 'article_history', 'article_trending_slideshow'));
     }
     public function details($id)
     {

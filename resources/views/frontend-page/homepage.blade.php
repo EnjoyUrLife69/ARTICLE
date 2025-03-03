@@ -3,49 +3,43 @@
 @section('content')
     <!-- Slideshow section / BAGIAN 1 -->
     <div class="slideshow-container">
-        <div class="slide active">
-            <img src="https://picsum.photos/1200/500?random=1" alt="Slide 1">
-            <div class="slide-content">
-                <h2 class="slide-title">Welcome to Our Platform</h2>
-            </div>
-        </div>
-        <div class="slide">
-            <img src="https://picsum.photos/1200/500?random=2" alt="Slide 2">
-            <div class="slide-content">
-                <h2 class="slide-title">Discover Amazing Content</h2>
-            </div>
-        </div>
-        <div class="slide">
-            <img src="https://picsum.photos/1200/500?random=3" alt="Slide 3">
-            <div class="slide-content">
-                <h2 class="slide-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam impedit,
-                    perspiciatis sint at cum voluptate exercitationem eligendi velit odio </h2>
-            </div>
-        </div>
-        <div class="slide">
-            <img src="https://picsum.photos/1200/500?random=4" alt="Slide 4">
-            <div class="slide-content">
-                <h2 class="slide-title">Stay Updated</h2>
-            </div>
-        </div>
-        <div class="slide">
-            <img src="https://picsum.photos/1200/500?random=5" alt="Slide 5">
-            <div class="slide-content">
-                <h2 class="slide-title">Explore More</h2>
-            </div>
-        </div>
+        @foreach ($article_trending_slideshow as $index => $article)
+            <a href="{{ url('/article/' . $article->id) }}" class="slide-link" data-article-id="{{ $article->id }}">
+                <div class="slide {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}">
+                    <img src="{{ asset('storage/images/articles/' . $article->cover) }}" alt="{{ $article->title }}">
+                    <div class="slide-content">
+                        <div class="content-wrapper">
+                            <span class="slide-tag">Trending</span>
+                            <h2 class="slide-title">{{ $article->title }}</h2>
+                            <p class="slide-description">{{ $article->description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        @endforeach
 
         <div class="slide-nav">
-            <button onclick="changeSlide(-1)">&#10094;</button>
-            <button onclick="changeSlide(1)">&#10095;</button>
+            <button class="prev-btn" type="button" aria-label="Previous slide">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                </svg>
+            </button>
+            <button class="next-btn" type="button" aria-label="Next slide">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+                </svg>
+            </button>
         </div>
 
         <div class="slide-indicators">
-            <div class="indicator active" onclick="goToSlide(0)"></div>
-            <div class="indicator" onclick="goToSlide(1)"></div>
-            <div class="indicator" onclick="goToSlide(2)"></div>
-            <div class="indicator" onclick="goToSlide(3)"></div>
-            <div class="indicator" onclick="goToSlide(4)"></div>
+            @foreach ($article_trending_slideshow as $index => $article)
+                <div class="indicator {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}"></div>
+            @endforeach
+        </div>
+
+        <div class="slide-counter">
+            <span class="current-slide">1</span>
+            <span class="total-slides">/ {{ count($article_trending_slideshow) }}</span>
         </div>
     </div>
 
