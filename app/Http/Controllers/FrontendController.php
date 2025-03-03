@@ -12,7 +12,10 @@ class FrontendController extends Controller
 {
     public function home()
     {
-        $articles                   = Article::all();
+        // Ambil semua artikel yang approved, tidak hanya 4 artikel
+        $articles = Article::where('status', 'approved')
+            ->get();
+
         $article_trending_slideshow = Article::where('status', 'approved')
             ->orderBy('view_count', 'desc')
             ->take(4)
@@ -24,8 +27,7 @@ class FrontendController extends Controller
             ->take(4)
             ->get();
 
-        $history = session()->get('article_history', []);
-        // Jika history kosong, langsung buat collection kosong
+        $history         = session()->get('article_history', []);
         $article_history = collect();
         if (! empty($history)) {
             $article_history = Article::whereIn('id', $history)
@@ -35,9 +37,20 @@ class FrontendController extends Controller
                 });
         }
 
-        $categories = Categorie::all();
-        return view('frontend-page.homepage', compact('articles', 'article_trending', 'categories', 'article_history', 'article_trending_slideshow'));
+        $categories = Categorie::withCount('articles')
+            ->orderByDesc('articles_count')
+            ->skip(4)
+            ->take(10)
+            ->get();
+
+        $popular_categories = Categorie::withCount('articles')
+            ->orderByDesc('articles_count')
+            ->take(4)
+            ->get();
+
+        return view('frontend-page.homepage', compact('articles', 'article_trending', 'categories', 'article_history', 'article_trending_slideshow', 'popular_categories'));
     }
+
     public function details($id)
     {
         $articles         = Article::findOrFail($id);

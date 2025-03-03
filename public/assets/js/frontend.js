@@ -3,7 +3,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         initializeSlideshow();
     });
-
     function initializeSlideshow() {
             // Get all elements
         const slideshowContainer = document.querySelector('.slideshow-container');
@@ -141,39 +140,89 @@
     }
 // SCRIPT BAGIAN 1 (SLIDESHOW) END
 
-// SCRIPT BAGIAN 3 (NAVBAR)
+// SCRIPT BAGIAN 3
+document.addEventListener('DOMContentLoaded', function() {
     const categoryLinks = document.querySelectorAll('.category-link');
     const articles = document.querySelectorAll('.article-card2');
     const loader = document.querySelector('.loader');
-
+    
+    // Fungsi untuk mengecek apakah kategori cocok
+    function categoryMatches(articleCategory, selectedCategory) {
+        return articleCategory === selectedCategory;
+    }
+    
     categoryLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Remove active class from all links
-                categoryLinks.forEach(l => l.classList.remove('active'));
-                // Add active class to clicked link
-                this.classList.add('active');
-
-                // Show loader
-                loader.classList.add('active');
-
-                // Hide articles
-                articles.forEach(article => {
-                    article.style.opacity = '0';
-                });
-
-                // Simulate loading
-                setTimeout(() => {
-                    // Hide loader
-                    loader.classList.remove('active');
-
-                    // Show articles with animation
-                    articles.forEach(article => {
-                        article.style.opacity = '1';
-                        article.classList.remove('reload-animation');
-                        void article.offsetWidth; // Trigger reflow
-                        article.classList.add('reload-animation');
-                    });
-                }, 500);
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Hapus class active dari semua kategori
+            categoryLinks.forEach(l => l.classList.remove('active'));
+            
+            // Tambahkan class active ke kategori yang diklik
+            this.classList.add('active');
+            
+            // Ambil kategori yang dipilih
+            const selectedCategory = this.getAttribute('data-category');
+            
+            // Tampilkan loader
+            loader.classList.add('active');
+            
+            // Sembunyikan semua artikel dulu
+            articles.forEach(article => {
+                article.style.display = 'none';
+                article.style.opacity = '0';
             });
+            
+            setTimeout(() => {
+                // Sembunyikan loader setelah delay
+                loader.classList.remove('active');
+                
+                // Jika kategori "all" dipilih, tampilkan semua artikel
+                if (selectedCategory === "all") {
+                    // Konversi NodeList ke Array agar bisa menggunakan slice
+                    const allArticles = Array.from(articles);
+                    // Ambil hanya 6 artikel pertama
+                    const limitedArticles = allArticles.slice(0, 6);
+                    
+                    limitedArticles.forEach(article => {
+                        article.style.display = 'block';
+                        setTimeout(() => {
+                            article.style.opacity = '1';
+                        }, 50);
+                    });
+                    return;
+                }
+                
+                // Filter artikel berdasarkan kategori yang dipilih
+                let filteredArticles = [];
+                articles.forEach(article => {
+                    // Debug: Log nilai kategori untuk memastikan perbandingan benar
+                    console.log('Article Category:', article.getAttribute('data-category'));
+                    console.log('Selected Category:', selectedCategory);
+                    
+                    // Perhatikan kategori disimpan sebagai string, jadi pastikan perbandingan sebagai string
+                    if (article.getAttribute('data-category') === selectedCategory) {
+                        filteredArticles.push(article);
+                    }
+                });
+                
+                console.log('Filtered Articles Count:', filteredArticles.length);
+                
+                // Jika tidak ada artikel yang cocok, tampilkan pesan
+                if (filteredArticles.length === 0) {
+                    alert("Tidak ada artikel dalam kategori ini.");
+                    return;
+                }
+                
+                // Tampilkan semua artikel yang sesuai dengan kategori
+                filteredArticles.forEach(article => {
+                    article.style.display = 'block';
+                    setTimeout(() => {
+                        article.style.opacity = '1';
+                    }, 50);
+                });
+            }, 600);
+        });
     });
-// SCRIPT BAGIAN 3 (NAVBAR) END
+});
+// SCRIPT BAGIAN 3 END

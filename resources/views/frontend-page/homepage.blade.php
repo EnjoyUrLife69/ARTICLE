@@ -9,7 +9,7 @@
                     <img src="{{ asset('storage/images/articles/' . $article->cover) }}" alt="{{ $article->title }}">
                     <div class="slide-content">
                         <div class="content-wrapper">
-                            <span class="slide-tag">Trending</span>
+                            <span class="slide-tag">{{ $article->categorie->name }}</span>
                             <h2 class="slide-title">{{ $article->title }}</h2>
                             <p class="slide-description">{{ $article->description }}</p>
                         </div>
@@ -59,96 +59,55 @@
         @endforeach
     </div>
 
-    {{-- Article Category section / BAGIAN 3 --}}
-    <div class="container">
-        <header class="blog-header">
-            <nav class="categories-nav">
-                <a class="category-link active">CATEGORY</a>
-                <a class="category-link">CATEGORY</a>
-                <a class="category-link">CATEGORY</a>
-                <a class="category-link">CATEGORY</a>
+    <!-- Article Category section / BAGIAN 3 -->
+    <section class="article-category-section">
+        <div class="container">
+            <div class="categories-nav">
+                <!-- Tambahkan data-category="all" untuk menampilkan semua artikel -->
+                <a href="#" class="category-link active" data-category="all">ALL</a>
+
+                @foreach ($popular_categories as $data)
+                    <a href="#" class="category-link" data-category="{{ $data->id }}">
+                        {{ strtoupper($data->name) }} ({{ $data->articles_count }})
+                    </a>
+                @endforeach
+
                 <button class="more-btn">MORE</button>
-            </nav>
-            <h1 class="blog-title">LOREM IPSUM</h1>
-        </header>
+            </div>
 
-        <div class="blog-content">
-            <main class="blog-grid">
-                <article class="article-card2">
-                    <div class="article-image">IMG</div>
-                    <div class="article-date">Date</div>
-                    <a href="#" class="article-title">Lorem ipsum dolor sit amet consectetur</a>
-                </article>
+            <div class="loader">
+                <div class="loader-spinner"></div>
+            </div>
 
-                <article class="article-card2">
-                    <div class="article-image">IMG</div>
-                    <div class="article-date">Date</div>
-                    <a href="#" class="article-title">Lorem ipsum dolor sit amet consectetur</a>
-                </article>
+            <div class="blog-content">
+                <div class="blog-grid">
+                    @foreach ($articles as $data)
+                        <div class="article-card2" data-category="{{ $data->categorie_id }}">
+                            <div class="article-image">
+                                <a href="{{ url('/article/' . $data->id) }}"><img src="{{ asset('storage/images/articles/' . $data->cover) }}" alt="Article Image"></a>
+                            </div>
+                            <div class="article-date">{{ $data->created_at->format('M d, Y') }}</div>
+                            <a href="{{ url('/article/' . $data->id) }}" class="article-title-2">{{ $data->title }}</a>
+                        </div>
+                    @endforeach
+                </div>
 
-                <article class="article-card2">
-                    <div class="article-image">IMG</div>
-                    <div class="article-date">Date</div>
-                    <a href="#" class="article-title">Lorem ipsum dolor sit amet consectetur</a>
-                </article>
-
-                <article class="article-card2">
-                    <div class="article-image">IMG</div>
-                    <div class="article-date">Date</div>
-                    <a href="#" class="article-title">Lorem ipsum dolor sit amet consectetur</a>
-                </article>
-            </main>
-
-            <aside class="sidebar">
-                <h2 class="sidebar-title">CATEGORY</h2>
-                <ul class="categories-list">
-                    <li>
-                        <a href="#">Category 1</a>
-                        <span class="post-count">(200)</span>
-                    </li>
-                    <li>
-                        <a href="#">Category 2</a>
-                        <span class="post-count">(200)</span>
-                    </li>
-                    <li>
-                        <a href="#">Category 3</a>
-                        <span class="post-count">(200)</span>
-                    </li>
-                    <li>
-                        <a href="#">Category 4</a>
-                        <span class="post-count">(200)</span>
-                    </li>
-                    <li>
-                        <a href="#">Category 5</a>
-                        <span class="post-count">(200)</span>
-                    </li>
-                    <li>
-                        <a href="#">Category 6</a>
-                        <span class="post-count">(200)</span>
-                    </li>
-                    <li>
-                        <a href="#">Category 7</a>
-                        <span class="post-count">(200)</span>
-                    </li>
-                    <li>
-                        <a href="#">Category 8</a>
-                        <span class="post-count">(200)</span>
-                    </li>
-                    <li>
-                        <a href="#">Category 9</a>
-                        <span class="post-count">(200)</span>
-                    </li>
-                    <li>
-                        <a href="#">Category 10</a>
-                        <span class="post-count">(200)</span>
-                    </li>
-                </ul>
-                <button class="sidebar-more">MORE</button>
-            </aside>
+                <div class="sidebar">
+                    <h3 class="sidebar-title">CATEGORIES</h3>
+                    <ul class="categories-list">
+                        @foreach ($categories as $data)
+                            <li>
+                                <a href="#">{{ $data->name }}</a>
+                                <span class="post-count">({{ $data->articles_count }})</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <button class="sidebar-more">VIEW MORE</button>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="loader"></div>
-    </div>
 
     {{-- BAGIAN 4 --}}
     <br><br><br>

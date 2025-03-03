@@ -29,15 +29,8 @@ class Categorie extends Model
         });
     }
 
-    public function article()
+    public function articles()
     {
         return $this->hasMany(Article::class, 'categorie_id', 'id');
     }
-
-    // Schema::create('categories', function (Blueprint $table) {
-    //         $table->uuid('id')->primary();
-    //         $table->string('name');
-    //         $table->string('description')->nullable();
-    //         $table->timestamps();
-    //     });
 }
