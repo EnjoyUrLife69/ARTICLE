@@ -238,8 +238,7 @@ class ArticleController extends Controller
         $articles = Article::where('status', 'approved')
             ->where(function ($q) use ($query) {
                 $q->where('title', 'LIKE', "%{$query}%")
-                    ->orWhere('description', 'LIKE', "%{$query}%")
-                    ->orWhere('content', 'LIKE', "%{$query}%");
+                    ->orWhere('description', 'LIKE', "%{$query}%");
             })
             ->orderBy('created_at', 'desc')
             ->paginate(10);

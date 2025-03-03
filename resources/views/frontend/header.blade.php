@@ -162,14 +162,17 @@
 
 <script>
     // Search Toggle
+    // Simplified Search Toggle
     document.addEventListener('DOMContentLoaded', function() {
         const searchToggle = document.querySelector('.search-toggle');
         const searchWrapper = document.querySelector('.search-wrapper');
         const searchClose = document.querySelector('.search-close');
         const searchInput = document.querySelector('.search-input');
+        const searchForm = document.querySelector('.search-form');
 
         // Buka search overlay
-        searchToggle.addEventListener('click', function() {
+        searchToggle.addEventListener('click', function(e) {
+            e.preventDefault();
             searchWrapper.classList.add('active');
             setTimeout(() => {
                 searchInput.focus();
@@ -194,5 +197,17 @@
                 searchWrapper.classList.remove('active');
             }
         });
+
+        // Pastikan form pencarian berfungsi dengan benar
+        if (searchForm) {
+            searchForm.addEventListener('submit', function(e) {
+                // Tambahkan parameter untuk mencari hanya di judul dan kategori
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'search_in';
+                hiddenInput.value = 'title_category';
+                searchForm.appendChild(hiddenInput);
+            });
+        }
     });
 </script>
