@@ -1,32 +1,32 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 OPR/117.0.0.0" version="26.0.4">
   <diagram name="Page-1" id="5_PxfF87xwtZbWOUVoVM">
-    <mxGraphModel dx="695" dy="433" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="888" dy="553" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="FiibV92SIHVnTIMMilG7-3" value="Admin" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="170" y="220" width="20" height="30" as="geometry" />
+          <mxGeometry x="70" y="220" width="20" height="30" as="geometry" />
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-9" value="t" style="swimlane;startSize=0;" vertex="1" parent="1">
-          <mxGeometry x="240" y="190" width="440" height="420" as="geometry" />
+          <mxGeometry x="160" y="150" width="440" height="500" as="geometry" />
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-11" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Membaca&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;Artikel&lt;/font&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
-          <mxGeometry x="160" y="240" width="60" height="40" as="geometry" />
+          <mxGeometry x="175" y="320" width="60" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="FiibV92SIHVnTIMMilG7-15" value="&lt;font size=&quot;1&quot;&gt;Mengelola&lt;/font&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;Artikel&lt;/font&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
-          <mxGeometry x="270" y="120" width="60" height="40" as="geometry" />
+        <mxCell id="FiibV92SIHVnTIMMilG7-15" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Mengelola&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;Semua Artikel&lt;/font&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
+          <mxGeometry x="60" y="100" width="60" height="40" as="geometry" />
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-17" value="&lt;font size=&quot;1&quot;&gt;Mengelola&lt;/font&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;Kategori&lt;/font&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
-          <mxGeometry x="115" y="110" width="60" height="40" as="geometry" />
+          <mxGeometry x="120" y="135" width="60" height="40" as="geometry" />
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-18" value="&lt;font size=&quot;1&quot;&gt;Mengelola&lt;/font&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;Role &amp;amp; Permission&lt;/font&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
-          <mxGeometry x="210" y="180" width="60" height="40" as="geometry" />
+          <mxGeometry x="175" y="175" width="60" height="40" as="geometry" />
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-27" value="&lt;font size=&quot;1&quot;&gt;Login&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
           <mxGeometry x="180" y="10" width="60" height="40" as="geometry" />
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-39" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Like &amp;amp; Komen Artikel&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
-          <mxGeometry x="105" y="310" width="60" height="40" as="geometry" />
+          <mxGeometry x="180" y="380" width="60" height="40" as="geometry" />
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-44" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-47" target="FiibV92SIHVnTIMMilG7-27">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -47,7 +47,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-48" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;Include&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
-          <mxGeometry x="125" y="60" width="50" height="30" as="geometry" />
+          <mxGeometry x="125" y="70" width="50" height="30" as="geometry" />
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-49" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-17" target="FiibV92SIHVnTIMMilG7-48">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -62,7 +62,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-47" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;Include&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
-          <mxGeometry x="275" y="70" width="50" height="30" as="geometry" />
+          <mxGeometry x="70" y="70" width="50" height="30" as="geometry" />
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-52" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-53" target="FiibV92SIHVnTIMMilG7-27">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -71,7 +71,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-53" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;Include&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
-          <mxGeometry x="110" y="270" width="50" height="30" as="geometry" />
+          <mxGeometry x="265" y="315" width="50" height="30" as="geometry" />
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-54" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-39" target="FiibV92SIHVnTIMMilG7-53">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -86,19 +86,109 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-51" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;Include&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
-          <mxGeometry x="215" y="70" width="50" height="30" as="geometry" />
+          <mxGeometry x="170" y="70" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-61" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-57" target="FiibV92SIHVnTIMMilG7-15">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="220" as="sourcePoint" />
+            <mxPoint x="220" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-62" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Mengelola&lt;/font&gt;&lt;div&gt;&lt;span style=&quot;font-size: 9px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Artikel&lt;/span&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
+          <mxGeometry x="280" y="120" width="60" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-63" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-64" target="FiibV92SIHVnTIMMilG7-27">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="260" as="sourcePoint" />
+            <mxPoint x="300" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-64" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;Include&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
+          <mxGeometry x="265" y="70" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-65" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-62" target="FiibV92SIHVnTIMMilG7-64">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="470" y="240" as="sourcePoint" />
+            <mxPoint x="360" y="190" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-57" value="&lt;font size=&quot;1&quot;&gt;Approve dan Rejected&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
-          <mxGeometry x="270" y="300" width="60" height="40" as="geometry" />
+          <mxGeometry x="60" y="170" width="60" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="FiibV92SIHVnTIMMilG7-59" value="" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-57" target="FiibV92SIHVnTIMMilG7-15">
+        <mxCell id="FiibV92SIHVnTIMMilG7-66" value="&lt;font size=&quot;1&quot;&gt;CRUD&lt;/font&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;Article&lt;/font&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
+          <mxGeometry x="280" y="220" width="60" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-67" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-60" target="FiibV92SIHVnTIMMilG7-62">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="170" y="230" as="sourcePoint" />
-            <mxPoint x="220" y="180" as="targetPoint" />
+            <mxPoint x="250" y="260" as="sourcePoint" />
+            <mxPoint x="300" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-68" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-66" target="FiibV92SIHVnTIMMilG7-60">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="460" y="340" as="sourcePoint" />
+            <mxPoint x="460" y="300" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-60" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Extend&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
-          <mxGeometry x="275" y="250" width="50" height="30" as="geometry" />
+          <mxGeometry x="285" y="175" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-69" value="&lt;font size=&quot;1&quot;&gt;Melihat&lt;/font&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;Penghasilan&lt;/font&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
+          <mxGeometry x="345" y="220" width="60" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-70" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-71" target="FiibV92SIHVnTIMMilG7-62">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="260" as="sourcePoint" />
+            <mxPoint x="300" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-71" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Extend&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
+          <mxGeometry x="345" y="175" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-72" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-69" target="FiibV92SIHVnTIMMilG7-71">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="530" y="360" as="sourcePoint" />
+            <mxPoint x="460" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-74" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Extend&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
+          <mxGeometry x="65" y="135" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-76" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Logout&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
+          <mxGeometry x="175" y="440" width="60" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-77" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-78" target="FiibV92SIHVnTIMMilG7-27">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="260" as="sourcePoint" />
+            <mxPoint x="260" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-78" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;Include&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
+          <mxGeometry x="295" y="400" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-79" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-76" target="FiibV92SIHVnTIMMilG7-78">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="370" y="580" as="sourcePoint" />
+            <mxPoint x="370" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-85" value="&lt;font size=&quot;1&quot;&gt;CRUD&lt;/font&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;Kategori&lt;/font&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
+          <mxGeometry x="120" y="240" width="60" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-90" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-91" target="FiibV92SIHVnTIMMilG7-17">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="150" y="260" as="sourcePoint" />
+            <mxPoint x="200" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-91" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Extend&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="FiibV92SIHVnTIMMilG7-9">
+          <mxGeometry x="125" y="200" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-92" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="FiibV92SIHVnTIMMilG7-9" source="FiibV92SIHVnTIMMilG7-85" target="FiibV92SIHVnTIMMilG7-91">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="370" as="sourcePoint" />
+            <mxPoint x="310" y="315" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-13" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="FiibV92SIHVnTIMMilG7-3" target="FiibV92SIHVnTIMMilG7-11">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -125,7 +215,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-24" value="Writer" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="710" y="315" width="20" height="30" as="geometry" />
+          <mxGeometry x="660" y="340" width="20" height="30" as="geometry" />
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-28" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="FiibV92SIHVnTIMMilG7-24" target="FiibV92SIHVnTIMMilG7-27">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -145,14 +235,8 @@
             <mxPoint x="500" y="310" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="FiibV92SIHVnTIMMilG7-33" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="FiibV92SIHVnTIMMilG7-24" target="FiibV92SIHVnTIMMilG7-15">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="450" y="360" as="sourcePoint" />
-            <mxPoint x="500" y="310" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-35" value="Guest" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="180" y="430" width="20" height="30" as="geometry" />
+          <mxGeometry x="80" y="430" width="20" height="30" as="geometry" />
         </mxCell>
         <mxCell id="FiibV92SIHVnTIMMilG7-36" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="FiibV92SIHVnTIMMilG7-35" target="FiibV92SIHVnTIMMilG7-11">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -176,6 +260,30 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="420" y="360" as="sourcePoint" />
             <mxPoint x="470" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-33" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="FiibV92SIHVnTIMMilG7-24" target="FiibV92SIHVnTIMMilG7-62">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="820" y="355" as="sourcePoint" />
+            <mxPoint x="549.9999999999966" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-80" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="FiibV92SIHVnTIMMilG7-24" target="FiibV92SIHVnTIMMilG7-76">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="370" y="490" as="sourcePoint" />
+            <mxPoint x="420" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-82" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="FiibV92SIHVnTIMMilG7-35" target="FiibV92SIHVnTIMMilG7-76">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="370" y="490" as="sourcePoint" />
+            <mxPoint x="420" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FiibV92SIHVnTIMMilG7-83" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="FiibV92SIHVnTIMMilG7-3" target="FiibV92SIHVnTIMMilG7-76">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="370" y="490" as="sourcePoint" />
+            <mxPoint x="420" y="440" as="targetPoint" />
           </mxGeometry>
         </mxCell>
       </root>
