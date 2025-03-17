@@ -57,12 +57,17 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item {{ request()->routeIs('home') ? 'active' : '' }}">
-            <a href="{{ route('home') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Home</div>
+        <li class="menu-item {{ request()->routeIs('writer.dashboard', 'admin.dashboard') ? 'active' : '' }}">
+            @if (auth()->user()->hasRole('Super Admin'))
+                <a href="{{ route('admin.dashboard') }}" class="menu-link">
+                @else
+                    <a href="{{ route('writer.dashboard') }}" class="menu-link">
+            @endif
+            <i class="menu-icon tf-icons bx bx-home"></i>
+            <div data-i18n="Dashboard">Dashboard</div>
             </a>
         </li>
+
         @if (auth()->user()->can('article-list'))
             <li
                 class="menu-item {{ request()->routeIs('articles.index') || request()->routeIs('articles.create') || request()->routeIs('articles.edit') ? 'active' : '' }}">

@@ -51,7 +51,7 @@
                 <div class="card-body">
                     <!-- Logo -->
                     <div class="app-brand justify-content-center">
-                        <a href="{{ route('home') }}" class="app-brand-link">
+                        <a href="#" class="app-brand-link">
                             //
                         </a>
                     </div>

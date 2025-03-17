@@ -237,8 +237,8 @@ class ArticleController extends Controller
 
         $articles = Article::where('status', 'approved')
             ->where(function ($q) use ($query) {
-                $q->where('title', 'LIKE', "%{$query}%")
-                    ->orWhere('description', 'LIKE', "%{$query}%");
+                $q->whereRaw('LOWER(title) LIKE ?', ["%" . strtolower($query) . "%"])
+                    ->orWhereRaw('LOWER(description) LIKE ?', ["%" . strtolower($query) . "%"]);
             })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
@@ -247,4 +247,5 @@ class ArticleController extends Controller
 
         return view('articles.search', compact('articles', 'categories', 'query'));
     }
+
 }

@@ -24,15 +24,18 @@
             <div class="col-3">
                 <div class="card mt-4">
                     <div class="card-body">
-                        <center><em><b style="color: rgb(172, 172, 172);">Your Balance</b></em></center><br>
+                        <center><em><b style="color: rgb(172, 172, 172);">Saldo Anda</b></em></center><br>
                         <center><em>
-                                <h3><b>Rp. {{ number_format($totalEarnings, 2) }}</b>&nbsp;<i
+                                <h3><b>Rp. {{ number_format($totalEarnings, 2, ',', '.') }}</b>&nbsp;<i
                                         class='bx bx-trending-up bx-tada' style='color:#16d603'></i></h3>
                             </em></center>
                         <center>
-                            <button class="btn btn-primary mt-3">
-                                Withdraw Funds
-                            </button>
+                            <a href="{{ route('withdraw.create') }}" class="btn btn-primary mt-3">
+                                <i class='bx bx-money-withdraw'></i> Tarik Dana
+                            </a>
+                            <a href="{{ route('withdraw.index') }}" class="btn btn-secondary mt-3">
+                                <i class='bx bx-history'></i> Riwayat Penarikan
+                            </a>
                         </center>
                     </div>
                 </div>
@@ -147,4 +150,93 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="withdrawModal" tabindex="-1" aria-labelledby="withdrawModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="withdrawModalLabel">Penarikan Dana</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('withdraw.store') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="balance" class="form-label">Saldo Tersedia</label>
+                            <input type="text" class="form-control" id="balance"
+                                value="Rp. {{ number_format($totalEarnings, 2) }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="form-label">Jumlah Penarikan</label>
+                            <input type="number" class="form-control" id="amount" name="amount" required min="10000"
+                                max="{{ $totalEarnings }}">
+                            <div class="form-text">Minimal penarikan Rp. 10.000</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="payment_method" class="form-label">Metode Pembayaran</label>
+                            <select class="form-select" id="payment_method" name="payment_method" required>
+                                <option value="" selected disabled>Pilih metode pembayaran</option>
+                                <option value="bank_transfer">Transfer Bank</option>
+                                <option value="e-wallet">E-Wallet</option>
+                            </select>
+                        </div>
+                        <div id="bankDetails" class="mb-3 d-none">
+                            <label for="bank_name" class="form-label">Nama Bank</label>
+                            <select class="form-select" id="bank_name" name="bank_name">
+                                <option value="" selected disabled>Pilih bank</option>
+                                <option value="BCA">BCA</option>
+                                <option value="BNI">BNI</option>
+                                <option value="BRI">BRI</option>
+                                <option value="Mandiri">Mandiri</option>
+                            </select>
+                            <div class="mt-2">
+                                <label for="account_number" class="form-label">Nomor Rekening</label>
+                                <input type="text" class="form-control" id="account_number" name="account_number">
+                            </div>
+                            <div class="mt-2">
+                                <label for="account_name" class="form-label">Nama Pemilik Rekening</label>
+                                <input type="text" class="form-control" id="account_name" name="account_name">
+                            </div>
+                        </div>
+                        <div id="ewalletDetails" class="mb-3 d-none">
+                            <label for="ewallet_type" class="form-label">Jenis E-Wallet</label>
+                            <select class="form-select" id="ewallet_type" name="ewallet_type">
+                                <option value="" selected disabled>Pilih E-Wallet</option>
+                                <option value="GoPay">GoPay</option>
+                                <option value="OVO">OVO</option>
+                                <option value="DANA">DANA</option>
+                                <option value="LinkAja">LinkAja</option>
+                            </select>
+                            <div class="mt-2">
+                                <label for="phone_number" class="form-label">Nomor Telepon</label>
+                                <input type="text" class="form-control" id="phone_number" name="phone_number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Tarik Dana</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('payment_method').addEventListener('change', function() {
+            const bankDetails = document.getElementById('bankDetails');
+            const ewalletDetails = document.getElementById('ewalletDetails');
+
+            if (this.value === 'bank_transfer') {
+                bankDetails.classList.remove('d-none');
+                ewalletDetails.classList.add('d-none');
+            } else if (this.value === 'e-wallet') {
+                ewalletDetails.classList.remove('d-none');
+                bankDetails.classList.add('d-none');
+            } else {
+                bankDetails.classList.add('d-none');
+                ewalletDetails.classList.add('d-none');
+            }
+        });
+    </script>
 @endsection

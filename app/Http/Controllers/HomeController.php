@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 class HomeController extends Controller
@@ -21,16 +20,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = Auth::user();
+
+        if ($user->hasRole('Super Admin')) {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->hasRole('Writer')) {
+            return redirect()->route('writer.dashboard');
+        } else {
+            // default jika tidak punya role yang sesuai
+            return redirect('/login')->with('error', 'Role not recognized.');
+        }
+
     }
 
     public function getNotifications()
     {
         $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->take(3)->get();
-        $unreadCount = auth()->user()->notifications()->where('status', 'unread')->count();
+        $unreadCount   = auth()->user()->notifications()->where('status', 'unread')->count();
 
         return view('backend.header', compact('notifications', 'unreadCount'));
     }
-    
 
 }

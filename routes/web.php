@@ -22,12 +22,17 @@ Route::post('/update-share/{id}', [FrontendController::class, 'updateShare'])->n
 Auth::routes();
 
 // Search
-Route::get('/search', [App\Http\Controllers\ArticleController::class, 'search'])->name('articles.search'); 
-
+Route::get('/search', [App\Http\Controllers\ArticleController::class, 'search'])->name('articles.search');
 
 // BACKEND ROUTE
 Route::middleware('auth')->prefix('dashboard')->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/writer/dashboard', [App\Http\Controllers\WriterDashboardController::class, 'index'])
+        ->name('writer.dashboard')
+        ->middleware('role:Writer'); // Menggunakan role Writer
+
+    Route::get('/admin/dashboard', [App\Http\Controllers\AdminDashboardController::class, 'index'])
+        ->name('admin.dashboard')
+        ->middleware('role:Super Admin');
 
     Route::resource('categories', CategorieController::class);
     Route::resource('articles', ArticleController::class);
@@ -67,5 +72,12 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::get('/profile/activities', [UserController::class, 'getActivities'])->name('profile.activities');
 
     Route::resource('earning', EarningController::class);
+
+    // withdraw
+    Route::get('/withdraws', [App\Http\Controllers\WithdrawController::class, 'index'])->name('withdraw.index');
+    Route::get('/withdraws/create', [App\Http\Controllers\WithdrawController::class, 'create'])->name('withdraw.create');
+    Route::post('/withdraws', [App\Http\Controllers\WithdrawController::class, 'store'])->name('withdraw.store');
+    Route::get('/withdraws/{withdraw}', [App\Http\Controllers\WithdrawController::class, 'show'])->name('withdraw.show');
+    Route::put('/withdraws/{withdraw}/cancel', [App\Http\Controllers\WithdrawController::class, 'cancel'])->name('withdraw.cancel');
 
 });
