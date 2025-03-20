@@ -1,19 +1,15 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('withdraws', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('user_id'); // Menggunakan unsignedBigInteger untuk kompatibilitas dengan tabel users
+            $table->unsignedBigInteger('user_id');
             $table->decimal('amount', 10, 2);
             $table->enum('payment_method', ['bank_transfer', 'e-wallet']);
 
@@ -26,9 +22,9 @@ return new class extends Migration
             $table->string('ewallet_type')->nullable();
             $table->string('phone_number')->nullable();
 
-            // Status dan detail pemrosesan
-            $table->enum('status', ['pending', 'processing', 'completed', 'rejected'])->default('pending');
-            $table->timestamp('processed_at')->nullable();
+            // Status langsung menjadi completed
+            $table->enum('status', ['completed'])->default('completed');
+            $table->timestamp('processed_at')->useCurrent();
             $table->text('notes')->nullable();
 
             $table->timestamps();
@@ -37,9 +33,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('withdraws');

@@ -18,7 +18,7 @@
 
         @if (session('success'))
             <script type="text/javascript">
-                showToast('Success!', '{{ session('success') }}', 'success');
+                showToast('Berhasil!', '{{ session('success') }}', 'success');
             </script>
         @endif
 
@@ -89,16 +89,6 @@
                                                 <a href="{{ route('withdraw.show', $withdraw->id) }}" class="btn btn-sm btn-info">
                                                     <i class='bx bx-show'></i>
                                                 </a>
-                                                
-                                                @if ($withdraw->status == 'pending')
-                                                    <form action="{{ route('withdraw.cancel', $withdraw->id) }}" method="POST" class="d-inline">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin membatalkan penarikan ini?')">
-                                                            <i class='bx bx-x'></i>
-                                                        </button>
-                                                    </form>
-                                                @endif
                                             </td>
                                         </tr>
                                     @empty

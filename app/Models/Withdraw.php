@@ -10,9 +10,13 @@ class Withdraw extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'amount', 'payment_method', 'bank_name', 'account_number', 'account_name',
-        'ewallet_type', 'phone_number', 'status', 'processed_at', 'notes',
+        'user_id', 'amount', 'payment_method', 'bank_name',
+        'account_number', 'account_name', 'ewallet_type',
+        'phone_number', 'notes',
     ];
+
+    // Tentukan kolom yang harus dikonversi ke Carbon
+    protected $dates = ['created_at', 'updated_at', 'processed_at'];
 
     // ID field uses UUID
     public $incrementing = false;
@@ -25,6 +29,10 @@ class Withdraw extends Model
             if (empty($model->id)) {
                 $model->id = (string) Str::uuid();
             }
+
+            // Otomatis set status ke completed saat dibuat
+            $model->status       = 'completed';
+            $model->processed_at = now();
         });
     }
 
@@ -33,19 +41,12 @@ class Withdraw extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Status badges untuk tampilan
+    // Hanya satu status sekarang
     public function getStatusBadgeAttribute()
     {
-        return match ($this->status) {
-            'pending' => '<span class="badge bg-warning">Menunggu</span>',
-            'processing' => '<span class="badge bg-info">Diproses</span>',
-            'completed' => '<span class="badge bg-success">Selesai</span>',
-            'rejected' => '<span class="badge bg-danger">Ditolak</span>',
-            default => '<span class="badge bg-secondary">Unknown</span>',
-        };
+        return '<span class="badge bg-success">Selesai</span>';
     }
 
-    // Method untuk mendapatkan detail pembayaran
     public function getPaymentDetailsAttribute()
     {
         if ($this->payment_method == 'bank_transfer') {
@@ -55,7 +56,6 @@ class Withdraw extends Model
         }
     }
 
-    // Accessor untuk menampilkan formatted amount
     public function getFormattedAmountAttribute()
     {
         return 'Rp. ' . number_format($this->amount, 2, ',', '.');
