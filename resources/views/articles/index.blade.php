@@ -121,6 +121,7 @@
                                             @endif
                                             <td>
                                                 {{-- SHOW --}}
+                                                {{-- Show Button --}}
                                                 <button type="button" class="btn btn-sm btn-warning"
                                                     data-bs-target="#Show{{ $data->id }}" data-bs-toggle="modal">
                                                     <i class='bx bx-show-alt' data-bs-toggle="tooltip"
@@ -197,4 +198,53 @@
         </div>
 
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for the modal to be shown
+            document.getElementById('Show{{ $data->id }}').addEventListener('shown.bs.modal', function() {
+                // Initialize thumbnail swiper
+                var thumbsSwiper = new Swiper('#thumbSwiper{{ $data->id }}', {
+                    spaceBetween: 10,
+                    slidesPerView: 4,
+                    freeMode: true,
+                    watchSlidesProgress: true,
+                    breakpoints: {
+                        576: {
+                            slidesPerView: 5,
+                        },
+                        768: {
+                            slidesPerView: 6,
+                        }
+                    }
+                });
+
+                // Initialize main swiper
+                var mainSwiper = new Swiper('#imageSwiper{{ $data->id }}', {
+                    spaceBetween: 0,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    thumbs: {
+                        swiper: thumbsSwiper
+                    },
+                    effect: 'fade',
+                    fadeEffect: {
+                        crossFade: true
+                    },
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -2,152 +2,295 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="card">
-            <div class="card-body">
-                <h3 style="font-weight: bold; font-size: 30px">
-                    <div data-aos="flip-left">
-                        <center class="mt-2">
-                            <i class='bx bxs-book-content' style="font-size: 31px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);"></i>
-                            <em style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);">Edit Article </em>
-                        </center>
-                    </div>
-                </h3>
-            </div>
-        </div>
         <form action="{{ route('articles.update', $articles->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-
-            <div class="row mt-4">
-                <div class="col-8">
-                    <div class="card mb-4">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="form-label" style="font-weight: bold">Form</h5>
+            <div class="container-fluid p-0">
+                <!-- Header -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <h4 class="mb-0 fw-bold">
+                                    <i class="fas fa-pen-to-square me-2"></i>Edit Article
+                                </h4>
+                                <div>
+                                    <a href="{{ route('articles.index') }}"
+                                        class="btn btn-outline-secondary me-2">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="basic-default-name">Title</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="title" id="basic-default-name"
-                                        placeholder="Enter Article title" value="{{ $articles->title }}" />
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="row">
+                    <!-- Left Column - Form Fields -->
+                    <div class="col-lg-8 col-md-12 mb-4">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white py-3">
+                                <h5 class="mb-0 fw-bold">Basic Information</h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Title -->
+                                <div class="mb-4">
+                                    <label for="title" class="form-label fw-medium">Title <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="title" name="title"
+                                        placeholder="Enter article title" value="{{ $articles->title }}" required>
                                     @error('title')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                            </div>
-                            {{-- <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="basic-default-company">Release Date</label>
-                                    <div class="col-sm-10">
-                                        <input type="date" class="form-control" id="basic-default-company"
-                                            placeholder="ACME Inc." />
-                                    </div>
-                                </div> --}}
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="basic-default-email">Categories</label>
-                                <div class="col-sm-10">
-                                    <div class="input-group input-group-merge">
-                                        <select id="defaultSelect" class="form-select" name="categorie_id">
-                                            <option value="">Select a Category</option>
-                                            @foreach ($categories as $data)
-                                                <option value="{{ $data->id }}"
-                                                    {{ old('categorie_id', $articles->categorie_id) == $data->id ? 'selected' : '' }}>
-                                                    {{ $data->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('categorie_id')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                    <div class="form-text">Choose your category</div>
-                                </div>
-                            </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="basic-default-message">Description</label>
-                                <div class="col-sm-10">
-                                    <textarea style="height: 200%" id="basic-default-message" class="form-control" name="description"
-                                        placeholder="Tell More about this article" aria-label="Hi, Do you have a moment to talk Joe?"
-                                        aria-describedby="basic-icon-default-message2">{{ $articles->description }}</textarea>
+                                <!-- Category -->
+                                <div class="mb-4">
+                                    <label for="category" class="form-label fw-medium">Category <span
+                                            class="text-danger">*</span></label>
+                                    <select id="defaultSelect" class="form-select" name="categorie_id" required>
+                                        <option value="">Select a Category</option>
+                                        @foreach ($categories as $data)
+                                            <option value="{{ $data->id }}"
+                                                {{ old('categorie_id', $articles->categorie_id) == $data->id ? 'selected' : '' }}>
+                                                {{ $data->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <div class="form-text">Choose the most appropriate category</div>
+                                    @error('categorie_id')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <!-- Description -->
+                                <div class="mb-4">
+                                    <label for="description" class="form-label fw-medium">Description <span
+                                            class="text-danger">*</span></label>
+                                    <textarea id="description" class="form-control" name="description" rows="4"
+                                        placeholder="Provide a brief description for this article" required>{{ $articles->description }}</textarea>
                                     @error('description')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="row justify-content-end">
-                                <p style="color: white">.</p>
-                            </div>
-                            <div class="div" style="float: right">
-                                <div class="row mt-3" style="width: 95%">
-                                    <div class="col-6">
-                                        <a href="{{ route('articles.index') }}"><button type="button"
-                                                class="btn btn-danger">Cancel</button></a>
-                                    </div>
-                                    <div class="col-6">
-                                        <button type="cancel" class="btn btn-primary">Submit</button>
-                                    </div>
+
+                                <!-- YouTube Link -->
+                                <div class="mb-2">
+                                    <label for="youtube-link" class="form-label fw-medium">YouTube Video</label>
+                                    <input type="text" class="form-control" id="youtube-link" name="youtube_link"
+                                        placeholder="Enter YouTube video URL (optional)" 
+                                        value="{{ $articles->media->where('type', 'youtube')->first()->path ?? '' }}">
+                                    <div class="form-text">Optional: Add a YouTube video to enhance your article</div>
+                                    @error('youtube_link')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4" style="max-height: 50px">
-                    <div class="card mb-4" style="height: 24.8rem">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="form-label" style="font-weight: bold">Cover</h5>
-                        </div>
-                        <div class="card-body">
-                            <!-- Input file -->
-                            <input class="form-control" type="file" id="formFile" name="cover" accept="image/*"
-                                onchange="previewImage(); displayFileName();" {{ !$articles->cover ? 'required' : '' }} />
-                                <img id="imagePreview" src="#" alt="Preview" style="display: none; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); border-radius: 5px; max-width: 100%; margin-top: 10px;" />
-
-                            @error('cover')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                            <small class="form-text text-muted">
-                                jpeg, png, jpg, gif, svg, webp.
-                            </small>
-
-                            <!-- Tempat Preview -->
-                            <div id="previewContainer" class="mt-3">
-                                <center>
-                                    <label for="formFile" style="cursor: pointer;">
-                                        <!-- Jika sudah ada gambar, tampilkan gambar tersebut, jika belum tampilkan placeholder -->
-                                        <img id="previewImage"
-                                            src="{{ $articles->cover ? asset('storage/images/articles/' . $articles->cover) : asset('assets/img/img_placeholder.png') }}"
-                                            alt="Preview Image" class="mt-3"
-                                            style="max-height: 228px; max-width: 100%; display: block; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); border-radius: 5px;" />
-                                    </label>
-                                </center>
                             </div>
                         </div>
 
+                        <!-- Content Editor -->
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white py-3">
+                                <h5 class="mb-0 fw-bold">Content <span class="text-danger">*</span></h5>
+                            </div>
+                            <div class="card-body p-0">
+                                <textarea id="content-editor" class="form-control border-0" name="content" rows="15"
+                                    placeholder="Write your article content here...">{{ $articles->content }}</textarea>
+                                @error('content')
+                                    <small class="text-danger px-3 py-2 d-block">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row-4">
-                    <div class="col-12">
-                        <div class="card mb-4">
+                    <!-- Right Column - Media -->
+                    <div class="col-lg-4 col-md-12">
+                        <!-- Cover Image -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white py-3">
+                                <h5 class="mb-0 fw-bold">Cover Image</h5>
+                            </div>
                             <div class="card-body">
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label" for="basic-default-message"
-                                        style="font-weight: bold">Content</label>
-                                    <div class="col-sm-10">
-                                        <textarea style="height: 150%" id="exampleFormControlTextarea2" class="form-control" name="content"
-                                            placeholder="Write your content here" aria-label="Hi, Do you have a moment to talk Joe?"
-                                            aria-describedby="basic-icon-default-message2">{{ $articles->content }}</textarea>
-                                        @error('content')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div>
+                                <div class="mb-3">
+                                    <input class="form-control" type="file" id="cover-image" name="cover"
+                                        accept="image/jpeg,image/png,image/jpg,image/gif,image/svg+xml,image/webp"
+                                        onchange="previewCoverImage()">
+                                    <small class="form-text text-muted d-block mt-1">
+                                        Supported formats: jpeg, png, jpg, gif, svg, webp
+                                    </small>
+                                    @error('cover')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
+                                <div class="text-center border rounded p-3 bg-light mt-3">
+                                    <img id="cover-preview" src="{{ $articles->cover ? asset('storage/images/articles/' . $articles->cover) : asset('assets/img/img_placeholder.png') }}"
+                                        alt="Cover Preview" class="img-fluid" style="max-height: 200px;">
+                                </div>
+                            </div>
+                        </div>
 
+                        <!-- Additional Images -->
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white py-3">
+                                <h5 class="mb-0 fw-bold">Additional Images</h5>
+                            </div>
+                            <div class="card-body">
+                                <input class="form-control" type="file" id="additional-images"
+                                    name="additional_images[]" multiple
+                                    accept="image/jpeg,image/png,image/jpg,image/gif,image/svg+xml,image/webp"
+                                    onchange="previewAdditionalImages()">
+                                <small class="form-text text-muted d-block mt-1">
+                                    Upload up to 5 additional images to enhance your article
+                                </small>
+                                @error('additional_images.*')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+
+                                <!-- Additional Images Preview -->
+                                <div id="additional-images-preview" class="row mt-3 g-2">
+                                    @if(isset($articles->media))
+                                        @foreach($articles->media->where('type', 'image')->sortBy('order') as $media)
+                                            <div class="col-4">
+                                                <div class="card h-100">
+                                                    <img src="{{ asset('storage/images/articles/additional/' . $media->path) }}" 
+                                                        class="card-img-top" 
+                                                        style="height: 80px; object-fit: cover;">
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
+
+        <script>
+            // Cover image preview
+            function previewCoverImage() {
+                const input = document.getElementById('cover-image');
+                const preview = document.getElementById('cover-preview');
+
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            // Additional images preview
+            function previewAdditionalImages() {
+                const input = document.getElementById('additional-images');
+                const previewContainer = document.getElementById('additional-images-preview');
+
+                // Clear previous previews
+                previewContainer.innerHTML = '';
+
+                if (input.files) {
+                    // Limit to 5 images
+                    const filesToProcess = Math.min(input.files.length, 5);
+
+                    for (let i = 0; i < filesToProcess; i++) {
+                        const file = input.files[i];
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            const col = document.createElement('div');
+                            col.className = 'col-4';
+
+                            const card = document.createElement('div');
+                            card.className = 'card h-100';
+
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.className = 'card-img-top';
+                            img.style.height = '80px';
+                            img.style.objectFit = 'cover';
+
+                            card.appendChild(img);
+                            col.appendChild(card);
+                            previewContainer.appendChild(col);
+                        }
+
+                        reader.readAsDataURL(file);
+                    }
+
+                    // Warning if more than 5 files were selected
+                    if (input.files.length > 5) {
+                        const warningDiv = document.createElement('div');
+                        warningDiv.className = 'col-12 mt-2';
+                        warningDiv.innerHTML =
+                            '<div class="alert alert-warning py-2 small">Only the first 5 images will be uploaded.</div>';
+                        previewContainer.appendChild(warningDiv);
+                    }
+                }
+            }
+
+            // Initialize any rich text editors or other components here
+            document.addEventListener('DOMContentLoaded', function() {
+                // Example: If you're using a rich text editor for content
+                // Replace with your actual editor initialization code
+                if (typeof tinymce !== 'undefined') {
+                    tinymce.init({
+                        selector: '#content-editor',
+                        height: 500,
+                        menubar: false,
+                        plugins: [
+                            'advlist autolink lists link image charmap print preview anchor',
+                            'searchreplace visualblocks code fullscreen',
+                            'insertdatetime media table paste code help wordcount'
+                        ],
+                        toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                            alignleft aligncenter alignright alignjustify | \
+                            bullist numlist outdent indent | removeformat | help'
+                    });
+                }
+            });
+        </script>
+
+        <!-- Add the following CSS to your stylesheet -->
+        <style>
+            /* Form styling */
+            .card {
+                border-radius: 8px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+            }
+
+            .card-header {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            .form-control:focus,
+            .form-select:focus {
+                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+            }
+
+            .form-label {
+                color: #444;
+            }
+
+            /* Make the editor look nicer */
+            #content-editor {
+                min-height: 300px;
+                padding: 1rem;
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                .card-header h5 {
+                    font-size: 1rem;
+                }
+
+                #cover-preview {
+                    max-height: 150px;
+                }
+            }
+        </style>
     @endsection

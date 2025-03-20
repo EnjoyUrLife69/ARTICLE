@@ -434,37 +434,62 @@
                                     <div class="progress-wrapper mb-3">
                                         <div class="d-flex justify-content-between mb-1">
                                             <span>Views</span>
-                                            <span>{{ number_format(($totalViews / ($totalViews + $totalLikes + $totalShares)) * 100, 1) }}%</span>
+                                            <span>
+                                                @php
+                                                    $totalEngagement = $totalViews + $totalLikes + $totalShares;
+                                                    $viewsPercentage =
+                                                        $totalEngagement > 0
+                                                            ? ($totalViews / $totalEngagement) * 100
+                                                            : 0;
+                                                @endphp
+                                                {{ number_format($viewsPercentage, 1) }}%
+                                            </span>
                                         </div>
                                         <div class="progress" style="height: 6px;">
                                             <div class="progress-bar bg-info" role="progressbar"
-                                                style="width: {{ ($totalViews / ($totalViews + $totalLikes + $totalShares)) * 100 }}%"
-                                                aria-valuenow="{{ ($totalViews / ($totalViews + $totalLikes + $totalShares)) * 100 }}"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                style="width: {{ $viewsPercentage }}%"
+                                                aria-valuenow="{{ $viewsPercentage }}" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                     <div class="progress-wrapper mb-3">
                                         <div class="d-flex justify-content-between mb-1">
                                             <span>Likes</span>
-                                            <span>{{ number_format(($totalLikes / ($totalViews + $totalLikes + $totalShares)) * 100, 1) }}%</span>
+                                            <span>
+                                                @php
+                                                    $likesPercentage =
+                                                        $totalEngagement > 0
+                                                            ? ($totalLikes / $totalEngagement) * 100
+                                                            : 0;
+                                                @endphp
+                                                {{ number_format($likesPercentage, 1) }}%
+                                            </span>
                                         </div>
                                         <div class="progress" style="height: 6px;">
                                             <div class="progress-bar bg-primary" role="progressbar"
-                                                style="width: {{ ($totalLikes / ($totalViews + $totalLikes + $totalShares)) * 100 }}%"
-                                                aria-valuenow="{{ ($totalLikes / ($totalViews + $totalLikes + $totalShares)) * 100 }}"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                style="width: {{ $likesPercentage }}%"
+                                                aria-valuenow="{{ $likesPercentage }}" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                     <div class="progress-wrapper">
                                         <div class="d-flex justify-content-between mb-1">
                                             <span>Shares</span>
-                                            <span>{{ number_format(($totalShares / ($totalViews + $totalLikes + $totalShares)) * 100, 1) }}%</span>
+                                            <span>
+                                                @php
+                                                    $sharesPercentage =
+                                                        $totalEngagement > 0
+                                                            ? ($totalShares / $totalEngagement) * 100
+                                                            : 0;
+                                                @endphp
+                                                {{ number_format($sharesPercentage, 1) }}%
+                                            </span>
                                         </div>
                                         <div class="progress" style="height: 6px;">
                                             <div class="progress-bar bg-success" role="progressbar"
-                                                style="width: {{ ($totalShares / ($totalViews + $totalLikes + $totalShares)) * 100 }}%"
-                                                aria-valuenow="{{ ($totalShares / ($totalViews + $totalLikes + $totalShares)) * 100 }}"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                style="width: {{ $sharesPercentage }}%"
+                                                aria-valuenow="{{ $sharesPercentage }}" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>

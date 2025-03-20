@@ -79,6 +79,7 @@ class FrontendController extends Controller
 
         return view('frontend-page.detail', compact('articles', 'categories', 'article', 'comments', 'article_trending'));
     }
+     
     public function toggleLike($id)
     {
         $user    = Auth::user();

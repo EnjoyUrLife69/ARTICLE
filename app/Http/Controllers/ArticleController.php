@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activitie;
 use App\Models\Article;
+use App\Models\ArticleMedia;
 use App\Models\Categorie;
 use App\Models\Notification;
 use Carbon\Carbon;
@@ -93,11 +94,13 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'        => 'required',
-            'content'      => 'required',
-            'cover'        => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
-            'categorie_id' => 'required',
-            'description'  => 'required',
+            'title'               => 'required',
+            'content'             => 'required',
+            'cover'               => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
+            'categorie_id'        => 'required',
+            'description'         => 'required',
+            'additional_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
+            'youtube_link'        => 'nullable|url',
         ]);
 
         $article               = new Article();
@@ -120,6 +123,58 @@ class ArticleController extends Controller
             $article->cover = $imageName;
         }
 
+        // Save the article first to get the ID
+        $article->save();
+
+        // Process additional images if any
+        if ($request->hasFile('additional_images')) {
+            $additionalImages = $request->file('additional_images');
+            $order            = 1;
+
+            // Limit to max 5 images
+            foreach (array_slice($additionalImages, 0, 5) as $image) {
+                $imageName = $article->id . '-' . time() . '-' . $order . '.' . $image->getClientOriginalExtension();
+
+                // Store the image
+                $path = $image->storeAs('images/articles/additional', $imageName);
+
+                // Create media record
+                ArticleMedia::create([
+                    'article_id' => $article->id,
+                    'type'       => 'image',
+                    'path'       => $imageName,
+                    'order'      => $order,
+                ]);
+
+                $order++;
+            }
+        }
+
+        // Process YouTube link if provided
+        if ($request->filled('youtube_link')) {
+            $youtubeLink = $request->input('youtube_link');
+
+            // Extract YouTube video ID if needed
+            // This is a simple extraction, you might want to improve it
+            $videoId = $youtubeLink;
+
+            // If it's a full YouTube URL, extract the ID
+            if (strpos($youtubeLink, 'youtube.com') !== false || strpos($youtubeLink, 'youtu.be') !== false) {
+                // Extract video ID from YouTube URL
+                if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $youtubeLink, $matches)) {
+                    $videoId = $matches[1];
+                }
+            }
+
+            // Create media record for YouTube
+            ArticleMedia::create([
+                'article_id' => $article->id,
+                'type'       => 'youtube',
+                'path'       => $videoId,
+                'order'      => 0, // YouTube videos can be order 0
+            ]);
+        }
+
         Activitie::create([
             'user_id'        => auth()->id(),
             'action'         => 'create',
@@ -130,7 +185,6 @@ class ArticleController extends Controller
             'categorie_name' => $article->categorie ? $article->categorie->name : 'No category',
         ]);
 
-        $article->save();
         return redirect()->route('articles.index')->with('success', 'Data created successfully.');
     }
 
@@ -154,11 +208,13 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title'        => 'required',
-            'content'      => 'required',
-            'cover'        => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3048',
-            'categorie_id' => 'required',
-            'description'  => 'required',
+            'title'               => 'required',
+            'content'             => 'required',
+            'cover'               => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
+            'categorie_id'        => 'required',
+            'description'         => 'required',
+            'additional_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
+            'youtube_link'        => 'nullable|url',
         ]);
 
         $article               = Article::findOrFail($id);
@@ -194,6 +250,79 @@ class ArticleController extends Controller
             $article->cover = $imageName;
         }
 
+        // Save the article first to update it
+        $article->save();
+
+        // Process YouTube link if provided
+        if ($request->filled('youtube_link')) {
+            $youtubeLink = $request->input('youtube_link');
+
+            // Extract YouTube video ID if needed
+            $videoId = $youtubeLink;
+
+            // If it's a full YouTube URL, extract the ID
+            if (strpos($youtubeLink, 'youtube.com') !== false || strpos($youtubeLink, 'youtu.be') !== false) {
+                // Extract video ID from YouTube URL
+                if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $youtubeLink, $matches)) {
+                    $videoId = $matches[1];
+                }
+            }
+
+            // Check if YouTube record already exists
+            $youtubeMedia = ArticleMedia::where('article_id', $article->id)
+                ->where('type', 'youtube')
+                ->first();
+
+            if ($youtubeMedia) {
+                // Update existing record
+                $youtubeMedia->path = $videoId;
+                $youtubeMedia->save();
+            } else {
+                // Create new record
+                ArticleMedia::create([
+                    'article_id' => $article->id,
+                    'type'       => 'youtube',
+                    'path'       => $videoId,
+                    'order'      => 0,
+                ]);
+            }
+        } else {
+            // If no YouTube link is provided, delete existing YouTube record
+            ArticleMedia::where('article_id', $article->id)
+                ->where('type', 'youtube')
+                ->delete();
+        }
+
+        // Process additional images if any
+        if ($request->hasFile('additional_images')) {
+            $additionalImages = $request->file('additional_images');
+
+            // Get current highest order
+            $maxOrder = ArticleMedia::where('article_id', $article->id)
+                ->where('type', 'image')
+                ->max('order') ?? 0;
+
+            $order = $maxOrder + 1;
+
+            // Limit to max 5 images
+            foreach (array_slice($additionalImages, 0, 5) as $image) {
+                $imageName = $article->id . '-' . time() . '-' . $order . '.' . $image->getClientOriginalExtension();
+
+                // Store the image
+                $path = $image->storeAs('images/articles/additional', $imageName);
+
+                // Create media record
+                ArticleMedia::create([
+                    'article_id' => $article->id,
+                    'type'       => 'image',
+                    'path'       => $imageName,
+                    'order'      => $order,
+                ]);
+
+                $order++;
+            }
+        }
+
         Activitie::create([
             'user_id'        => auth()->id(),
             'action'         => 'edit',
@@ -204,7 +333,6 @@ class ArticleController extends Controller
             'categorie_name' => $article->categorie ? $article->categorie->name : 'No category',
         ]);
 
-        $article->save();
         return redirect()->route('articles.index')->with('success', 'Data updated successfully.');
     }
 

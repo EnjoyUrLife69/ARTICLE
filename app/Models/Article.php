@@ -45,6 +45,22 @@ class Article extends Model
         return $this->hasMany(Comment::class, 'articles_id', 'id');
     }
 
+    // Media
+    public function media()
+    {
+        return $this->hasMany(ArticleMedia::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ArticleMedia::class)->where('type', 'image');
+    }
+
+    public function youtubeVideos()
+    {
+        return $this->hasMany(ArticleMedia::class)->where('type', 'youtube');
+    }
+
     public function deleteImage()
     {
         $imagePath = public_path('images/articles/' . $this->cover); // Perbaiki path
@@ -67,11 +83,10 @@ class Article extends Model
 
     // TOTAL PENDAPATAN
     protected $appends = ['total'];
-    // Harga per interaksi (dalam IDR)
+                            // Harga per interaksi (dalam IDR)
     const VIEW_RATE  = 15;  // Rp15 per view
     const LIKE_RATE  = 150; // Rp150 per like
     const SHARE_RATE = 550; // Rp750 per share
-
 
     // Menghitung total pendapatan
     public function getTotalAttribute()

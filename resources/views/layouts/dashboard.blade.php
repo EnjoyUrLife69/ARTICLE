@@ -53,6 +53,155 @@
             border-left: 2px solid #E4E6E8;
             margin-right: 10px;
         }
+
+        /* Show Modal */
+        /* Clean modal styling */
+        .modal-content {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Custom pill navigation */
+        .custom-nav-pills .nav-link {
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #495057;
+            background-color: #f8f9fa;
+            margin: 0 5px;
+        }
+
+        .custom-nav-pills .nav-link.active {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+        /* Carousel styling */
+        .carousel-image-container {
+            height: 300px;
+            border-radius: 8px;
+        }
+
+        .carousel-img {
+            max-height: 300px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .carousel-control-next,
+        .carousel-control-prev {
+            width: 10%;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .carousel-control-prev {
+            left: 10px;
+        }
+
+        .carousel-control-next {
+            right: 10px;
+        }
+
+        .carousel-indicators {
+            position: static;
+            margin-bottom: 0;
+        }
+
+        .carousel-indicators button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 3px;
+        }
+
+        .carousel-indicators button.active {
+            background-color: #0d6efd;
+        }
+
+        /* Thumbnail styling */
+        .carousel-thumbnails {
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: thin;
+            padding-bottom: 5px;
+        }
+
+        .carousel-thumbnails::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .carousel-thumbnails::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 10px;
+        }
+
+        .thumbnail-item {
+            padding: 0;
+            border: none;
+            background: none;
+            border-radius: 4px;
+            overflow: hidden;
+            width: 60px;
+            height: 45px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .thumbnail-item:hover {
+            opacity: 0.9;
+        }
+
+        .thumbnail-item.active {
+            opacity: 1;
+            box-shadow: 0 0 0 2px #0d6efd;
+        }
+
+        .thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Video container */
+        .video-container {
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Article content styling */
+        .article-content {
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin: 1rem auto;
+            display: block;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .carousel-image-container {
+                height: 200px;
+            }
+
+            .carousel-img {
+                max-height: 200px;
+            }
+
+            .thumbnail-item {
+                width: 50px;
+                height: 35px;
+            }
+        }
     </style>
     <script type="text/javascript">
         function showToast(title, text, icon) {
@@ -290,7 +439,8 @@
         });
     </script>
 
-    {{-- paginaation user --}}
+    {{-- show --}}
+
 
     @yield('scripts')
 </body>
