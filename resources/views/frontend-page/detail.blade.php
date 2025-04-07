@@ -530,7 +530,7 @@
             border-radius: 8px;
             overflow: hidden;
         }
-        
+
         /* Tabs for switching between images and video */
         .media-tabs {
             display: flex;
@@ -542,7 +542,7 @@
             justify-content: flex-end;
             padding-right: 15px;
         }
-        
+
         .media-tab {
             padding: 12px 24px;
             cursor: pointer;
@@ -553,12 +553,12 @@
             color: #555;
             transition: all 0.3s ease;
         }
-        
+
         .media-tab.active {
             color: #000;
             font-weight: bold;
         }
-        
+
         .media-tab.active:after {
             content: '';
             position: absolute;
@@ -568,7 +568,7 @@
             height: 3px;
             background: #000;
         }
-        
+
         /* Image carousel */
         .carousel-container {
             position: relative;
@@ -578,23 +578,23 @@
             border-radius: 8px;
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
         }
-        
+
         .carousel-slide {
             display: none;
             width: 100%;
             height: 100%;
         }
-        
+
         .carousel-slide.active {
             display: block;
         }
-        
+
         .carousel-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .carousel-controls {
             position: absolute;
             top: 50%;
@@ -604,7 +604,7 @@
             transform: translateY(-50%);
             z-index: 10;
         }
-        
+
         .carousel-control {
             background: rgba(0, 0, 0, 0.5);
             color: white;
@@ -619,17 +619,17 @@
             margin: 0 10px;
             transition: all 0.3s ease;
         }
-        
+
         .carousel-control:hover {
             background: rgba(0, 0, 0, 0.8);
         }
-        
+
         .carousel-dots {
             display: flex;
             justify-content: center;
             margin-top: 10px;
         }
-        
+
         .carousel-dot {
             width: 10px;
             height: 10px;
@@ -640,11 +640,11 @@
             border: none;
             transition: background 0.3s ease;
         }
-        
+
         .carousel-dot.active {
             background: #000;
         }
-        
+
         /* Thumbnails navigation */
         .carousel-thumbnails {
             display: flex;
@@ -653,7 +653,7 @@
             flex-wrap: wrap;
             gap: 8px;
         }
-        
+
         .thumbnail-item {
             width: 60px;
             height: 60px;
@@ -665,17 +665,17 @@
             background: none;
             transition: all 0.3s ease;
         }
-        
+
         .thumbnail-item.active {
             border-color: #000;
         }
-        
+
         .thumbnail-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         /* Video container */
         .video-container {
             width: 100%;
@@ -684,49 +684,49 @@
             overflow: hidden;
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
         }
-        
+
         .media-content {
             display: none;
             padding: 15px;
         }
-        
+
         .media-content.active {
             display: block;
         }
-        
+
         @media (max-width: 768px) {
             .carousel-container {
                 height: 350px;
             }
-            
+
             .media-tabs {
                 justify-content: center;
             }
-            
+
             .media-tab {
                 padding: 10px 15px;
             }
-            
+
             .thumbnail-item {
                 width: 50px;
                 height: 50px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .carousel-container {
                 height: 250px;
             }
-            
+
             .carousel-thumbnails {
                 margin-top: 10px;
             }
-            
+
             .thumbnail-item {
                 width: 40px;
                 height: 40px;
             }
-            
+
             .media-tab {
                 padding: 8px 12px;
                 font-size: 14px;
@@ -828,7 +828,7 @@
                     </button>
                 </div>
             </div>
-            
+
             <!-- Media Section (Images and Video) -->
             <div class="media-container">
                 @php
@@ -836,82 +836,89 @@
                     $hasImages = $articles->media()->where('type', 'image')->count() > 0;
                     $totalImages = $hasImages ? $articles->media()->where('type', 'image')->count() : 0;
                 @endphp
-                
-                @if($hasVideo && ($hasImages || $articles->cover))
-                <!-- Media Tabs (only show if we have both images and video) -->
-                <div class="media-tabs">
-                    <button class="media-tab active" onclick="showMediaTab('images')">Images</button>
-                    <button class="media-tab" onclick="showMediaTab('video')">Video</button>
-                </div>
+
+                @if ($hasVideo && ($hasImages || $articles->cover))
+                    <!-- Media Tabs (only show if we have both images and video) -->
+                    <div class="media-tabs">
+                        <button class="media-tab active" onclick="showMediaTab('images')">Images</button>
+                        <button class="media-tab" onclick="showMediaTab('video')">Video</button>
+                    </div>
                 @endif
-                
+
                 <!-- Images Tab Content -->
                 <div id="images-content" class="media-content active">
                     <div class="carousel-container">
                         <!-- Main cover image -->
                         <div class="carousel-slide active">
-                            <img src="{{ asset('storage/images/articles/' . $articles->cover) }}" alt="{{ $articles->title }}" class="carousel-img">
+                            <img src="{{ asset('storage/images/articles/' . $articles->cover) }}"
+                                alt="{{ $articles->title }}" class="carousel-img">
                         </div>
-                        
+
                         <!-- Additional images -->
-                        @if($hasImages)
-                            @foreach($articles->media()->where('type', 'image')->get() as $index => $image)
+                        @if ($hasImages)
+                            @foreach ($articles->media()->where('type', 'image')->get() as $index => $image)
                                 <div class="carousel-slide">
-                                    <img src="{{ asset('storage/images/articles/additional/' . $image->path) }}" alt="Image {{ $index + 1 }}" class="carousel-img">
+                                    <img src="{{ asset('storage/images/articles/additional/' . $image->path) }}"
+                                        alt="Image {{ $index + 1 }}" class="carousel-img">
                                 </div>
                             @endforeach
                         @endif
-                        
+
                         <!-- Carousel controls (only show if more than one image) -->
-                        @if($hasImages || $articles->cover)
+                        @if ($hasImages || $articles->cover)
                             <div class="carousel-controls">
                                 <button class="carousel-control prev" onclick="changeSlide(-1)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="M15 19l-7-7 7-7" />
                                     </svg>
                                 </button>
                                 <button class="carousel-control next" onclick="changeSlide(1)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="M9 5l7 7-7 7" />
                                     </svg>
                                 </button>
                             </div>
                         @endif
                     </div>
-                    
+
                     <!-- Thumbnails navigation -->
-                    @if($hasImages)
+                    @if ($hasImages)
                         <div class="carousel-thumbnails">
                             <button class="thumbnail-item active" onclick="goToSlide(0)">
                                 <img src="{{ asset('storage/images/articles/' . $articles->cover) }}" alt="Thumbnail">
                             </button>
-                            @foreach($articles->media()->where('type', 'image')->get() as $index => $image)
+                            @foreach ($articles->media()->where('type', 'image')->get() as $index => $image)
                                 <button class="thumbnail-item" onclick="goToSlide({{ $index + 1 }})">
-                                    <img src="{{ asset('storage/images/articles/additional/' . $image->path) }}" alt="Thumbnail {{ $index + 1 }}">
+                                    <img src="{{ asset('storage/images/articles/additional/' . $image->path) }}"
+                                        alt="Thumbnail {{ $index + 1 }}">
                                 </button>
                             @endforeach
                         </div>
                     @endif
                 </div>
-                
+
                 <!-- Video Tab Content -->
-                @if($hasVideo)
-                <div id="video-content" class="media-content {{ !($hasImages || $articles->cover) ? 'active' : '' }}">
-                    <div class="video-container">
-                        <div class="ratio ratio-16x9">
-                            <iframe style="width: 100%; height: 450px"
-                                src="https://www.youtube.com/embed/{{ $articles->media()->where('type', 'youtube')->first()->path }}?autoplay=0" 
-                                title="{{ $articles->title }}"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                            </iframe>
+                @if ($hasVideo)
+                    <div id="video-content"
+                        class="media-content {{ !($hasImages || $articles->cover) ? 'active' : '' }}">
+                        <div class="video-container">
+                            <div class="ratio ratio-16x9">
+                                <iframe style="width: 100%; height: 450px"
+                                    src="https://www.youtube.com/embed/{{ $articles->media()->where('type', 'youtube')->first()->path }}?autoplay=0"
+                                    title="{{ $articles->title }}" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endif
             </div>
-            
+
             {{-- <div class="quote" style="color: #7e7e7e; margin-left: 5px"><em>Lorem ipsum dolor sit amet consectetur</em></div> --}}
             <hr style="margin-top: 2%; border: none; height: 1px; background-color: rgba(0, 0, 0, 0.1);">
             <div class="content">
@@ -966,52 +973,52 @@
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-slide');
         const thumbnails = document.querySelectorAll('.thumbnail-item');
-        
+
         // Function to change slides
         function changeSlide(n) {
             showSlide(currentSlide + n);
         }
-        
+
         // Function to go to specific slide
         function goToSlide(n) {
             showSlide(n);
         }
-        
+
         // Function to show a specific slide
         function showSlide(n) {
             if (slides.length === 0) return;
-            
+
             // Hide current slide
             slides[currentSlide].classList.remove('active');
             if (thumbnails.length > 0) {
                 thumbnails[currentSlide].classList.remove('active');
             }
-            
+
             // Calculate new slide index
             currentSlide = (n + slides.length) % slides.length;
-            
+
             // Show new slide
             slides[currentSlide].classList.add('active');
             if (thumbnails.length > 0) {
                 thumbnails[currentSlide].classList.add('active');
             }
         }
-        
+
         // Function to switch between images and video
         function showMediaTab(tabName) {
             // Hide all tab contents
             document.querySelectorAll('.media-content').forEach(content => {
                 content.classList.remove('active');
             });
-            
+
             // Make all tabs inactive
             document.querySelectorAll('.media-tab').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
+
             // Show selected tab content
             document.getElementById(`${tabName}-content`).classList.add('active');
-            
+
             // Make selected tab active
             const clickedTab = Array.from(document.querySelectorAll('.media-tab')).find(
                 tab => tab.textContent.toLowerCase().trim() === tabName.toLowerCase().trim()
@@ -1148,6 +1155,56 @@
             updateShareCount();
             const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
             window.open(facebookShareUrl, '_blank');
+        }
+
+        // AUTOPLAY VIDEO
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if URL has autoplay parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const autoplay = urlParams.get('autoplay');
+
+            if (autoplay === '1') {
+                // Switch to video tab
+                showMediaTab('video');
+
+                // Update iframe src to include autoplay=1
+                const videoIframe = document.querySelector('.video-container iframe');
+                if (videoIframe) {
+                    let currentSrc = videoIframe.getAttribute('src');
+                    if (currentSrc.includes('autoplay=0')) {
+                        currentSrc = currentSrc.replace('autoplay=0', 'autoplay=1');
+                    } else {
+                        currentSrc += (currentSrc.includes('?') ? '&' : '?') + 'autoplay=1';
+                    }
+                    videoIframe.setAttribute('src', currentSrc);
+                }
+
+                // Scroll to video section
+                document.querySelector('.media-container').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+        // Function to switch between images and video
+        function showMediaTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.media-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Make all tabs inactive
+            document.querySelectorAll('.media-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(`${tabName}-content`).classList.add('active');
+
+            // Make selected tab active
+            const clickedTab = Array.from(document.querySelectorAll('.media-tab')).find(
+                tab => tab.textContent.toLowerCase().trim() === tabName.toLowerCase().trim()
+            );
+            if (clickedTab) clickedTab.classList.add('active');
         }
     </script>
 

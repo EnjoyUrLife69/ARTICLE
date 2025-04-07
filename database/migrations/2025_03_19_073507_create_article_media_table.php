@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('article_id');
             $table->enum('type', ['image', 'youtube']);
-            $table->string('path'); // For images: file name, for YouTube: video ID/URL
+            $table->string('path');
             $table->integer('order')->default(0);
             $table->timestamps();
 

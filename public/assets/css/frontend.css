@@ -1015,9 +1015,10 @@ a{
     }
 }
 
-/* CSS BAGIAN 4 */
+/* VIDEO HIGHLIGHTS SECTION */
 .section-title {
     text-align: center;
+    font-family: 'Raleway', sans-serif;
     padding: 15px 0;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
@@ -1027,6 +1028,7 @@ a{
 .section-title h2 {
     font-size: 24px;
     font-weight: bold;
+    margin: 0;
 }
 
 .video-highlight {
@@ -1034,9 +1036,10 @@ a{
     grid-template-columns: 2fr 1fr;
     gap: 30px;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto 50px;
 }
 
+/* Main Video Styles */
 .main-video {
     position: relative;
 }
@@ -1046,9 +1049,12 @@ a{
     aspect-ratio: 16/9;
     background: #1a1a1a;
     margin-bottom: 15px;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
 .main-video-title {
+    font-family: 'Raleway', sans-serif;
     font-size: 22px;
     margin: 15px 0;
     display: flex;
@@ -1062,14 +1068,18 @@ a{
     content: '▶';
     font-size: 14px;
     margin-top: 6px;
+    color: #c4156e;
 }
 
 .video-description {
-    font-size: 14px;
-    color: #666;
+    margin-left: 20px;
+    margin-right: 5px;
+    font-size: 18px;
+    color: #353535;
     line-height: 1.5;
 }
 
+/* Sidebar Videos Styles */
 .video-list {
     display: flex;
     flex-direction: column;
@@ -1086,22 +1096,27 @@ a{
     width: 100%;
     aspect-ratio: 16/9;
     background: #1a1a1a;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
 .video-item-title {
+    font-family: 'Raleway', sans-serif;
     font-size: 16px;
     display: flex;
     align-items: flex-start;
     gap: 10px;
     line-height: 1.3;
     color: #000;
-    font-weight: normal;
+    font-weight: bold;
+    margin: 5px 0 0;
 }
 
 .video-item-title::before {
     content: '▶';
     font-size: 12px;
     margin-top: 4px;
+    color: #c4156e;
 }
 
 .more-btn2 {
@@ -1110,11 +1125,76 @@ a{
     background: #c4156e;
     color: white;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
     margin-top: 20px;
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 1px;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.more-btn2:hover {
+    background: #a81159;
+    text-decoration: none;
+    color: white;
+}
+
+/* Link Styles */
+.video-highlight a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.video-highlight a:hover .main-video-title,
+.video-highlight a:hover .video-item-title {
+    color: #c4156e;
+}
+
+/* Hover Effects */
+.video-item-img img,
+.main-video-img img {
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-item-img:hover img,
+.main-video-img:hover img {
+    transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .video-highlight {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .video-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .more-btn2 {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 576px) {
+    .video-list {
+        grid-template-columns: 1fr;
+    }
+
+    .more-btn2 {
+        grid-column: auto;
+    }
 }
 
 /* FOOTER */
@@ -1606,3 +1686,186 @@ a{
         font-size: 18px;
     }
 }
+
+ /* Article History Section Styles / BAGIAN 5 */
+ .history-container {
+     margin-bottom: 50px;
+     max-width: 1200px;
+     margin-left: auto;
+     margin-right: auto;
+     position: relative;
+ }
+
+ .history-scroll-container {
+     position: relative;
+     padding: 0 40px;
+ }
+
+ .history-articles-scroll {
+     display: flex;
+     overflow-x: auto;
+     scroll-behavior: smooth;
+     padding: 10px 5px 20px;
+     scrollbar-width: none;
+     /* Firefox */
+     -ms-overflow-style: none;
+     /* IE and Edge */
+     gap: 20px;
+ }
+
+ .history-articles-scroll::-webkit-scrollbar {
+     display: none;
+     /* Chrome, Safari, Opera */
+ }
+
+ .history-article {
+     flex: 0 0 280px;
+     border-radius: 8px;
+     overflow: hidden;
+     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+     background: white;
+ }
+
+ .history-article:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+ }
+
+ .history-img-container {
+     position: relative;
+     width: 100%;
+     aspect-ratio: 4/3;
+     overflow: hidden;
+ }
+
+ .history-img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     transition: transform 0.5s ease;
+ }
+
+ .history-article:hover .history-img {
+     transform: scale(1.05);
+ }
+
+ .history-overlay {
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     padding: 10px;
+     display: flex;
+     justify-content: flex-start;
+ }
+
+ .history-category {
+     background-color: #c4156e;
+     color: white;
+     font-size: 12px;
+     padding: 4px 10px;
+     border-radius: 4px;
+     font-weight: 600;
+ }
+
+ .history-title {
+     padding: 15px 15px 5px;
+     margin: 0;
+     font-size: 16px;
+     line-height: 1.4;
+     font-weight: 600;
+     color: #333;
+     transition: color 0.2s ease;
+ }
+
+ .history-article:hover .history-title {
+     color: #c4156e;
+ }
+
+ .history-date {
+     padding: 0 15px 15px;
+     font-size: 13px;
+     color: #777;
+ }
+
+ .history-link {
+     text-decoration: none;
+     color: inherit;
+     display: block;
+ }
+
+ .history-scroll-arrow {
+     position: absolute;
+     top: 50%;
+     transform: translateY(-50%);
+     width: 40px;
+     height: 40px;
+     background-color: rgba(255, 255, 255, 0.9);
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+     cursor: pointer;
+     z-index: 10;
+     transition: all 0.3s ease;
+ }
+
+ .history-scroll-arrow:hover {
+     background-color: #c4156e;
+     color: white;
+ }
+
+ .left-arrow {
+     left: 10px;
+ }
+
+ .right-arrow {
+     right: 10px;
+ }
+
+ .no-history-message {
+     text-align: center;
+     padding: 60px 20px;
+     background: #f8f8f8;
+     border-radius: 8px;
+     margin-bottom: 50px;
+     max-width: 1200px;
+     margin-left: auto;
+     margin-right: auto;
+ }
+
+ .no-history-icon {
+     font-size: 50px;
+     color: #ddd;
+     margin-bottom: 20px;
+ }
+
+ .no-history-message h4 {
+     font-size: 22px;
+     margin-bottom: 10px;
+     color: #555;
+ }
+
+ .no-history-message p {
+     color: #777;
+     font-size: 16px;
+ }
+
+ /* Responsive Adjustments */
+ @media (max-width: 768px) {
+     .history-article {
+         flex: 0 0 240px;
+     }
+ }
+
+ @media (max-width: 480px) {
+     .history-article {
+         flex: 0 0 220px;
+     }
+
+     .history-scroll-container {
+         padding: 0 30px;
+     }
+ }

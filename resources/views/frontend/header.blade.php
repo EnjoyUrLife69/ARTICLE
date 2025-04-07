@@ -16,8 +16,13 @@
             <li class="nav-item">
                 <a href="{{ url('/') }}" class="nav-link">HOME</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item dropdown">
                 <a href="#" class="nav-link">CATEGORY</a>
+                <div class="dropdown-content">
+                    @foreach ($categories as $cat)
+                        <a href="{{ url('/category/' . $cat->id) }}">{{ $cat->name }}</a>
+                    @endforeach
+                </div>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">LIFESTYLE</a>

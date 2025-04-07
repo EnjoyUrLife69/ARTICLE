@@ -48,7 +48,29 @@ class FrontendController extends Controller
             ->take(4)
             ->get();
 
-        return view('frontend-page.homepage', compact('articles', 'article_trending', 'categories', 'article_history', 'article_trending_slideshow', 'popular_categories'));
+        $articlesWithVideos = Article::whereHas('media', function ($query) {
+            $query->where('type', 'youtube');
+        })
+            ->where('status', 'approved')
+            ->latest('release_date')
+            ->take(5)
+            ->get();
+
+        // Separate main video and sidebar videos
+        $mainVideo     = $articlesWithVideos->first();
+        $sidebarVideos = $articlesWithVideos->slice(1, 2);
+
+        $history         = session()->get('article_history', []);
+        $article_history = collect();
+        if (! empty($history)) {
+            $article_history = Article::whereIn('id', $history)
+                ->get()
+                ->sortBy(function ($article) use ($history) {
+                    return array_search($article->id, $history);
+                });
+        }
+
+        return view('frontend-page.homepage', compact('articles', 'article_trending', 'categories', 'article_history', 'article_trending_slideshow', 'popular_categories', 'mainVideo', 'sidebarVideos'));
     }
 
     public function details($id)
@@ -79,7 +101,7 @@ class FrontendController extends Controller
 
         return view('frontend-page.detail', compact('articles', 'categories', 'article', 'comments', 'article_trending'));
     }
-     
+
     public function toggleLike($id)
     {
         $user    = Auth::user();
@@ -113,4 +135,64 @@ class FrontendController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function category($id = null)
+    {
+        // Jika parameter ID adalah 'all', tampilkan semua artikel
+        if ($id == 'all') {
+            return $this->allArticles();
+        }
+
+        // Temukan kategori berdasarkan ID (untuk ID yang valid)
+        $category = Categorie::findOrFail($id);
+
+        // Dapatkan artikel dalam kategori ini dengan pagination
+        $articles = Article::where('categorie_id', $category->id)
+            ->where('status', 'approved')
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
+
+        // Dapatkan kategori populer untuk sidebar
+        $popular_categories = Categorie::withCount(['articles' => function ($query) {
+            $query->where('status', 'approved');
+        }])
+            ->orderBy('articles_count', 'desc')
+            ->take(6)
+            ->get();
+
+        // Dapatkan semua kategori untuk sidebar
+        $categories = Categorie::withCount(['articles' => function ($query) {
+            $query->where('status', 'approved');
+        }])
+            ->orderBy('name')
+            ->get();
+
+        return view('frontend-page.category', compact('category', 'articles', 'categories', 'popular_categories'));
+    }
+
+    public function allArticles()
+    {
+        // Ambil semua artikel yang disetujui dengan pagination
+        $articles = Article::where('status', 'approved')
+            ->orderBy('created_at', 'desc')
+            ->paginate(6);
+
+        $popular_categories = Categorie::withCount(['articles' => function ($query) {
+            $query->where('status', 'approved');
+        }])
+            ->orderBy('articles_count', 'desc')
+            ->take(6)
+            ->get();
+
+        // Dapatkan semua kategori untuk sidebar
+        $categories = Categorie::withCount(['articles' => function ($query) {
+            $query->where('status', 'approved');
+        }])
+            ->orderBy('name')
+            ->get();
+
+        // Kirim variabel yang diperlukan ke view
+        return view('frontend-page.category', compact('articles', 'categories', 'popular_categories'));
+    }
+
 }

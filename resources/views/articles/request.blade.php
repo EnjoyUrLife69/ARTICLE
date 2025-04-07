@@ -21,6 +21,7 @@
         @endif
         <div class="card mt-4">
             <div class="card-body">
+                @if(count($articles) > 0)
                 <div class="table-responsive text-nowrap">
                     <table id="myTable" class="table table-striped">
                         <thead>
@@ -61,37 +62,79 @@
                                                 title="Show" data-bs-offset="0,4" data-bs-html="true"></i>
                                         </button>
                                         @include('articles.show')
-
-
-                                        {{-- EDIT
-                                        @can('article-edit')
-                                            <a href="{{ route('articles.edit', $data->id) }}"><button type="button"
-                                                    class="btn btn-sm btn-primary" data-bs-toggle="modal">
-                                                    <i class='bx bx-edit' data-bs-toggle="tooltip" data-bs-placement="top"
-                                                        title="Edit" data-bs-offset="0,4" data-bs-html="true"></i>
-                                                </button></a>
-                                        @endcan --}}
-
-                                        {{-- DELETE
-                                        @can('article-delete')
-                                            <form action="{{ route('articles.destroy', $data->id) }}" method="POST"
-                                                style="display: inline;" id="deleteForm{{ $data->id }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="tooltip"
-                                                    id="deleteButton{{ $data->id }}" data-bs-offset="0,4"
-                                                    data-bs-placement="top" data-bs-html="true" title="<span>Delete</span>">
-                                                    <i class='bx bx-trash'></i>
-                                                </button>
-                                            </form>
-                                        @endcan --}}
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+                @else
+                <!-- Empty State with Simple Animation -->
+                <div class="empty-state-container text-center py-5">
+                    <div class="empty-state-icon mb-4">
+                        <i class='bx bx-file-find bx-tada' style="font-size: 100px; color: #d6dbf5;"></i>
+                    </div>
+                    <h4 class="text-primary" style="color: #696cff !important; font-weight: 600;">No Article Requests Found</h4>
+                    <p class="text-muted mt-2 mb-4">
+                        There are currently no pending article requests to review.
+                    </p>
+                    <button type="button" class="btn btn-primary mt-2" onclick="refreshPage()">
+                        <i class='bx bx-refresh me-1'></i> Refresh
+                    </button>
+                </div>
+                
+                <!-- Fallback CSS Animation -->
+                <style>
+                    .empty-state-container {
+                        padding: 40px 20px;
+                    }
+                    
+                    .empty-state-icon {
+                        animation: pulse 2s infinite;
+                    }
+                    
+                    @keyframes pulse {
+                        0% {
+                            transform: scale(1);
+                        }
+                        50% {
+                            transform: scale(1.1);
+                        }
+                        100% {
+                            transform: scale(1);
+                        }
+                    }
+                    
+                    .bx-tada {
+                        animation: tada 1.5s ease infinite;
+                    }
+                    
+                    @keyframes tada {
+                        0% {
+                            transform: scale(1) rotate(0);
+                        }
+                        10%, 20% {
+                            transform: scale(0.9) rotate(-3deg);
+                        }
+                        30%, 50%, 70%, 90% {
+                            transform: scale(1.1) rotate(3deg);
+                        }
+                        40%, 60%, 80% {
+                            transform: scale(1.1) rotate(-3deg);
+                        }
+                        100% {
+                            transform: scale(1) rotate(0);
+                        }
+                    }
+                </style>
+                @endif
             </div>
         </div>
     </div>
+
+    <script>
+        function refreshPage() {
+            window.location.reload();
+        }
+    </script>
 @endsection

@@ -28,8 +28,8 @@
                 <div class="container-fluid px-0">
                     <div class="row">
                         <div class="col-12">
-                            {{-- Article Title --}}
-                            <h4 class="fw-bold mb-4 text-break">{{ $data->title }}</h4>
+                            {{-- Article Title - Added text-break class to fix overflow --}}
+                            <h4 class="fw-bold mb-4 text-break title-wrap">{{ $data->title }}</h4>
 
                             {{-- Media Tabs Navigation --}}
                             @if (
@@ -107,7 +107,7 @@
                                             </button>
 
                                             {{-- Thumbnails Navigation --}}
-                                            <div
+                                            {{-- <div
                                                 class="carousel-thumbnails mt-3 d-flex justify-content-center flex-wrap">
                                                 <button type="button"
                                                     data-bs-target="#carouselArticle{{ $data->id }}"
@@ -129,7 +129,7 @@
                                                             alt="Thumbnail">
                                                     </button>
                                                 @endforeach
-                                            </div>
+                                            </div> --}}
                                         @endif
                                     </div>
                                 </div>
@@ -197,151 +197,244 @@
     </div>
 </div>
 
-{{-- CSS tambahan untuk mencegah overflow --}}
+{{-- style Show Modal --}}
 <style>
-    /* Styling khusus untuk deskripsi agar tidak overflow */
-    #Show{{ $data->id }} .modal-description {
-        background-color: #f8f9fa;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border-left: 4px solid #0d6efd;
-        margin-bottom: 1.5rem;
-        word-wrap: break-word !important;
-        overflow-wrap: break-word !important;
-        word-break: break-all !important;
-        white-space: normal !important;
-        overflow: hidden !important;
-        max-width: 100% !important;
-    }
+        /* Title overflow fix */
+        .title-wrap {
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            word-break: break-word !important;
+            hyphens: auto !important;
+            max-width: 100% !important;
+        }
 
-    #Show{{ $data->id }} .modal-description p {
-        margin-bottom: 0 !important;
-        font-style: italic;
-        max-width: 100% !important;
-        overflow-wrap: break-word !important;
-        word-wrap: break-word !important;
-        word-break: break-all !important;
-        white-space: normal !important;
-    }
+        /* Styling for description to prevent overflow */
+        #Show{{ $data->id }} .modal-description {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #0d6efd;
+            margin-bottom: 1.5rem;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            word-break: break-word !important;
+            white-space: normal !important;
+            overflow: hidden !important;
+            max-width: 100% !important;
+        }
 
-    #Show{{ $data->id }} .modal-body {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: #444;
-        overflow-x: hidden !important;
-    }
+        #Show{{ $data->id }} .modal-description p {
+            margin-bottom: 0 !important;
+            font-style: italic;
+            max-width: 100% !important;
+            overflow-wrap: break-word !important;
+            word-wrap: break-word !important;
+            word-break: break-word !important;
+            white-space: normal !important;
+        }
 
-    #Show{{ $data->id }} .article-content {
-        overflow-wrap: break-word !important;
-        word-wrap: break-word !important;
-        word-break: break-word !important;
-        hyphens: auto !important;
-        max-width: 100% !important;
-        overflow-x: hidden !important;
-    }
+        #Show{{ $data->id }} .modal-body {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #444;
+            overflow-x: hidden !important;
+        }
 
-    #Show{{ $data->id }} .article-content>* {
-        max-width: 100% !important;
-        overflow-x: hidden !important;
-        word-wrap: break-word !important;
-        overflow-wrap: break-word !important;
-        white-space: normal !important;
-    }
+        /* Article content overflow handling */
+        #Show{{ $data->id }} .article-content {
+            overflow-wrap: break-word !important;
+            word-wrap: break-word !important;
+            word-break: break-word !important;
+            hyphens: auto !important;
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
 
-    #Show{{ $data->id }} .article-content p {
-        margin-bottom: 1.25rem;
-        max-width: 100% !important;
-        overflow-wrap: break-word !important;
-        word-wrap: break-word !important;
-        word-break: break-word !important;
-    }
+        #Show{{ $data->id }} .article-content>* {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            white-space: normal !important;
+        }
 
-    #Show{{ $data->id }} .article-content h1,
-    #Show{{ $data->id }} .article-content h2,
-    #Show{{ $data->id }} .article-content h3,
-    #Show{{ $data->id }} .article-content h4,
-    #Show{{ $data->id }} .article-content h5,
-    #Show{{ $data->id }} .article-content h6 {
-        margin-top: 1.5rem;
-        margin-bottom: 1rem;
-        max-width: 100% !important;
-        overflow-wrap: break-word !important;
-        word-wrap: break-word !important;
-        word-break: break-word !important;
-    }
+        #Show{{ $data->id }} .article-content p {
+            margin-bottom: 1.25rem;
+            max-width: 100% !important;
+            overflow-wrap: break-word !important;
+            word-wrap: break-word !important;
+            word-break: break-word !important;
+        }
 
-    #Show{{ $data->id }} .article-content table {
-        width: 100% !important;
-        max-width: 100% !important;
-        table-layout: auto !important;
-        overflow-x: auto !important;
-        display: block !important;
-        white-space: normal !important;
-    }
+        #Show{{ $data->id }} .article-content h1,
+        #Show{{ $data->id }} .article-content h2,
+        #Show{{ $data->id }} .article-content h3,
+        #Show{{ $data->id }} .article-content h4,
+        #Show{{ $data->id }} .article-content h5,
+        #Show{{ $data->id }} .article-content h6 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            max-width: 100% !important;
+            overflow-wrap: break-word !important;
+            word-wrap: break-word !important;
+            word-break: break-word !important;
+        }
 
-    #Show{{ $data->id }} .article-content table td,
-    #Show{{ $data->id }} .article-content table th {
-        word-break: break-word !important;
-        white-space: normal !important;
-    }
+        /* Table responsiveness */
+        #Show{{ $data->id }} .article-content table {
+            width: 100% !important;
+            max-width: 100% !important;
+            table-layout: auto !important;
+            overflow-x: auto !important;
+            display: block !important;
+            white-space: normal !important;
+        }
 
-    #Show{{ $data->id }} .article-content pre,
-    #Show{{ $data->id }} .article-content code {
-        white-space: pre-wrap !important;
-        word-wrap: break-word !important;
-        overflow-wrap: break-word !important;
-        max-width: 100% !important;
-        display: block !important;
-        overflow-x: hidden !important;
-    }
+        #Show{{ $data->id }} .article-content table td,
+        #Show{{ $data->id }} .article-content table th {
+            word-break: break-word !important;
+            white-space: normal !important;
+        }
 
-    #Show{{ $data->id }} .article-content img {
-        max-width: 100% !important;
-        height: auto !important;
-        border-radius: 6px !important;
-        display: block !important;
-    }
+        /* Code blocks */
+        #Show{{ $data->id }} .article-content pre,
+        #Show{{ $data->id }} .article-content code {
+            white-space: pre-wrap !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            max-width: 100% !important;
+            display: block !important;
+            overflow-x: hidden !important;
+        }
 
-    #Show{{ $data->id }} .article-content a {
-        word-break: break-word !important;
-        overflow-wrap: break-word !important;
-    }
+        /* Images */
+        #Show{{ $data->id }} .article-content img {
+            max-width: 100% !important;
+            height: auto !important;
+            border-radius: 6px !important;
+            display: block !important;
+        }
 
-    #Show{{ $data->id }} .article-content iframe {
-        max-width: 100% !important;
-        display: block !important;
-    }
+        /* Links */
+        #Show{{ $data->id }} .article-content a {
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+        }
 
-    /* Force content to be responsive */
-    .force-word-wrap {
-        overflow-wrap: break-word !important;
-        word-wrap: break-word !important;
-        word-break: break-word !important;
-        white-space: normal !important;
-        hyphens: auto !important;
-        max-width: 100% !important;
-        overflow-x: hidden !important;
-    }
+        /* Iframes */
+        #Show{{ $data->id }} .article-content iframe {
+            max-width: 100% !important;
+            display: block !important;
+        }
+
+        /* Force all content to be responsive */
+        .force-word-wrap {
+            overflow-wrap: break-word !important;
+            word-wrap: break-word !important;
+            word-break: break-word !important;
+            white-space: normal !important;
+            hyphens: auto !important;
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
 </style>
 
-{{-- Script Show modal --}}
+{{-- script Show Modal --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Apply overflow handling when modal is shown
         document.getElementById('Show{{ $data->id }}').addEventListener('shown.bs.modal', function() {
-            // Fix untuk deskripsi
+            // Handle title overflow
+            const titleElement = document.querySelector('#Show{{ $data->id }} h4.title-wrap');
+            if (titleElement) {
+                titleElement.classList.add('force-word-wrap');
+            }
+
+            // Handle description overflow
             const descriptionElement = document.querySelector(
                 '#Show{{ $data->id }} .modal-description p');
             if (descriptionElement) {
-                descriptionElement.style.wordBreak = 'break-all';
+                descriptionElement.style.wordBreak = 'break-word';
                 descriptionElement.style.overflowWrap = 'break-word';
                 descriptionElement.style.wordWrap = 'break-word';
                 descriptionElement.style.whiteSpace = 'normal';
                 descriptionElement.style.maxWidth = '100%';
                 descriptionElement.style.display = 'block';
             }
+
+            // Create carousel instance
+            var myCarousel = new bootstrap.Carousel(document.getElementById(
+                'carouselArticle{{ $data->id }}'), {
+                interval: 5000,
+                wrap: true,
+                touch: true
+            });
+
+            // Handle article content
+            const articleContent = document.querySelector('#Show{{ $data->id }} .article-content');
+            if (articleContent) {
+                articleContent.classList.add('force-word-wrap');
+
+                // Process all text elements
+                const textElements = articleContent.querySelectorAll(
+                    'p, h1, h2, h3, h4, h5, h6, span, a, li');
+                textElements.forEach(function(element) {
+                    element.style.maxWidth = '100%';
+                    element.style.wordWrap = 'break-word';
+                    element.style.overflowWrap = 'break-word';
+                    element.style.wordBreak = 'break-word';
+                    element.style.whiteSpace = 'normal';
+                    element.classList.add('text-break');
+                });
+
+                // Process tables
+                const tables = articleContent.querySelectorAll('table');
+                tables.forEach(function(table) {
+                    // Wrap table in scrollable container
+                    const wrapper = document.createElement('div');
+                    wrapper.style.width = '100%';
+                    wrapper.style.maxWidth = '100%';
+                    wrapper.style.overflowX = 'auto';
+                    table.parentNode.insertBefore(wrapper, table);
+                    wrapper.appendChild(table);
+
+                    table.style.maxWidth = '100%';
+                    table.style.tableLayout = 'auto';
+                });
+
+                // Process images
+                const images = articleContent.querySelectorAll('img');
+                images.forEach(function(img) {
+                    img.style.maxWidth = '100%';
+                    img.style.height = 'auto';
+                    img.style.display = 'block';
+                });
+
+                // Process code blocks
+                const codeBlocks = articleContent.querySelectorAll('pre, code');
+                codeBlocks.forEach(function(block) {
+                    block.style.whiteSpace = 'pre-wrap';
+                    block.style.wordWrap = 'break-word';
+                    block.style.maxWidth = '100%';
+                    block.style.overflowX = 'hidden';
+                });
+
+                // Process iframes
+                const iframes = articleContent.querySelectorAll('iframe');
+                iframes.forEach(function(iframe) {
+                    iframe.style.maxWidth = '100%';
+
+                    // Wrap iframe in responsive container
+                    const wrapper = document.createElement('div');
+                    wrapper.style.width = '100%';
+                    wrapper.style.position = 'relative';
+                    wrapper.classList.add('ratio', 'ratio-16x9');
+                    iframe.parentNode.insertBefore(wrapper, iframe);
+                    wrapper.appendChild(iframe);
+                });
+            }
         });
-    });
-    document.addEventListener('DOMContentLoaded', function() {
+
         // Add force-word-wrap class to all article content containers
         const articleContents = document.querySelectorAll('.article-content');
         articleContents.forEach(function(container) {
@@ -352,82 +445,6 @@
             for (let i = 0; i < children.length; i++) {
                 children[i].classList.add('force-word-wrap');
             }
-        });
-    });
-</script>
-
-{{-- Script Show Modal --}}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Wait for the modal to be shown
-        document.getElementById('Show{{ $data->id }}').addEventListener('shown.bs.modal', function() {
-            // Create a new carousel instance
-            var myCarousel = new bootstrap.Carousel(document.getElementById(
-                'carouselArticle{{ $data->id }}'), {
-                interval: 5000, // 5 seconds per slide
-                wrap: true, // Continuous cycle
-                touch: true // Enable touch swiping
-            });
-
-            // Fix any potential horizontal overflow issues
-            const articleContent = document.querySelector('#Show{{ $data->id }} .article-content');
-
-            // Process all paragraph and heading elements
-            const textElements = articleContent.querySelectorAll(
-                'p, h1, h2, h3, h4, h5, h6, span, a, li');
-            textElements.forEach(function(element) {
-                element.style.maxWidth = '100%';
-                element.style.wordWrap = 'break-word';
-                element.style.overflowWrap = 'break-word';
-                element.style.wordBreak = 'break-word';
-                element.style.whiteSpace = 'normal';
-                element.classList.add('text-break');
-            });
-
-            // Process all tables
-            const tables = articleContent.querySelectorAll('table');
-            tables.forEach(function(table) {
-                // Wrap table in a div with horizontal scroll if needed
-                const wrapper = document.createElement('div');
-                wrapper.style.width = '100%';
-                wrapper.style.maxWidth = '100%';
-                wrapper.style.overflowX = 'auto';
-                table.parentNode.insertBefore(wrapper, table);
-                wrapper.appendChild(table);
-
-                // Set table styles
-                table.style.maxWidth = '100%';
-                table.style.tableLayout = 'auto';
-            });
-
-            // Process all images
-            const images = articleContent.querySelectorAll('img');
-            images.forEach(function(img) {
-                img.style.maxWidth = '100%';
-                img.style.height = 'auto';
-                img.style.display = 'block';
-            });
-
-            // Process all pre/code elements
-            const codeBlocks = articleContent.querySelectorAll('pre, code');
-            codeBlocks.forEach(function(block) {
-                block.style.whiteSpace = 'pre-wrap';
-                block.style.wordWrap = 'break-word';
-                block.style.maxWidth = '100%';
-                block.style.overflowX = 'hidden';
-            });
-
-            // Process any iframes
-            const iframes = articleContent.querySelectorAll('iframe');
-            iframes.forEach(function(iframe) {
-                iframe.style.maxWidth = '100%';
-                const wrapper = document.createElement('div');
-                wrapper.style.width = '100%';
-                wrapper.style.position = 'relative';
-                wrapper.classList.add('ratio', 'ratio-16x9');
-                iframe.parentNode.insertBefore(wrapper, iframe);
-                wrapper.appendChild(iframe);
-            });
         });
     });
 </script>
@@ -463,8 +480,8 @@
                 <div class="container-fluid px-0">
                     <div class="row">
                         <div class="col-12">
-                            {{-- Article Title --}}
-                            <h4 class="fw-bold mb-4 text-break">{{ $data->title }}</h4>
+                            {{-- Article Title - Added title-wrap class for overflow handling --}}
+                            <h4 class="fw-bold mb-4 text-break title-wrap">{{ $data->title }}</h4>
 
                             {{-- Media Tabs Navigation --}}
                             @if (
@@ -545,7 +562,7 @@
                                             </button>
 
                                             {{-- Thumbnails Navigation --}}
-                                            <div
+                                            {{-- <div
                                                 class="carousel-thumbnails mt-3 d-flex justify-content-center flex-wrap">
                                                 <button type="button"
                                                     data-bs-target="#carouselArticleRequest{{ $data->id }}"
@@ -567,7 +584,7 @@
                                                             alt="Thumbnail">
                                                     </button>
                                                 @endforeach
-                                            </div>
+                                            </div> --}}
                                         @endif
                                     </div>
                                 </div>
@@ -620,7 +637,7 @@
                 </div>
             </div>
 
-            {{-- Modal Footer dengan tombol Approve dan Reject --}}
+            {{-- Modal Footer with Approve and Reject buttons --}}
             <div class="modal-footer bg-light">
                 <div class="d-flex align-items-center me-auto">
                     <span class="me-3 text-muted"><i class="far fa-eye me-1"></i>{{ $data->view_count }}</span>
@@ -648,7 +665,9 @@
     </div>
 </div>
 
-{{-- Modal Reject yang ditingkatkan --}}
+{{-- ///////////////////////////////////////////////////////////////////////////////////////////////////// --}}
+
+{{-- Enhanced Reject Modal --}}
 <div class="modal fade" id="modalToggle2" aria-hidden="true" aria-labelledby="modalToggleLabel2" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -663,8 +682,8 @@
 
                 <!-- Modal Body -->
                 <div class="modal-body">
-                    Please provide a <b>Reason</b> for rejecting this article. <br>
-                    Your feedback will help the writer understand the issues and improve their <br> content. <br><br>
+                    <p>Please provide a <b>Reason</b> for rejecting this article.</p>
+                    <p>Your feedback will help the writer understand the issues and improve their content.</p>
                     <textarea style="height: 200px" id="basic-default-message" class="form-control" name="review_notes"
                         placeholder="Write your feedback here..." aria-describedby="basic-icon-default-message2"></textarea>
                 </div>
@@ -688,93 +707,260 @@
     </div>
 </div>
 
+{{-- Improved CSS for text overflow in request modal --}}
+<style>
+    /* Title overflow fix */
+    .title-wrap {
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+        max-width: 100% !important;
+    }
+    
+    /* Styling for request modal */
+    #Show-request{{ $data->id }} .modal-description {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-left: 4px solid #0d6efd;
+        margin-bottom: 1.5rem;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        word-break: break-word !important;
+        white-space: normal !important;
+        overflow: hidden !important;
+        max-width: 100% !important;
+    }
+
+    #Show-request{{ $data->id }} .modal-description p {
+        margin-bottom: 0 !important;
+        font-style: italic;
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+        white-space: normal !important;
+    }
+
+    #Show-request{{ $data->id }} .modal-body {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #444;
+        overflow-x: hidden !important;
+    }
+
+    /* Article content overflow handling */
+    #Show-request{{ $data->id }} .article-content {
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+
+    #Show-request{{ $data->id }} .article-content>* {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+    }
+
+    #Show-request{{ $data->id }} .article-content p {
+        margin-bottom: 1.25rem;
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+    }
+
+    #Show-request{{ $data->id }} .article-content h1,
+    #Show-request{{ $data->id }} .article-content h2,
+    #Show-request{{ $data->id }} .article-content h3,
+    #Show-request{{ $data->id }} .article-content h4,
+    #Show-request{{ $data->id }} .article-content h5,
+    #Show-request{{ $data->id }} .article-content h6 {
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        max-width: 100% !important;
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+    }
+
+    /* Table responsiveness */
+    #Show-request{{ $data->id }} .article-content table {
+        width: 100% !important;
+        max-width: 100% !important;
+        table-layout: auto !important;
+        overflow-x: auto !important;
+        display: block !important;
+        white-space: normal !important;
+    }
+
+    #Show-request{{ $data->id }} .article-content table td,
+    #Show-request{{ $data->id }} .article-content table th {
+        word-break: break-word !important;
+        white-space: normal !important;
+    }
+
+    /* Code blocks */
+    #Show-request{{ $data->id }} .article-content pre,
+    #Show-request{{ $data->id }} .article-content code {
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        max-width: 100% !important;
+        display: block !important;
+        overflow-x: hidden !important;
+    }
+
+    /* Images */
+    #Show-request{{ $data->id }} .article-content img {
+        max-width: 100% !important;
+        height: auto !important;
+        border-radius: 6px !important;
+        display: block !important;
+    }
+
+    /* Links */
+    #Show-request{{ $data->id }} .article-content a {
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+
+    /* Iframes */
+    #Show-request{{ $data->id }} .article-content iframe {
+        max-width: 100% !important;
+        display: block !important;
+    }
+
+    /* Force all content to be responsive */
+    .force-word-wrap {
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+        white-space: normal !important;
+        hyphens: auto !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
+    /* Improve reject modal appearance */
+    #modalToggle2 .modal-body p {
+        margin-bottom: 0.5rem;
+    }
+    
+    #modalToggle2 textarea {
+        margin-top: 1rem;
+    }
+</style>
+
+{{-- Improved JavaScript for handling overflow in request modal --}}
 <script>
-    // Enhanced JavaScript for request modal
     document.addEventListener('DOMContentLoaded', function() {
-        // Fix untuk konten request modal saat dibuka
-        document.getElementById('Show-request{{ $data->id }}').addEventListener('shown.bs.modal',
-            function() {
-                // Create a new carousel instance
-                var requestCarousel = new bootstrap.Carousel(document.getElementById(
-                    'carouselArticleRequest{{ $data->id }}'), {
-                    interval: 5000, // 5 seconds per slide
-                    wrap: true, // Continuous cycle
-                    touch: true // Enable touch swiping
+        // Apply overflow handling when request modal is shown
+        document.getElementById('Show-request{{ $data->id }}').addEventListener('shown.bs.modal', function() {
+            // Handle title overflow
+            const titleElement = document.querySelector('#Show-request{{ $data->id }} h4.title-wrap');
+            if (titleElement) {
+                titleElement.classList.add('force-word-wrap');
+            }
+            
+            // Create carousel instance
+            var requestCarousel = new bootstrap.Carousel(document.getElementById('carouselArticleRequest{{ $data->id }}'), {
+                interval: 5000,
+                wrap: true,
+                touch: true
+            });
+            
+            // Handle description overflow
+            const descriptionElement = document.querySelector('#Show-request{{ $data->id }} .modal-description p');
+            if (descriptionElement) {
+                descriptionElement.style.wordBreak = 'break-word';
+                descriptionElement.style.overflowWrap = 'break-word';
+                descriptionElement.style.wordWrap = 'break-word';
+                descriptionElement.style.whiteSpace = 'normal';
+                descriptionElement.style.maxWidth = '100%';
+                descriptionElement.style.display = 'block';
+            }
+            
+            // Handle article content
+            const articleContent = document.querySelector('#Show-request{{ $data->id }} .article-content');
+            if (articleContent) {
+                articleContent.classList.add('force-word-wrap');
+                
+                // Process all text elements
+                const textElements = articleContent.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span, a, li');
+                textElements.forEach(function(element) {
+                    element.style.maxWidth = '100%';
+                    element.style.wordWrap = 'break-word';
+                    element.style.overflowWrap = 'break-word';
+                    element.style.wordBreak = 'break-word';
+                    element.style.whiteSpace = 'normal';
+                    element.classList.add('text-break');
                 });
 
-                // Fix untuk deskripsi
-                const descriptionElement = document.querySelector(
-                    '#Show-request{{ $data->id }} .modal-description p');
-                if (descriptionElement) {
-                    descriptionElement.style.wordBreak = 'break-all';
-                    descriptionElement.style.overflowWrap = 'break-word';
-                    descriptionElement.style.wordWrap = 'break-word';
-                    descriptionElement.style.whiteSpace = 'normal';
-                    descriptionElement.style.maxWidth = '100%';
-                    descriptionElement.style.display = 'block';
-                }
+                // Process tables
+                const tables = articleContent.querySelectorAll('table');
+                tables.forEach(function(table) {
+                    // Wrap table in scrollable container
+                    const wrapper = document.createElement('div');
+                    wrapper.style.width = '100%';
+                    wrapper.style.maxWidth = '100%';
+                    wrapper.style.overflowX = 'auto';
+                    table.parentNode.insertBefore(wrapper, table);
+                    wrapper.appendChild(table);
+                    
+                    table.style.maxWidth = '100%';
+                    table.style.tableLayout = 'auto';
+                });
 
-                // Fix any potential horizontal overflow issues
-                const articleContent = document.querySelector(
-                    '#Show-request{{ $data->id }} .article-content');
-                if (articleContent) {
-                    // Process all paragraph and heading elements
-                    const textElements = articleContent.querySelectorAll(
-                        'p, h1, h2, h3, h4, h5, h6, span, a, li');
-                    textElements.forEach(function(element) {
-                        element.style.maxWidth = '100%';
-                        element.style.wordWrap = 'break-word';
-                        element.style.overflowWrap = 'break-word';
-                        element.style.wordBreak = 'break-word';
-                        element.style.whiteSpace = 'normal';
-                        element.classList.add('text-break');
-                    });
+                // Process images
+                const images = articleContent.querySelectorAll('img');
+                images.forEach(function(img) {
+                    img.style.maxWidth = '100%';
+                    img.style.height = 'auto';
+                    img.style.display = 'block';
+                });
 
-                    // Process all tables
-                    const tables = articleContent.querySelectorAll('table');
-                    tables.forEach(function(table) {
-                        // Wrap table in a div with horizontal scroll if needed
-                        const wrapper = document.createElement('div');
-                        wrapper.style.width = '100%';
-                        wrapper.style.maxWidth = '100%';
-                        wrapper.style.overflowX = 'auto';
-                        table.parentNode.insertBefore(wrapper, table);
-                        wrapper.appendChild(table);
+                // Process code blocks
+                const codeBlocks = articleContent.querySelectorAll('pre, code');
+                codeBlocks.forEach(function(block) {
+                    block.style.whiteSpace = 'pre-wrap';
+                    block.style.wordWrap = 'break-word';
+                    block.style.maxWidth = '100%';
+                    block.style.overflowX = 'hidden';
+                });
 
-                        // Set table styles
-                        table.style.maxWidth = '100%';
-                        table.style.tableLayout = 'auto';
-                    });
+                // Process iframes
+                const iframes = articleContent.querySelectorAll('iframe');
+                iframes.forEach(function(iframe) {
+                    iframe.style.maxWidth = '100%';
+                    
+                    // Wrap iframe in responsive container
+                    const wrapper = document.createElement('div');
+                    wrapper.style.width = '100%';
+                    wrapper.style.position = 'relative';
+                    wrapper.classList.add('ratio', 'ratio-16x9');
+                    iframe.parentNode.insertBefore(wrapper, iframe);
+                    wrapper.appendChild(iframe);
+                });
+            }
+        });
 
-                    // Process all images
-                    const images = articleContent.querySelectorAll('img');
-                    images.forEach(function(img) {
-                        img.style.maxWidth = '100%';
-                        img.style.height = 'auto';
-                        img.style.display = 'block';
-                    });
+        // Add force-word-wrap class to all article content containers
+        const articleContents = document.querySelectorAll('.article-content');
+        articleContents.forEach(function(container) {
+            container.classList.add('force-word-wrap');
 
-                    // Process all pre/code elements
-                    const codeBlocks = articleContent.querySelectorAll('pre, code');
-                    codeBlocks.forEach(function(block) {
-                        block.style.whiteSpace = 'pre-wrap';
-                        block.style.wordWrap = 'break-word';
-                        block.style.maxWidth = '100%';
-                        block.style.overflowX = 'hidden';
-                    });
-
-                    // Process any iframes
-                    const iframes = articleContent.querySelectorAll('iframe');
-                    iframes.forEach(function(iframe) {
-                        iframe.style.maxWidth = '100%';
-                        const wrapper = document.createElement('div');
-                        wrapper.style.width = '100%';
-                        wrapper.style.position = 'relative';
-                        wrapper.classList.add('ratio', 'ratio-16x9');
-                        iframe.parentNode.insertBefore(wrapper, iframe);
-                        wrapper.appendChild(iframe);
-                    });
-                }
-            });
+            // Add to all direct children
+            const children = container.children;
+            for (let i = 0; i < children.length; i++) {
+                children[i].classList.add('force-word-wrap');
+            }
+        });
     });
 </script>

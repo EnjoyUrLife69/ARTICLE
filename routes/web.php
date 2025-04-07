@@ -18,6 +18,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/like/{id}', [FrontendController::class, 'toggleLike'])->middleware('auth');
 });
 Route::post('/update-share/{id}', [FrontendController::class, 'updateShare'])->name('articles.share');
+// Route untuk kategori dengan ID atau semua artikel
+Route::get('/category/{id}', [FrontendController::class, 'category'])->where('id', '[a-fA-F0-9\-]+')->name('category.show');
+Route::get('/category/all', [FrontendController::class, 'allArticles'])->name('category.all');
 
 Auth::routes();
 

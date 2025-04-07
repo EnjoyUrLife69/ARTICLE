@@ -226,3 +226,47 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 // SCRIPT BAGIAN 3 END
+
+
+// SCRIPT BAGIAN 5
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollContainer = document.querySelector('.history-articles-scroll');
+    const leftArrow = document.querySelector('.left-arrow');
+    const rightArrow = document.querySelector('.right-arrow');
+    
+    if (scrollContainer && leftArrow && rightArrow) {
+        // Scroll left
+        leftArrow.addEventListener('click', function() {
+            scrollContainer.scrollBy({
+                left: -300,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Scroll right
+        rightArrow.addEventListener('click', function() {
+            scrollContainer.scrollBy({
+                left: 300,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Hide arrows based on scroll position
+        function updateArrows() {
+            const isAtStart = scrollContainer.scrollLeft === 0;
+            const isAtEnd = scrollContainer.scrollLeft >= (scrollContainer.scrollWidth - scrollContainer.clientWidth - 5);
+            
+            leftArrow.style.opacity = isAtStart ? '0.5' : '1';
+            leftArrow.style.pointerEvents = isAtStart ? 'none' : 'auto';
+            
+            rightArrow.style.opacity = isAtEnd ? '0.5' : '1';
+            rightArrow.style.pointerEvents = isAtEnd ? 'none' : 'auto';
+        }
+        
+        // Initial check
+        updateArrows();
+        
+        // Update on scroll
+        scrollContainer.addEventListener('scroll', updateArrows);
+    }
+});
