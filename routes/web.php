@@ -19,8 +19,16 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::post('/update-share/{id}', [FrontendController::class, 'updateShare'])->name('articles.share');
 // Route untuk kategori dengan ID atau semua artikel
-Route::get('/category/{id}', [FrontendController::class, 'category'])->where('id', '[a-fA-F0-9\-]+')->name('category.show');
-Route::get('/category/all', [FrontendController::class, 'allArticles'])->name('category.all');
+
+// Route untuk kategori spesifik dengan filter opsional
+Route::get('/category/{id}/{filter?}', [FrontendController::class, 'category'])
+    ->where('id', '[a-fA-F0-9\-]+')
+    ->name('category.show');
+
+// Route untuk semua artikel dengan filter opsional
+Route::get('/category/all/{filter?}', [FrontendController::class, 'allArticles'])
+    ->name('category.all');
+
 
 Auth::routes();
 

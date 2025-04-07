@@ -5,7 +5,9 @@
     <div class="category-hero">
         <div class="container">
             <!-- Memeriksa apakah $category ada, jika tidak tampilkan "All Articles" -->
-            <h1 class="category-title">{{ isset($category) ? strtoupper($category->name) : 'ALL ARTICLES' }}</h1>
+            <h1 class="category-title">
+                {{ isset($category) ? strtoupper($category->name) : 'ALL ARTICLES' }}
+            </h1>
             <p class="category-subtitle">
                 <span class="category-count">{{ $articles->total() }}</span> Articles found
                 @if (isset($category))
@@ -27,7 +29,60 @@
         <div class="content-wrapper" style="margin-left: -160px">
             <!-- Article Grid Section -->
             <div class="articles-section" style="width: 850px">
-                <h2 class="section-heading">Artikel Terbaru</h2>
+                <div class="row">
+                    <div class="col-10">
+                        <h2 class="section-heading">
+                            @php
+                                $filterTitles = [
+                                    'latest' => 'Latest Articles',
+                                    'most_viewed' => 'Most Viewed Articles',
+                                    'most_liked' => 'Most Liked Articles',
+                                    'oldest' => 'Oldest Articles',
+                                ];
+                                $currentFilter = request('filter', $filter);
+                                $pageTitle = $filterTitles[$currentFilter] ?? 'Latest Articles';
+                            @endphp
+                            {{ $pageTitle }}
+                        </h2>
+                    </div>
+                    <div class="col-2">
+                        @php
+                            $filterOptions = [
+                                'latest' => 'Latest',
+                                'most_viewed' => 'Most Viewed',
+                                'most_liked' => 'Most Liked',
+                                'oldest' => 'Oldest',
+                            ];
+                        @endphp
+
+                        <div class="filter-dropdown">
+                            @if (isset($category))
+                                <form action="{{ route('category.show', ['id' => $category->id]) }}" method="GET">
+                                    <select name="filter" onchange="this.form.submit()" class="custom-select">
+                                        @foreach ($filterOptions as $value => $label)
+                                            <option value="{{ $value }}"
+                                                {{ request('filter', $filter) == $value ? 'selected' : '' }}>
+                                                {{ $label }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </form>
+                            @else
+                                <form action="{{ route('category.all') }}" method="GET">
+                                    <select name="filter" onchange="this.form.submit()" class="custom-select">
+                                        @foreach ($filterOptions as $value => $label)
+                                            <option value="{{ $value }}"
+                                                {{ request('filter', $filter) == $value ? 'selected' : '' }}>
+                                                {{ $label }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </form>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
 
                 @if ($articles->count() > 0)
                     <div class="articlee-grid">
@@ -38,13 +93,16 @@
                                         <img src="{{ asset('storage/images/articles/' . $article->cover) }}"
                                             alt="{{ $article->title }}">
                                     </a>
-                                    <div class="article-date">{{ $article->created_at->format('M d, Y') }}</div>
+                                    <div class="article-date" style="color: #ffffff">
+                                        {{ $article->created_at->format('M d, Y') }}</div>
                                 </div>
                                 <div class="article-content">
                                     <a href="{{ url('/article/' . $article->id) }}"
                                         class="article-title">{{ $article->title }}</a><br>
-                                    <p class="article-excerpt">{{ Str::limit(strip_tags($article->description), 120) }}</p>
-                                    <a href="{{ url('/article/' . $article->id) }}" class="read-more">Baca Selengkapnya</a>
+                                    <p class="article-excerpt">{{ Str::limit(strip_tags($article->description), 120) }}
+                                    </p>
+                                    <a href="{{ url('/article/' . $article->id) }}" class="read-more">Baca
+                                        Selengkapnya</a>
                                 </div>
                             </div>
                         @endforeach
@@ -52,7 +110,7 @@
 
                     <!-- Pagination -->
                     <div class="pagination-container">
-                        {{ $articles->links('pagination::bootstrap-4') }}
+                        {{ $articles->appends(request()->query())->links('pagination::bootstrap-4') }}
                     </div>
                 @else
                     <div class="empty-state">
@@ -98,73 +156,6 @@
         </div>
     </div>
 
-    <!-- Videos Section -->
-    {{-- @php
-        $categoryVideos = $category
-            ->articles()
-            ->whereHas('media', function ($query) {
-                $query->where('type', 'youtube');
-            })
-            ->where('status', 'approved')
-            ->orderBy('created_at', 'desc')
-            ->take(4)
-            ->get();
-
-        $mainVideo = $categoryVideos->count() > 0 ? $categoryVideos->shift() : null;
-    @endphp
-
-    @if ($mainVideo)
-        <div class="videos-section">
-            <div class="container">
-                <h2 class="section-heading">Video {{ strtoupper($category->name) }}</h2>
-
-                <div class="video-showcase">
-                    <div class="featured-video">
-                        <a href="{{ url('/article/' . $mainVideo->id) }}?autoplay=1" class="video-link">
-                            <div class="featured-video-image">
-                                <img src="https://img.youtube.com/vi/{{ $mainVideo->media->where('type', 'youtube')->first()->path }}/maxresdefault.jpg"
-                                    alt="{{ $mainVideo->title }}">
-                                <div class="play-button">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="featured-video-content">
-                            <h3 class="featured-video-title">{{ $mainVideo->title }}</h3>
-                            <p class="featured-video-description">{{ Str::limit($mainVideo->description, 250) }}</p>
-                        </div>
-                    </div>
-
-                    <div class="video-list">
-                        @foreach ($categoryVideos as $video)
-                            <div class="video-item">
-                                <a href="{{ url('/article/' . $video->id) }}?autoplay=1" class="video-link">
-                                    <div class="video-thumbnail">
-                                        <img src="https://img.youtube.com/vi/{{ $video->media->where('type', 'youtube')->first()->path }}/mqdefault.jpg"
-                                            alt="{{ $video->title }}">
-                                        <div class="play-button-small">
-                                            <i class="fas fa-play"></i>
-                                        </div>
-                                    </div>
-                                    <h4 class="video-title">{{ Str::limit($video->title, 100) }}</h4>
-                                </a>
-                            </div>
-                        @endforeach
-
-                        @if ($category->articles()->whereHas('media', function ($query) {
-            $query->where('type', 'youtube');
-        })->count() > 3)
-                            <div class="more-videos">
-                                <a href="{{ url('/videos?category=' . $category->id) }}" class="more-videos-btn">Lihat
-                                    Semua Video</a>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif --}}
-
     <script>
         document.getElementById('categorySearch').addEventListener('input', function() {
             const searchTerm = this.value.toLowerCase();
@@ -181,14 +172,21 @@
         });
     </script>
 
+    <script>
+        document.querySelector('.filter-btn').addEventListener('click', function() {
+            var dropdownContent = document.querySelector('.dropdown-content');
+            dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+        });
+    </script>
+
+
 @endsection
 
 <style>
     /* ===== GLOBAL STYLES ===== */
     :root {
-        --primary-color: #c4156e;
-        --primary-light: #e6267e;
-        --primary-dark: #9c0f57;
+        --primary-color: #272727;
+        --primary-dark: #333;
         --text-dark: #333333;
         --text-medium: #666666;
         --text-light: #888888;
@@ -696,65 +694,6 @@
         border-radius: 20px;
     }
 
-    /* Trending Articles */
-    .trending-articles {
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing-md);
-    }
-
-    .trending-article {
-        display: flex;
-        gap: var(--spacing-sm);
-        text-decoration: none;
-        background-color: #f5f5f5;
-        border-radius: var(--border-radius-sm);
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-
-    .trending-article:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-sm);
-    }
-
-    .trending-image {
-        width: 90px;
-        height: 90px;
-        flex-shrink: 0;
-    }
-
-    .trending-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .trending-content {
-        padding: var(--spacing-sm);
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .trending-title {
-        font-size: 0.95rem;
-        font-weight: 500;
-        color: var(--text-dark);
-        margin: 0 0 5px;
-        line-height: 1.4;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    .trending-date {
-        font-size: 0.8rem;
-        color: var(--text-light);
-        margin-top: auto;
-    }
-
     /* ===== VIDEOS SECTION ===== */
     .videos-section {
         background-color: #f0f2f5;
@@ -925,5 +864,81 @@
 
     .more-videos-btn:hover {
         background-color: var(--primary-light);
+    }
+
+    /* STYLING FILTER DROPDOWN */
+    /* Minimalist Dropdown Styling */
+    .filter-dropdown {
+        position: relative;
+        width: 150px;
+        /* Lebih ramping */
+        margin-bottom: 15px;
+    }
+
+    .filter-dropdown form {
+        width: 100%;
+    }
+
+    .filter-dropdown select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 100%;
+        padding: 8px 30px 8px 12px;
+        /* Padding kanan lebih besar untuk arrow */
+        font-size: 14px;
+        border: none;
+        border-bottom: 2px solid #888;
+        /* Garis bawah tipis */
+        background-color: transparent;
+        color: #333;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    .filter-dropdown select:hover {
+        border-color: #000;
+    }
+
+    .filter-dropdown select:focus {
+        border-color: #ff1493;
+        /* Warna pink sesuai desain website */
+    }
+
+    /* Custom dropdown arrow */
+    .filter-dropdown {
+        position: relative;
+    }
+
+    .filter-dropdown::after {
+        content: '▼';
+        font-size: 0.7em;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #888;
+        transition: color 0.3s ease;
+    }
+
+    .filter-dropdown:hover::after {
+        color: #000;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+        .filter-dropdown {
+            width: 100%;
+            max-width: 200px;
+        }
+    }
+
+    /* Styling untuk opsi dropdown */
+    .filter-dropdown select option {
+        background-color: #fff;
+        color: #333;
+        padding: 10px;
     }
 </style>

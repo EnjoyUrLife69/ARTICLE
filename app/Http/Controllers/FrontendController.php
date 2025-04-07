@@ -7,6 +7,8 @@ use App\Models\Comment;
 use App\Models\Like;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class FrontendController extends Controller
 {
@@ -136,23 +138,47 @@ class FrontendController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function category($id = null)
+    public function category($id, Request $request)
     {
-        // Jika parameter ID adalah 'all', tampilkan semua artikel
-        if ($id == 'all') {
-            return $this->allArticles();
+        // Ambil filter dari request, default 'latest'
+        $filter = $request->input('filter', 'latest');
+
+        // Validasi filter
+        $validFilters = ['latest', 'most_viewed', 'most_liked', 'oldest'];
+        $filter       = in_array($filter, $validFilters) ? $filter : 'latest';
+
+        // Jika ID adalah 'all', alihkan ke method allArticles
+        if ($id === 'all') {
+            return $this->allArticles($request);
         }
 
-        // Temukan kategori berdasarkan ID (untuk ID yang valid)
+        // Cari kategori
         $category = Categorie::findOrFail($id);
 
-        // Dapatkan artikel dalam kategori ini dengan pagination
-        $articles = Article::where('categorie_id', $category->id)
-            ->where('status', 'approved')
-            ->orderBy('created_at', 'desc')
-            ->paginate(9);
+        // Query artikel berdasarkan kategori
+        $query = Article::where('categorie_id', $category->id)
+            ->where('status', 'approved');
 
-        // Dapatkan kategori populer untuk sidebar
+        // Terapkan filter
+        switch ($filter) {
+            case 'most_viewed':
+                $query->orderBy('view_count', 'desc');
+                break;
+            case 'most_liked':
+                $query->orderBy('like_count', 'desc');
+                break;
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            default: // latest
+                $query->orderBy('created_at', 'desc');
+                break;
+        }
+
+        // Ambil artikel dengan pagination
+        $articles = $query->paginate(9);
+
+        // Data tambahan untuk sidebar
         $popular_categories = Categorie::withCount(['articles' => function ($query) {
             $query->where('status', 'approved');
         }])
@@ -160,23 +186,53 @@ class FrontendController extends Controller
             ->take(6)
             ->get();
 
-        // Dapatkan semua kategori untuk sidebar
         $categories = Categorie::withCount(['articles' => function ($query) {
             $query->where('status', 'approved');
         }])
             ->orderBy('name')
             ->get();
 
-        return view('frontend-page.category', compact('category', 'articles', 'categories', 'popular_categories'));
+        return view('frontend-page.category', compact(
+            'category',
+            'articles',
+            'categories',
+            'popular_categories',
+            'filter'
+        ));
     }
 
-    public function allArticles()
+    public function allArticles(Request $request)
     {
-        // Ambil semua artikel yang disetujui dengan pagination
-        $articles = Article::where('status', 'approved')
-            ->orderBy('created_at', 'desc')
-            ->paginate(6);
+        // Ambil filter dari request, default 'latest'
+        $filter = $request->input('filter', 'latest');
 
+        // Validasi filter
+        $validFilters = ['latest', 'most_viewed', 'most_liked', 'oldest'];
+        $filter       = in_array($filter, $validFilters) ? $filter : 'latest';
+
+        // Query artikel
+        $query = Article::where('status', 'approved');
+
+        // Terapkan filter
+        switch ($filter) {
+            case 'most_viewed':
+                $query->orderBy('view_count', 'desc');
+                break;
+            case 'most_liked':
+                $query->orderBy('like_count', 'desc');
+                break;
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            default: // latest
+                $query->orderBy('created_at', 'desc');
+                break;
+        }
+
+        // Ambil artikel dengan pagination
+        $articles = $query->paginate(9);
+
+        // Data tambahan untuk sidebar
         $popular_categories = Categorie::withCount(['articles' => function ($query) {
             $query->where('status', 'approved');
         }])
@@ -184,15 +240,18 @@ class FrontendController extends Controller
             ->take(6)
             ->get();
 
-        // Dapatkan semua kategori untuk sidebar
         $categories = Categorie::withCount(['articles' => function ($query) {
             $query->where('status', 'approved');
         }])
             ->orderBy('name')
             ->get();
 
-        // Kirim variabel yang diperlukan ke view
-        return view('frontend-page.category', compact('articles', 'categories', 'popular_categories'));
+        return view('frontend-page.category', compact(
+            'articles',
+            'categories',
+            'popular_categories',
+            'filter'
+        ));
     }
 
 }
