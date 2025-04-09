@@ -52,7 +52,7 @@
                         <div class="position-relative hover-edit" style="margin-top: -50px;">
                             <button class="border-0 bg-transparent p-0" data-bs-toggle="modal"
                                 data-bs-target="#editProfileImageModal">
-                                <img src="{{ asset('storage/images/users/' . $user->image) }}" alt="Profile Image"
+                                <img src="{{ $user->image_url }}" alt="Profile Image"
                                     class="border border-5 border-white"
                                     style="border-radius: 5%; width: 135px; height: 135px; object-fit: cover;">
                                 <div class="edit-overlay">

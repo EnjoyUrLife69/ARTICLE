@@ -449,6 +449,8 @@
     });
 </script>
 
+{{-- ///////////////////////////////////////////////////////////////////////////////////////////////////// --}}
+
 {{-- Request Modal --}}
 <div class="modal fade" id="Show-request{{ $data->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -664,8 +666,6 @@
         </div>
     </div>
 </div>
-
-{{-- ///////////////////////////////////////////////////////////////////////////////////////////////////// --}}
 
 {{-- Enhanced Reject Modal --}}
 <div class="modal fade" id="modalToggle2" aria-hidden="true" aria-labelledby="modalToggleLabel2" tabindex="-1">

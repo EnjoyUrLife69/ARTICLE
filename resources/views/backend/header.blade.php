@@ -78,7 +78,7 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{ asset('storage/images/users/' . $user->image) }}" alt="Profile Image"
+                        <img src="{{ $user->image_url }}" alt="Profile Image"
                             class="img-fluid rounded-circle" width="100" height="100">
                     </div>
                 </a>
@@ -88,7 +88,7 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('storage/images/users/' . $user->image) }}"
+                                        <img src="{{ $user->image_url }}"
                                             alt="Profile Image" class="img-fluid rounded-circle" width="100"
                                             height="100">
                                     </div>

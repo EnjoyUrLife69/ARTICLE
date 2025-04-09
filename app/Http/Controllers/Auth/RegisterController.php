@@ -1,11 +1,12 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -26,9 +27,26 @@ class RegisterController extends Controller
     /**
      * Where to redirect users after registration.
      *
-     * @var string
+     * @return string
      */
-    protected $redirectTo = '/dashboard/writer/dashboard';
+    protected function redirectTo()
+    {
+        $user = Auth::user();
+
+        // Log roles untuk debugging
+        Log::info('User Register:', [
+            'name'  => $user->name,
+            'roles' => $user->getRoleNames()->toArray(),
+        ]);
+
+        if ($user->hasRole('Super Admin')) {
+            return '/dashboard/admin/dashboard';
+        } elseif ($user->hasRole('Writer')) {
+            return '/dashboard/writer/dashboard';
+        } else {
+            return '/';
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -49,8 +67,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name'     => ['required', 'string', 'max:255'],
+            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -63,11 +81,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+        // Mengecek apakah pengguna memilih untuk menjadi penulis
+        $isWriter = isset($data['wants_to_be_writer']) && $data['wants_to_be_writer'];
+
+        // Membuat pengguna baru
+        $user = User::create([
+            'name'     => $data['name'],
+            'email'    => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        
+
+        // Jika pengguna memilih untuk menjadi penulis, set role mereka ke 'Pending Writer'
+        if ($isWriter) {
+            $user->assignRole('Pending Writer'); // Memberikan role 'Pending Writer'
+        } else {
+                                        // Jika tidak memilih, set sebagai Guest
+            $user->assignRole('Guest'); // Memberikan role 'Guest'
+        }
+
+        return $user;
     }
 }

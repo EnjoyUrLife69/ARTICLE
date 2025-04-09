@@ -55,7 +55,7 @@
                                         <center>{{ $loop->iteration }}</center>
                                     </td>
                                     <td>
-                                        <img src="{{ asset('storage/images/users/' . $user->image) }}" alt="Profile Image"
+                                        <img src="{{ $user->image_url }}" alt="Profile Image"
                                             class="img-fluid rounded-circle" width="80px" height="80px"
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user->name }}">
                                     </td>

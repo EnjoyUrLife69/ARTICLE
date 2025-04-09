@@ -152,7 +152,7 @@
                 <a href="{{ route('request') }}" class="menu-link d-flex justify-content-between align-items-center">
                     <div>
                         <i class='menu-icon tf-icons bx bx-git-pull-request'></i>
-                        <span data-i18n="Analytics">Request</span>
+                        <span data-i18n="Analytics">Article Request</span>
                     </div>
                     @if ($newArticlesCount > 0)
                         <span
@@ -161,6 +161,23 @@
                     @endif
                 </a>
             </li>
+
+            <li class="menu-item {{ request()->routeIs('admin.pending-writers') ? 'active' : '' }}">
+                <a href="{{ route('admin.pending-writers') }}"
+                    class="menu-link d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class='menu-icon tf-icons bx bx-user-plus'></i>
+                        <span data-i18n="Analytics">Writer Request</span>
+                    </div>
+                    {{-- @if ($pendingWritersCount > 0)
+                        <span class="badge bg-warning ms-auto">
+                            {{ $pendingWritersCount ?? '0' }}
+                        </span>
+                    @endif --}}
+                </a>
+            </li>
+
+
 
             <li
                 class="menu-item {{ request()->routeIs('users.index') || request()->routeIs('roles.index') ? 'active open' : '' }} ">

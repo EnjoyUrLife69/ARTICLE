@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\WriterApprovalController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommentController;
@@ -29,7 +30,6 @@ Route::get('/category/{id}/{filter?}', [FrontendController::class, 'category'])
 Route::get('/category/all/{filter?}', [FrontendController::class, 'allArticles'])
     ->name('category.all');
 
-
 Auth::routes();
 
 // Search
@@ -37,6 +37,9 @@ Route::get('/search', [App\Http\Controllers\ArticleController::class, 'search'])
 
 // BACKEND ROUTE
 Route::middleware('auth')->prefix('dashboard')->group(function () {
+    Route::get('/pending-writers', [WriterApprovalController::class, 'index'])->name('admin.pending-writers');
+    Route::post('/approve-writer/{user}', [WriterApprovalController::class, 'approve'])->name('admin.approve-writer');
+
     Route::get('/writer/dashboard', [App\Http\Controllers\WriterDashboardController::class, 'index'])
         ->name('writer.dashboard')
         ->middleware('role:Writer'); // Menggunakan role Writer

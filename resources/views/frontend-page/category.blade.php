@@ -197,7 +197,7 @@
         --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.1);
         --border-radius-sm: 6px;
         --border-radius-md: 10px;
-        --border-radius-lg: 16px;
+        --border-radius-lg: 16px; 
         --spacing-xs: 5px;
         --spacing-sm: 10px;
         --spacing-md: 20px;

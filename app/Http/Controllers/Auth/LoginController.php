@@ -30,8 +30,7 @@ class LoginController extends Controller
         } elseif ($user->hasRole('Writer')) {
             return '/dashboard/writer/dashboard';
         } else {
-            // Guest atau role lain akan diarahkan ke halaman default
-            return '/home';
+            return '/';
         }
     }
 

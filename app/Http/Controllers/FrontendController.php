@@ -6,9 +6,8 @@ use App\Models\Categorie;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -16,6 +15,10 @@ class FrontendController extends Controller
     {
         // Ambil semua artikel yang approved, tidak hanya 4 artikel
         $articles = Article::where('status', 'approved')
+            ->get();
+
+        $articless = Article::where('status', 'approved')
+            ->take(6)
             ->get();
 
         $article_trending_slideshow = Article::where('status', 'approved')
@@ -72,9 +75,8 @@ class FrontendController extends Controller
                 });
         }
 
-        return view('frontend-page.homepage', compact('articles', 'article_trending', 'categories', 'article_history', 'article_trending_slideshow', 'popular_categories', 'mainVideo', 'sidebarVideos'));
+        return view('frontend-page.homepage', compact('articles', 'articless' ,  'article_trending', 'categories', 'article_history', 'article_trending_slideshow', 'popular_categories', 'mainVideo', 'sidebarVideos'));
     }
-
     public function details($id)
     {
         $articles         = Article::findOrFail($id);

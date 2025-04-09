@@ -77,6 +77,16 @@ class User extends Authenticatable
         ];
     }
 
+    public function getImageUrlAttribute()
+    {
+        if ($this->image && file_exists(public_path('storage/images/users/' . $this->image))) {
+            return asset('storage/images/users/' . $this->image);
+        }
+
+        // fallback ke default yang ada di public/assets/img/avatars
+        return asset('assets/img/avatars/default.jpg');
+    }
+
     public function deleteImage()
     {
         $imagePath = public_path('images/users/' . $this->image); // Perbaiki path

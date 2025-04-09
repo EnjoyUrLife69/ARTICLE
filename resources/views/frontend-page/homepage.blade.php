@@ -86,7 +86,7 @@
 
             <div class="blog-content">
                 <div class="blog-grid">
-                    @foreach ($articles as $data)
+                    @foreach ($articless as $data)
                         <div class="article-card2" data-category="{{ $data->categorie_id }}">
                             <div class="article-image">
                                 <a href="{{ url('/article/' . $data->id) }}"><img
@@ -99,23 +99,44 @@
                     @endforeach
                 </div>
 
-                <div class="sidebar">
-                    <h3 class="sidebar-title">CATEGORIES</h3>
-                    <ul class="categories-list">
+                <div class="sidebar"
+                    style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <h3 class="sidebar-title"
+                        style="font-size: 18px; font-weight: 700; margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 8px; color: #343a40;">
+                        CATEGORIES
+                    </h3>
+
+                    <ul class="categories-list" style="list-style: none; padding-left: 0; margin: 0;">
                         @foreach ($categories as $data)
-                            <li>
-                                <a href="{{ url('/category/' . $data->id) }}">{{ $data->name }}</a>
-                                <span class="post-count">({{ $data->articles_count }})</span>
+                            <li
+                                style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                <a href="{{ url('/category/' . $data->id) }}"
+                                    style="text-decoration: none; color: #495057; font-weight: 500; transition: color 0.3s;"
+                                    onmouseover="this.style.color='#0d6efd'" onmouseout="this.style.color='#495057'">
+                                    {{ $data->name }}
+                                </a>
+                                <span
+                                    style="font-size: 13px; color: #6c757d; background-color: #e9ecef; padding: 2px 8px; border-radius: 12px;">
+                                    {{ $data->articles_count }}
+                                </span>
                             </li>
                         @endforeach
                     </ul>
-                    <button class="sidebar-more">VIEW MORE</button>
+
+                    <a href="{{ url('/category/all') }}" class="sidebar-more"
+                        style="display: block; text-align: center; margin-top: 20px; background-color: #0d6efd; color: white; padding: 10px 15px; border-radius: 6px; font-weight: 600; text-decoration: none; transition: background-color 0.3s;"
+                        onmouseover="this.style.backgroundColor='#0b5ed7'"
+                        onmouseout="this.style.backgroundColor='#0d6efd'">
+                        VIEW MORE
+                    </a>
                 </div>
+
             </div>
         </div>
     </section>
 
     {{-- ARTICLE HISTORY SECTION - BAGIAN 5 --}}
+    <br><br>
     <div class="section-title">
         <h2>READING HISTORY</h2>
     </div>
