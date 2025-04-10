@@ -111,6 +111,13 @@
                         dashboard.
                     </div>
                 @endif
+                @if (Auth::user()->hasRole('Rejected Writer'))
+                    <div class="alert alert-danger mt-2"
+                        style="font-size: 14px; padding: 8px; border-radius: 6px; background-color: #f8d7da; color: #721c24;">
+                        <i class="fas fa-times-circle me-1"></i>
+                        Your writer application has been rejected.
+                    </div>
+                @endif
 
                 <div class="modal-menu-items">
                     @if (Auth::user()->hasRole('Writer'))

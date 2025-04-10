@@ -66,11 +66,20 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $rules = [
             'name'     => ['required', 'string', 'max:255'],
             'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ];
+        
+        // Add conditional validation for writer fields
+        if (isset($data['wants_to_be_writer']) && $data['wants_to_be_writer']) {
+            $rules['bio'] = ['required', 'string'];
+            $rules['motivation'] = ['required', 'string'];
+            // Previous work is optional
+        }
+        
+        return Validator::make($data, $rules);
     }
 
     /**
@@ -81,22 +90,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // Mengecek apakah pengguna memilih untuk menjadi penulis
-        $isWriter = isset($data['wants_to_be_writer']) && $data['wants_to_be_writer'];
-
-        // Membuat pengguna baru
+        // Create user as before
         $user = User::create([
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
-        // Jika pengguna memilih untuk menjadi penulis, set role mereka ke 'Pending Writer'
-        if ($isWriter) {
-            $user->assignRole('Pending Writer'); // Memberikan role 'Pending Writer'
+        // Assign appropriate role
+        if (isset($data['wants_to_be_writer']) && $data['wants_to_be_writer']) {
+            $user->assignRole('Pending Writer');
+            
+            // Create writer profile
+            $user->writerProfile()->create([
+                'bio' => $data['bio'] ?? null,
+                'previous_work' => $data['previous_work'] ?? null,
+                'motivation' => $data['motivation'] ?? null,
+                'status' => 'pending'
+            ]);
         } else {
-                                        // Jika tidak memilih, set sebagai Guest
-            $user->assignRole('Guest'); // Memberikan role 'Guest'
+            $user->assignRole('Guest');
         }
 
         return $user;

@@ -95,4 +95,9 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function writerProfile()
+    {
+        return $this->hasOne(WriterProfile::class);
+    }
 }

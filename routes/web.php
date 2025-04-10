@@ -39,6 +39,8 @@ Route::get('/search', [App\Http\Controllers\ArticleController::class, 'search'])
 Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::get('/pending-writers', [WriterApprovalController::class, 'index'])->name('admin.pending-writers');
     Route::post('/approve-writer/{user}', [WriterApprovalController::class, 'approve'])->name('admin.approve-writer');
+    Route::post('/reject-writer/{user}', [WriterApprovalController::class, 'reject'])->name('admin.reject-writer');
+
 
     Route::get('/writer/dashboard', [App\Http\Controllers\WriterDashboardController::class, 'index'])
         ->name('writer.dashboard')
@@ -93,5 +95,8 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::post('/withdraws', [App\Http\Controllers\WithdrawController::class, 'store'])->name('withdraw.store');
     Route::get('/withdraws/{withdraw}', [App\Http\Controllers\WithdrawController::class, 'show'])->name('withdraw.show');
     Route::put('/withdraws/{withdraw}/cancel', [App\Http\Controllers\WithdrawController::class, 'cancel'])->name('withdraw.cancel');
+
+    // In your web.php or admin routes file
+    Route::post('/admin/reject-writer/{user}', [WriterApprovalController::class, 'reject'])->name('admin.reject-writer');
 
 });
