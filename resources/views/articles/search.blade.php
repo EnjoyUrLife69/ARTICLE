@@ -157,7 +157,7 @@
         @if ($articles->count() > 0)
             <div class="article-grid">
                 @foreach ($articles as $data)
-                    <a href="{{ url('/article/' . $data->id) }}">
+                    <a href="{{ url('/article/' . $data->slug) }}">
                         <article class="article-card">
                             <img src="{{ asset('storage/images/articles/' . $data->cover) }}" alt="Article thumbnail"
                                 class="article-image">

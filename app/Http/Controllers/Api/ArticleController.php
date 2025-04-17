@@ -13,9 +13,14 @@ class ArticleController extends Controller
     {
         $articles = Article::with(['categorie', 'user'])->get();
 
-        // Tambahkan URL lengkap untuk cover
-        $articles->transform(function ($article) {
-            $article->cover = $article->cover ? asset("storage/{$article->cover}") : null;
+        // Ubah cara mengambil URL cover
+        $baseUrl = url('/storage/images/articles');
+        $articles->transform(function ($article) use ($baseUrl) {
+            if ($article->cover) {
+                // Ambil hanya nama file jika cover berisi path lengkap
+                $filename       = basename($article->cover);
+                $article->cover = "{$baseUrl}/{$filename}";
+            }
             return $article;
         });
 
@@ -36,8 +41,13 @@ class ArticleController extends Controller
             ], 404);
         }
 
-        // Tambahkan URL lengkap untuk cover
-        $article->cover = $article->cover ? asset("storage/{$article->cover}") : null;
+        // Ubah cara mengambil URL cover
+        $baseUrl = url('/storage/images/articles');
+        if ($article->cover) {
+            // Ambil hanya nama file jika cover berisi path lengkap
+            $filename       = basename($article->cover);
+            $article->cover = "{$baseUrl}/{$filename}";
+        }
 
         return response()->json([
             'success' => true,
@@ -121,4 +131,29 @@ class ArticleController extends Controller
             'message' => 'Article deleted successfully',
         ], 200);
     }
+
+    // ArticleController.php
+    public function updateShareCount($articleId)
+    {
+        try {
+            // Fetch the article by ID
+            $article = Article::findOrFail($articleId);
+
+            // Increment the share count
+            $article->increment('share_count');
+
+            // Return the updated share count
+            return response()->json([
+                'success'     => true,
+                'share_count' => $article->share_count,
+            ]);
+        } catch (\Exception $e) {
+            // Handle errors
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update share count',
+            ], 500);
+        }
+    }
+
 }

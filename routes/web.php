@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 
 // FRONTEND ROUTE
 Route::get('/', [FrontendController::class, 'home']);
-Route::get('/article/{id}', [FrontendController::class, 'details']);
+Route::get('/article/{slug}', [FrontendController::class, 'details']);
 Route::middleware(['auth'])->group(function () {
-    Route::post('/like/{id}', [FrontendController::class, 'toggleLike'])->middleware('auth');
+    Route::post('/like/{id}', 'App\Http\Controllers\FrontendController@toggleLike')->middleware('auth');
 });
-Route::post('/update-share/{id}', [FrontendController::class, 'updateShare'])->name('articles.share');
+Route::post('/update-share/{id}', 'App\Http\Controllers\FrontendController@updateShare');
 // Route untuk kategori dengan ID atau semua artikel
 
 // Route untuk kategori spesifik dengan filter opsional
@@ -41,7 +41,6 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::post('/approve-writer/{user}', [WriterApprovalController::class, 'approve'])->name('admin.approve-writer');
     Route::post('/reject-writer/{user}', [WriterApprovalController::class, 'reject'])->name('admin.reject-writer');
 
-
     Route::get('/writer/dashboard', [App\Http\Controllers\WriterDashboardController::class, 'index'])
         ->name('writer.dashboard')
         ->middleware('role:Writer'); // Menggunakan role Writer
@@ -54,8 +53,6 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::resource('articles', ArticleController::class);
     Route::resource('roles', RoleController::class);
     Route::get('/all-articles', [ArticleController::class, 'allArticles'])->name('articles.all'); // Semua artikel
-
-    Route::post('/comments', [CommentController::class, 'create'])->name('comments.store');
 
     Route::resource('users', UserController::class);
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
@@ -99,4 +96,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     // In your web.php or admin routes file
     Route::post('/admin/reject-writer/{user}', [WriterApprovalController::class, 'reject'])->name('admin.reject-writer');
 
+    // Comment Route
+    Route::post('articles/{articleId}/comments', [CommentController::class, 'store']);
+    Route::get('articles/{articleId}/comments', [CommentController::class, 'loadComments']);
 });

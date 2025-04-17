@@ -4,17 +4,16 @@
     <!-- Slideshow section / BAGIAN 1 -->
     <div class="slideshow-container">
         @foreach ($article_trending_slideshow as $index => $article)
-            <a href="{{ url('/article/' . $article->id) }}" class="slide-link" data-article-id="{{ $article->id }}">
+            <a href="{{ url('/article/' . $article->slug) }}" class="slide-link" data-article-id="{{ $article->id }}">
                 <div class="slide {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}">
                     <img src="{{ asset('storage/images/articles/' . $article->cover) }}" alt="{{ $article->title }}">
                     <div class="slide-content">
                         <div class="content-wrapper">
-                            <span class="slide-tag">
-                                <a href="{{ url('/category/' . $article->categorie->id) }}"
-                                    style="color: white; text-decoration: none;">
+                            <div class="category-tag">
+                                <a href="{{ url('/category/' . $article->categorie->id) }}">
                                     {{ $article->categorie->name }}
                                 </a>
-                            </span>
+                            </div>
                             <h2 class="slide-title">{{ $article->title }}</h2>
                             <p class="slide-description">{{ $article->description }}</p>
                         </div>
@@ -51,7 +50,7 @@
     <!-- Article grid section / BAGIAN 2 -->
     <div class="article-grid">
         @foreach ($article_trending as $data)
-            <a href="{{ url('/article/' . $data->id) }}">
+            <a href="{{ url('/article/' . $data->slug) }}">
                 <article class="article-card">
                     <img src="{{ asset('storage/images/articles/' . $data->cover) }}" alt="Article thumbnail"
                         class="article-image">
@@ -89,12 +88,12 @@
                     @foreach ($articless as $data)
                         <div class="article-card2" data-category="{{ $data->categorie_id }}">
                             <div class="article-image">
-                                <a href="{{ url('/article/' . $data->id) }}"><img
+                                <a href="{{ url('/article/' . $data->slug) }}"><img
                                         src="{{ asset('storage/images/articles/' . $data->cover) }}"
                                         alt="Article Image"></a>
                             </div>
                             <div class="article-date">{{ $data->created_at->format('M d, Y') }}</div>
-                            <a href="{{ url('/article/' . $data->id) }}" class="article-title-2">{{ $data->title }}</a>
+                            <a href="{{ url('/article/' . $data->slug) }}" class="article-title-2">{{ $data->title }}</a>
                         </div>
                     @endforeach
                 </div>
@@ -150,7 +149,7 @@
                 <div class="history-articles-scroll">
                     @foreach ($article_history->take(12) as $index => $article)
                         <div class="history-article">
-                            <a href="{{ url('/article/' . $article->id) }}" class="history-link">
+                            <a href="{{ url('/article/' . $article->slug) }}" class="history-link">
                                 <div class="history-img-container">
                                     <img src="{{ asset('storage/images/articles/' . $article->cover) }}"
                                         alt="{{ $article->title }}" class="history-img">
@@ -236,7 +235,7 @@
     @if (isset($mainVideo) && $mainVideo)
         <div class="video-highlight">
             <div class="main-video">
-                <a href="{{ url('/article/' . $mainVideo->id) }}?autoplay=1" class="slide-link" style="height: 500px;"
+                <a href="{{ url('/article/' . $mainVideo->slug) }}?autoplay=1" class="slide-link" style="height: 500px;"
                     data-article-id="{{ $mainVideo->id }}">
                     <div class="main-video-img">
                         <!-- Using high-quality thumbnail without YouTube play button -->
@@ -260,7 +259,7 @@
                 @if (isset($sidebarVideos) && count($sidebarVideos) > 0)
                     @foreach ($sidebarVideos as $video)
                         <div class="video-item">
-                            <a href="{{ url('/article/' . $video->id) }}?autoplay=1" class="slide-link"
+                            <a href="{{ url('/article/' . $video->slug) }}?autoplay=1" class="slide-link"
                                 data-article-id="{{ $video->id }}">
                                 <div class="video-item-img">
                                     <img src="https://img.youtube.com/vi/{{ $video->media->where('type', 'youtube')->first()->path }}/mqdefault.jpg"

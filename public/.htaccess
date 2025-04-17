@@ -19,3 +19,20 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# Tambahkan header CORS untuk semua file media
+<IfModule mod_headers.c>
+    # Untuk semua file gambar dan media
+    <FilesMatch "\.(jpg|jpeg|png|gif|svg|webp|mp4|webm|ogg)$">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "GET, OPTIONS"
+        Header set Access-Control-Allow-Headers "*"
+    </FilesMatch>
+    
+    # Untuk semua request ke direktori storage
+    <LocationMatch "/storage/">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "GET, OPTIONS"
+        Header set Access-Control-Allow-Headers "*"
+    </LocationMatch>
+</IfModule>

@@ -10,7 +10,7 @@ class Article extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'release_date', 'categorie_id', 'user_id', 'description', 'content', 'status', 'cover',
+        'title', 'slug', 'release_date', 'categorie_id', 'user_id', 'description', 'content', 'status', 'cover',
     ];
 
     public $timestamps   = true;
@@ -25,6 +25,27 @@ class Article extends Model
                 $model->id = (string) Str::uuid(); // Generate UUID sebagai id
             }
         });
+
+        static::creating(function ($article) {
+            $slug  = Str::slug($article->title);
+            $count = Article::where('slug', $slug)->count();
+            if ($count > 0) {
+                $article->slug = $slug . '-' . ($count + 1);
+            } else {
+                $article->slug = $slug;
+            }
+        });
+
+        static::updating(function ($article) {
+            $slug  = Str::slug($article->title);
+            $count = Article::where('slug', $slug)->count();
+            if ($count > 0) {
+                $article->slug = $slug . '-' . ($count + 1);
+            } else {
+                $article->slug = $slug;
+            }
+        });
+
     }
 
     public function categorie()
@@ -40,10 +61,10 @@ class Article extends Model
     {
         return $this->hasMany(Activitie::class, 'articles_id', 'id');
     }
-    public function comment()
-    {
-        return $this->hasMany(Comment::class, 'articles_id', 'id');
-    }
+    // public function comment()
+    // {
+    //     return $this->hasMany(Comment::class, 'articles_id', 'id');
+    // }
 
     // Media
     public function media()

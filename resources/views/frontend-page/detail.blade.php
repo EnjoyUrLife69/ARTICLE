@@ -747,17 +747,17 @@
                     </svg>
                 </div>
                 <div class="col-auto ms-2">
-                    <div class="category">{{ $articles->categorie->name }}</div>
+                    <div class="category">{{ $article->categorie->name }}</div>
                 </div>
             </div>
-            <h1 class="title">{{ $articles->title }}</h1>
+            <h1 class="title">{{ $article->title }}</h1>
             <div class="meta">
                 <div class="author">
-                    <div class="author-img"><img src="{{ asset('storage/images/users/' . $articles->user->image) }}"
+                    <div class="author-img"><img src="{{ asset('storage/images/users/' . $article->user->image) }}"
                             alt=""></div>
                     <div class="author-info">
-                        <div><b><em>{{ $articles->user->name }}</em></b></div>
-                        <div>{{ \Carbon\Carbon::parse($articles->release_date)->translatedFormat('D , jS F Y') }}</div>
+                        <div><b><em>{{ $article->user->name }}</em></b></div>
+                        <div>{{ \Carbon\Carbon::parse($article->release_date)->translatedFormat('D , jS F Y') }}</div>
                     </div>
                 </div>
                 <div class="actions">
@@ -804,11 +804,11 @@
                         </div>
                     </div>
                     @php
-                        $isLiked = Auth::check() && $articles->likes->contains('user_id', Auth::id());
+                        $isLiked = Auth::check() && $article->likes->contains('user_id', Auth::id());
                     @endphp
 
                     <button id="like-btn" class="tooltip-container share-btn"
-                        onclick="toggleLike('{{ $articles->id }}', {{ Auth::check() ? 'true' : 'false' }})">
+                        onclick="toggleLike('{{ $article->id }}', {{ Auth::check() ? 'true' : 'false' }})">
                         <span id="tooltip-text" class="tooltip-text">
                             {{ $isLiked ? 'Unlike this article' : 'Like this article' }}
                         </span>
@@ -832,12 +832,12 @@
             <!-- Media Section (Images and Video) -->
             <div class="media-container">
                 @php
-                    $hasVideo = $articles->media()->where('type', 'youtube')->count() > 0;
-                    $hasImages = $articles->media()->where('type', 'image')->count() > 0;
-                    $totalImages = $hasImages ? $articles->media()->where('type', 'image')->count() : 0;
+                    $hasVideo = $article->media()->where('type', 'youtube')->count() > 0;
+                    $hasImages = $article->media()->where('type', 'image')->count() > 0;
+                    $totalImages = $hasImages ? $article->media()->where('type', 'image')->count() : 0;
                 @endphp
 
-                @if ($hasVideo && ($hasImages || $articles->cover))
+                @if ($hasVideo && ($hasImages || $article->cover))
                     <!-- Media Tabs (only show if we have both images and video) -->
                     <div class="media-tabs">
                         <button class="media-tab active" onclick="showMediaTab('images')">Images</button>
@@ -850,13 +850,13 @@
                     <div class="carousel-container">
                         <!-- Main cover image -->
                         <div class="carousel-slide active">
-                            <img src="{{ asset('storage/images/articles/' . $articles->cover) }}"
-                                alt="{{ $articles->title }}" class="carousel-img">
+                            <img src="{{ asset('storage/images/articles/' . $article->cover) }}"
+                                alt="{{ $article->title }}" class="carousel-img">
                         </div>
 
                         <!-- Additional images -->
                         @if ($hasImages)
-                            @foreach ($articles->media()->where('type', 'image')->get() as $index => $image)
+                            @foreach ($article->media()->where('type', 'image')->get() as $index => $image)
                                 <div class="carousel-slide">
                                     <img src="{{ asset('storage/images/articles/additional/' . $image->path) }}"
                                         alt="Image {{ $index + 1 }}" class="carousel-img">
@@ -865,7 +865,7 @@
                         @endif
 
                         <!-- Carousel controls (only show if more than one image) -->
-                        @if ($hasImages || $articles->cover)
+                        @if ($hasImages || $article->cover)
                             <div class="carousel-controls">
                                 <button class="carousel-control prev" onclick="changeSlide(-1)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -889,9 +889,9 @@
                     @if ($hasImages)
                         <div class="carousel-thumbnails">
                             <button class="thumbnail-item active" onclick="goToSlide(0)">
-                                <img src="{{ asset('storage/images/articles/' . $articles->cover) }}" alt="Thumbnail">
+                                <img src="{{ asset('storage/images/articles/' . $article->cover) }}" alt="Thumbnail">
                             </button>
-                            @foreach ($articles->media()->where('type', 'image')->get() as $index => $image)
+                            @foreach ($article->media()->where('type', 'image')->get() as $index => $image)
                                 <button class="thumbnail-item" onclick="goToSlide({{ $index + 1 }})">
                                     <img src="{{ asset('storage/images/articles/additional/' . $image->path) }}"
                                         alt="Thumbnail {{ $index + 1 }}">
@@ -903,13 +903,12 @@
 
                 <!-- Video Tab Content -->
                 @if ($hasVideo)
-                    <div id="video-content"
-                        class="media-content {{ !($hasImages || $articles->cover) ? 'active' : '' }}">
+                    <div id="video-content" class="media-content {{ !($hasImages || $article->cover) ? 'active' : '' }}">
                         <div class="video-container">
                             <div class="ratio ratio-16x9">
                                 <iframe style="width: 100%; height: 450px"
-                                    src="https://www.youtube.com/embed/{{ $articles->media()->where('type', 'youtube')->first()->path }}?autoplay=0"
-                                    title="{{ $articles->title }}" frameborder="0"
+                                    src="https://www.youtube.com/embed/{{ $article->media()->where('type', 'youtube')->first()->path }}?autoplay=0"
+                                    title="{{ $article->title }}" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen>
                                 </iframe>
@@ -922,7 +921,7 @@
             {{-- <div class="quote" style="color: #7e7e7e; margin-left: 5px"><em>Lorem ipsum dolor sit amet consectetur</em></div> --}}
             <hr style="margin-top: 2%; border: none; height: 1px; background-color: rgba(0, 0, 0, 0.1);">
             <div class="content">
-                <p>{!! $articles->content !!}</p>
+                <p>{!! $article->content !!}</p>
             </div>
 
             <div class="end-article-divider">
@@ -943,7 +942,7 @@
                 <h2 class="popular-title">POPULAR</h2>
                 <div class="popular-posts">
                     @foreach ($article_trending as $data)
-                        <a href="{{ url('/article/' . $data->id) }}">
+                        <a href="{{ url('/article/' . $data->slug) }}"> <!-- Pastikan menggunakan slug, bukan id -->
                             <article class="popular-post">
                                 <div class="popular-img">
                                     <img src="{{ asset('storage/images/articles/' . $data->cover) }}"
@@ -1042,50 +1041,82 @@
                 return;
             }
 
-            let baseUrl = window.location.origin + '/ARTICLE/public';
-            let button = document.getElementById('like-btn');
-            let tooltipText = document.getElementById('tooltip-text');
             let heartOutline = document.getElementById('heart-outline');
             let heartFilled = document.getElementById('heart-filled');
+            let tooltipText = document.getElementById('tooltip-text');
 
-            // UI langsung berubah (Optimistic UI Update)
-            let isCurrentlyLiked = !heartOutline.classList.contains('hidden');
+            // Check the CURRENT state before toggling
+            let isCurrentlyLiked = !heartFilled.classList.contains('hidden');
 
+            // Toggle UI state immediately (Optimistic UI Update)
             if (isCurrentlyLiked) {
-                heartOutline.classList.add('hidden');
-                heartFilled.classList.remove('hidden');
-            } else {
+                // Currently liked, so unlike it
                 heartOutline.classList.remove('hidden');
                 heartFilled.classList.add('hidden');
+                tooltipText.textContent = 'Like this article';
+            } else {
+                // Currently not liked, so like it
+                heartOutline.classList.add('hidden');
+                heartFilled.classList.remove('hidden');
+                tooltipText.textContent = 'Unlike this article';
             }
 
-            fetch(`${baseUrl}/like/${articleId}`, {
+            // Send request to server
+            fetch(`/like/${articleId}`, {
                     method: 'POST',
                     headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json'
-                    }
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    credentials: 'same-origin'
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(data => {
+                    // Update UI based on server response
                     if (data.liked) {
+                        // Article is liked
                         heartOutline.classList.add('hidden');
                         heartFilled.classList.remove('hidden');
+                        tooltipText.textContent = 'Unlike this article';
                     } else {
+                        // Article is not liked
                         heartOutline.classList.remove('hidden');
                         heartFilled.classList.add('hidden');
+                        tooltipText.textContent = 'Like this article';
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    // Jika error, kembalikan UI seperti sebelumnya
+                    // If error, revert UI back to original state
                     if (isCurrentlyLiked) {
-                        heartOutline.classList.remove('hidden');
-                        heartFilled.classList.add('hidden');
-                    } else {
+                        // Was liked before clicking, so show filled heart
                         heartOutline.classList.add('hidden');
                         heartFilled.classList.remove('hidden');
+                        tooltipText.textContent = 'Unlike this article';
+                    } else {
+                        // Was not liked before clicking, so show outline heart
+                        heartOutline.classList.remove('hidden');
+                        heartFilled.classList.add('hidden');
+                        tooltipText.textContent = 'Like this article';
                     }
+
+                    // Show error toast
+                    Toastify({
+                        text: "Something went wrong. Please try again.",
+                        duration: 3000,
+                        gravity: "center",
+                        position: "right",
+                        style: {
+                            background: "red",
+                            color: "white"
+                        }
+                    }).showToast();
                 });
         }
 
@@ -1106,40 +1137,106 @@
 
         // Fungsi untuk update share count
         function updateShareCount() {
-            const articleId = document.querySelector('#like-btn').getAttribute('onclick').match(/'([^']+)'/)[1];
-            const baseUrl = window.location.origin + '/ARTICLE/public';
+            const articleId = '{{ $article->id }}'; // Get article ID directly from Blade
 
-            fetch(`${baseUrl}/update-share/${articleId}`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                    'Content-Type': 'application/json'
-                }
-            });
+            fetch(`/update-share/${articleId}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    credentials: 'same-origin'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        console.log('Share count updated successfully');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating share count:', error);
+                });
         }
 
         // COPY LINK KA CLIPBOARD
         function copyToClipboard() {
             const url = window.location.href;
-            navigator.clipboard.writeText(url).then(() => {
+
+            // Check if Clipboard API is supported
+            if (!navigator.clipboard) {
+                fallbackCopyTextToClipboard(url);
+                return;
+            }
+
+            // Use the Clipboard API
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    // Update share count and show success message
+                    updateShareCount();
+                    showToast("Link copied to clipboard!", "black");
+                })
+                .catch(err => {
+                    console.error('Could not copy text: ', err);
+                    fallbackCopyTextToClipboard(url);
+                });
+        }
+
+        function fallbackCopyTextToClipboard(text) {
+            // Create text area
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+
+            // Make the textarea out of viewport
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+
+            // Select and copy
+            textArea.focus();
+            textArea.select();
+
+            let successful = false;
+            try {
+                successful = document.execCommand('copy');
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+
+            // Remove textarea
+            document.body.removeChild(textArea);
+
+            if (successful) {
                 updateShareCount();
-                Toastify({
-                    text: "Link copied to clipboard!",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "center",
-                    style: {
-                        background: "black",
-                        color: "white",
-                        borderRadius: "8px",
-                        padding: "12px 24px",
-                    },
-                    offset: {
-                        x: 20,
-                        y: 20
-                    },
-                }).showToast();
-            });
+                showToast("Link copied to clipboard!", "black");
+            } else {
+                showToast("Unable to copy to clipboard. Please try again.", "red");
+            }
+        }
+
+        function showToast(message, backgroundColor) {
+            Toastify({
+                text: message,
+                duration: 3000,
+                gravity: "top",
+                position: "center",
+                style: {
+                    background: backgroundColor,
+                    color: "white",
+                    borderRadius: "8px",
+                    padding: "12px 24px",
+                },
+                offset: {
+                    x: 20,
+                    y: 20
+                },
+            }).showToast();
         }
 
         // SHARE KA TWITTER
@@ -1233,7 +1330,7 @@
     <script>
         var disqus_config = function() {
             this.page.url = "{{ url()->current() }}"; // URL halaman artikel
-            this.page.identifier = "{{ $articles->id }}"; // ID artikel sebagai identifier
+            this.page.identifier = "{{ $article->id }}"; // ID artikel sebagai identifier
         };
 
         (function() { // DON'T EDIT BELOW THIS LINE

@@ -75,37 +75,45 @@ class FrontendController extends Controller
                 });
         }
 
-        return view('frontend-page.homepage', compact('articles', 'articless' ,  'article_trending', 'categories', 'article_history', 'article_trending_slideshow', 'popular_categories', 'mainVideo', 'sidebarVideos'));
+        return view('frontend-page.homepage', compact('articles', 'articless', 'article_trending', 'categories', 'article_history', 'article_trending_slideshow', 'popular_categories', 'mainVideo', 'sidebarVideos'));
     }
-    public function details($id)
+    public function details($slug)
     {
-        $articles         = Article::findOrFail($id);
+        // Mencari artikel berdasarkan slug
+        $article = Article::where('slug', $slug)->with('categorie')->firstOrFail();
+
+        // Mengambil artikel yang trending (berdasarkan view_count)
         $article_trending = Article::where('status', 'approved')
             ->orderBy('view_count', 'desc')
             ->take(4)
             ->get();
-        $article    = Article::all();
-        $categories = Categorie::all();
-        $comments   = Comment::where('article_id', $id)->OrderBy('created_at', 'desc')->get();
 
-        // HISTORY
+                                                       // Mengambil semua artikel (optional, bisa dibatasi sesuai kebutuhan)
+        $articles = Article::with('categorie')->get(); // Tetap bisa digunakan untuk artikel populer atau lainnya
+
+        // Mengambil kategori (jika diperlukan)
+        $categories = Categorie::all();
+
+        // Mengambil komentar terkait artikel berdasarkan id
+        $comments = Comment::where('article_id', $article->id)->OrderBy('created_at', 'desc')->get();
+
+        // Menyimpan riwayat artikel yang dilihat
         $history = session()->get('article_history', []);
-        if (($key = array_search($id, $history)) !== false) {
+        if (($key = array_search($article->id, $history)) !== false) {
             unset($history[$key]);
         }
-        array_unshift($history, $id);
+        array_unshift($history, $article->id);
         session()->put('article_history', array_slice($history, 0, 5));
 
-        // Nambah view 1+
-        if (! session()->has('viewed_article_' . $id)) {
-            $articles = Article::findOrFail($id);
-            $articles->increment('view_count');
-            session()->put('viewed_article_' . $id, true);
+        // Menambah jumlah view jika belum pernah dilihat
+        if (! session()->has('viewed_article_' . $article->id)) {
+            $article->increment('view_count');
+            session()->put('viewed_article_' . $article->id, true);
         }
 
-        return view('frontend-page.detail', compact('articles', 'categories', 'article', 'comments', 'article_trending'));
+        // Mengembalikan view dengan data yang diperlukan
+        return view('frontend-page.detail', compact('article', 'categories', 'articles', 'comments', 'article_trending'));
     }
-
     public function toggleLike($id)
     {
         $user    = Auth::user();
@@ -131,7 +139,6 @@ class FrontendController extends Controller
             return response()->json(['liked' => true]);
         }
     }
-
     public function updateShare($id)
     {
         $article = Article::findOrFail($id);
@@ -139,7 +146,6 @@ class FrontendController extends Controller
 
         return response()->json(['success' => true]);
     }
-
     public function category($id, Request $request)
     {
         // Ambil filter dari request, default 'latest'
@@ -202,7 +208,6 @@ class FrontendController extends Controller
             'filter'
         ));
     }
-
     public function allArticles(Request $request)
     {
         // Ambil filter dari request, default 'latest'

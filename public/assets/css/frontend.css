@@ -747,17 +747,33 @@ a{
     max-width: 90%;
 }
 
-.slide-tag {
+.category-tag {
+    margin-top: -10px;
+    margin-bottom: 30px;
     display: inline-block;
-    background-color: #ff4757;
+    background-color: #ff3b4a;
     color: white;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 20px;
-    margin-bottom: 16px;
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    padding: 8px 16px;
+    border-radius: 4px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.category-tag a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+/* Optional dark background for context, remove if not needed */
+.dark-bg {
+    background-color: #111;
+    padding: 20px;
+    display: inline-block;
 }
 
 .slide-title {
