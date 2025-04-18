@@ -89,7 +89,7 @@
                         @foreach ($articles as $article)
                             <div class="article-card">
                                 <div class="article-image">
-                                    <a href="{{ url('/article/' . $article->id) }}">
+                                    <a href="{{ url('/article/' . $article->slug) }}">
                                         <img src="{{ asset('storage/images/articles/' . $article->cover) }}"
                                             alt="{{ $article->title }}">
                                     </a>
@@ -107,7 +107,7 @@
                             </div>
                         @endforeach
                     </div>
-
+                    
                     <!-- Pagination -->
                     <div class="pagination-container">
                         {{ $articles->appends(request()->query())->links('pagination::bootstrap-4') }}

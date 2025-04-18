@@ -134,77 +134,275 @@ a{
     transition: transform 0.3s;
 }
 
+/* Modify the dropdown content to display horizontally */
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: white;
-    min-width: 200px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    min-width: 650px;
+    /* Wider to accommodate horizontal items */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     z-index: 1;
-    border-radius: 4px;
+    border-radius: 8px;
     top: 100%;
-    left: 0;
-    /* Changed from 50% */
-    transform: none;
-    /* Removed translateX */
-    margin-top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Center the dropdown */
+    margin-top: 12px;
     border: 1px solid #e0e0e0;
     opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
+    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    /* Make items display in a grid */
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    padding: 20px;
 }
 
+/* Add animation when dropdown appears */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Show the dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: grid;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Style for dropdown links in grid layout */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 850px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    border-radius: 8px;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Center the dropdown */
+    margin-top: 12px;
+    border: 1px solid #e0e0e0;
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    /* Make items display in a grid */
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    padding: 20px;
+}
+
+/* Fix the dropdown position and animation */
+.dropdown-content {
+    /* Keep transform consistent in both states */
+    transform: translateX(-50%) translateY(10px);
+}
+
+/* Show the dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: grid;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+}
+
+/* Style for dropdown links in grid layout */
+.dropdown-content a {
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
+    color: #555;
+    padding: 14px 18px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    transition: all 0.25s ease;
+    border-radius: 6px;
+    background-color: #f8f8f8;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Add subtle icon to each dropdown item */
+.dropdown-content a::before {
+    content: "•";
+    margin-right: 8px;
+    color: #b33737;
+    font-weight: bold;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+/* Enhanced hover effect for dropdown items */
+.dropdown-content a:hover {
+    background-color: #f0f0f0;
+    color: #b33737;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dropdown-content a:hover::before {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Active state for dropdown items */
+.dropdown-content a:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Adjust the dropdown arrow position */
 .dropdown-content::before {
     content: "";
     position: absolute;
-    top: -6px;
-    left: 20px;
-    /* Changed from 50% */
-    transform: rotate(45deg);
-    /* Removed translateX */
-    width: 12px;
-    height: 12px;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 16px;
+    height: 16px;
     background-color: white;
     border-left: 1px solid #e0e0e0;
     border-top: 1px solid #e0e0e0;
     box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.03);
+    z-index: 0;
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
+/* Add subtle gradient border to the dropdown */
+.dropdown-content::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    padding: 1px;
+    background: linear-gradient(to bottom right, rgba(179, 55, 55, 0.3), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* DROPDOWN VERTIKAL */
+.dropdown-vertical {
+    display: none;
+    position: absolute;
+    background-color: white;
+    width: 250px;
+    /* Fixed width for vertical dropdown */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    border-radius: 8px;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    margin-top: 12px;
+    border: 1px solid #e0e0e0;
+    opacity: 0;
+    transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+    padding: 12px;
+}
+
+/* Show the dropdown on hover */
+.dropdown:hover .dropdown-vertical {
+    display: flex;
+    flex-direction: column;
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
 }
 
-.dropdown-content a {
+/* Style for vertical dropdown links */
+.dropdown-vertical a {
     font-family: 'Raleway', Arial, Helvetica, sans-serif;
-    color: #666;
-    padding: 14px 20px;
+    color: #555;
+    padding: 14px 18px;
     text-decoration: none;
-    display: block;
     font-size: 14px;
+    font-weight: 500;
     text-align: left;
-    /* Changed from center */
-    transition: background-color 0.3s, color 0.3s;
-    border-bottom: 1px solid #eee;
-    /* Added separator */
+    transition: all 0.25s ease;
+    border-radius: 6px;
+    background-color: #f8f8f8;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-bottom: 8px;
 }
 
-.dropdown-content a:last-child {
-    border-bottom: none;
-    /* Remove border from last item */
+.dropdown-vertical a:last-child {
+    margin-bottom: 0;
 }
 
-.dropdown-content a:first-child {
-    border-radius: 4px 4px 0 0;
-}
-
-.dropdown-content a:last-child {
-    border-radius: 0 0 4px 4px;
-}
-
-.dropdown-content a:hover {
-    background-color: #f9f9f9;
+/* Icon styles for vertical dropdown */
+.dropdown-vertical a i {
     color: #b33737;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+/* Enhanced hover effect for vertical dropdown items */
+.dropdown-vertical a:hover {
+    background-color: #f0f0f0;
+    color: #b33737;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dropdown-vertical a:hover i {
+    transform: scale(1.2);
+}
+
+/* Active state for dropdown items */
+.dropdown-vertical a:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Adjust the dropdown arrow position */
+.dropdown-vertical::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-left: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0;
+    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.03);
+    z-index: 0;
+}
+
+/* Add subtle gradient border to the dropdown */
+.dropdown-vertical::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    padding: 1px;
+    background: linear-gradient(to bottom right, rgba(179, 55, 55, 0.3), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
 }
 
 .menu-button {

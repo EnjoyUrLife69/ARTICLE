@@ -43,9 +43,8 @@ class FrontendController extends Controller
         }
 
         $categories = Categorie::withCount('articles')
-            ->orderByDesc('articles_count')
-            ->skip(4)
-            ->take(10)
+            // ->orderByDesc('articles_count')
+            ->orderBy('name', 'asc')
             ->get();
 
         $popular_categories = Categorie::withCount('articles')
