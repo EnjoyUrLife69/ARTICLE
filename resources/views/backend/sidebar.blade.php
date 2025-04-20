@@ -94,6 +94,12 @@
                     <div data-i18n="Analytics">Earn</div>
                 </a>
             </li>
+            <li class="menu-item {{ request()->routeIs('withdraw.index') ? 'active' : '' }}">
+                <a href="{{ route('withdraw.index') }}" class="menu-link">
+                    <i class='menu-icon tf-icons bx bx-dollar-circle'></i>
+                    <div data-i18n="Analytics">Withdraw</div>
+                </a>
+            </li>
         @endif
 
         <li class="menu-item {{ request()->routeIs('profile') ? 'active' : '' }}">

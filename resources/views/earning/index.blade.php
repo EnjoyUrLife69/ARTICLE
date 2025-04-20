@@ -26,8 +26,9 @@
                     <div class="card-body">
                         <center><em><b style="color: rgb(172, 172, 172);">Saldo Anda</b></em></center><br>
                         <center><em>
-                                <h3><b>Rp. {{ number_format($totalEarnings, 2, ',', '.') }}</b>&nbsp;<i
-                                        class='bx bx-trending-up bx-tada' style='color:#16d603'></i></h3>
+                                <h3><b>Rp. {{ number_format($availableBalance, 2, ',', '.') }}</b>&nbsp;
+                                    <i class='bx bx-wallet' style='color:#16d603'></i>
+                                </h3>
                             </em></center>
                         <center>
                             <a href="{{ route('withdraw.create') }}" class="btn btn-primary mt-3">

@@ -5,8 +5,11 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h3 class="text-center mb-0">
-                    <i class='bx bx-money-withdraw text-primary me-2' style="font-size: 1.5rem;"></i>
-                    Penarikan Dana Penulis
+                    <center class="mt-2" style="font-weight: bold">
+                        <i class='bx bx-money-withdraw'
+                            style="font-size: 31px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);"></i>
+                        <em style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);"> Penarikan Dana Penulis </em>
+                    </center>
                 </h3>
             </div>
         </div>

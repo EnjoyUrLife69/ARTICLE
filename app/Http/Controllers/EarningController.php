@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Earning;
 use Illuminate\Http\Request;
+use App\Models\Withdraw;
 
 class EarningController extends Controller
 {
@@ -17,9 +18,11 @@ class EarningController extends Controller
         $articles = Article::where('status', 'approved')
             ->where('user_id', $userId) // Filter hanya artikel milik user yang login
             ->get();
+
+        // Hitung total earnings dari artikel
         $totalEarnings = $articles->sum('total');
 
-        // Rincian total per kategori
+        // Hitung earnings berdasarkan view, like, dan share
         $totalViewEarnings = $articles->sum(function ($article) {
             return $article->view_count * Article::VIEW_RATE;
         });
@@ -32,7 +35,14 @@ class EarningController extends Controller
             return $article->share_count * Article::SHARE_RATE;
         });
 
-        return view('earning.index', compact('earnings', 'articles', 'totalEarnings', 'totalViewEarnings', 'totalLikeEarnings', 'totalShareEarnings'));
+        // Hitung total penarikan yang sudah dilakukan
+        $totalWithdrawn = Withdraw::where('user_id', $userId)
+            ->sum('amount');
+
+        // Saldo yang tersedia setelah penarikan
+        $availableBalance = $totalEarnings - $totalWithdrawn;
+
+        return view('earning.index', compact('earnings', 'articles', 'totalEarnings', 'totalViewEarnings', 'totalLikeEarnings', 'totalShareEarnings', 'availableBalance'));
     }
 
     /**
