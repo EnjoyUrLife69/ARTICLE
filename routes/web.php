@@ -35,6 +35,7 @@ Auth::routes();
 // Search
 Route::get('/search', [App\Http\Controllers\ArticleController::class, 'search'])->name('articles.search');
 
+
 // BACKEND ROUTE
 Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::get('/pending-writers', [WriterApprovalController::class, 'index'])->name('admin.pending-writers');
@@ -100,3 +101,26 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     Route::post('articles/{articleId}/comments', [CommentController::class, 'store']);
     Route::get('articles/{articleId}/comments', [CommentController::class, 'loadComments']);
 });
+
+// LOGIN
+use App\Http\Controllers\Auth\GoogleController;
+use Laravel\Socialite\Facades\Socialite;
+
+Route::get('login/disqus', [DisqusController::class, 'redirectToProvider']);
+Route::get('login/disqus/callback', [DisqusController::class, 'handleProviderCallback']);
+
+Route::get('login/google', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+Route::get('login/google/callback', function () {
+    $user = Socialite::driver('google')->user();
+
+    // Proses login atau penyimpanan user
+    // Misalnya: auth()->login($user);
+
+    return redirect()->to('/home'); // Redirect setelah login berhasil
+});
+Route::get('login/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('login/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+

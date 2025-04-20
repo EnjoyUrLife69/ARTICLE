@@ -182,7 +182,7 @@
                                     <div class="card-body d-flex flex-column">
                                         <h5 class="card-title">{{ $data->title }}</h5>
                                         <p class="card-text flex-grow-1">{{ Str::limit($data->description, 99) }}</p>
-                                        <a href="{{ url('/article/' . $data->id) }}" class="btn btn-primary mt-auto">Read
+                                        <a href="{{ url('/article/' . $data->slug) }}" class="btn btn-primary mt-auto">Read
                                             More</a>
                                     </div>
                                 </div>

@@ -25,7 +25,7 @@
                 </div>
             </li>
 
-            {{-- <li class="nav-item">
+            <li class="nav-item">
                 <a href="{{ url('/category/' . $categories->firstWhere('name', 'Lifestyle')?->id) }}"
                     class="nav-link">LIFESTYLE</a>
             </li>
@@ -40,14 +40,15 @@
             <li class="nav-item">
                 <a href="{{ url('/category/' . $categories->firstWhere('name', 'Music')?->id) }}"
                     class="nav-link">MUSIC</a>
-            </li> --}}
+            </li>
 
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link">MORE</a>
                 <div class="dropdown-vertical">
-                    <a href="#"><i class="fas fa-heart"></i>LOREM IPSUM</a>
-                    <a href="#"><i class="fas fa-plane"></i>LOREM IPSUM</a>
-                    <a href="#"><i class="fas fa-briefcase"></i>LOREM IPSUM</a>
+                    <a href="{{ url('/') }}#faq" class="nav-link">
+                        <i class="fas fa-question"></i><b>FAQ</b>
+                    </a>
+
                 </div>
             </li>
         </ul>

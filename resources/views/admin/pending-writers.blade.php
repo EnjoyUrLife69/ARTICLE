@@ -131,12 +131,13 @@
                                     <form action="{{ route('admin.approve-writer', $user->id) }}" method="POST"
                                         class="w-100">
                                         @csrf
-                                        <button type="submit" class="btn btn-success w-100"
-                                            onclick="return confirm('Approve {{ $user->name }} as a Writer?')">
+                                        <input type="hidden" name="name" value="{{ $user->name }}" />
+                                        <!-- Hidden input for user name -->
+                                        <button type="submit" class="btn btn-success w-100 approve-btn">
                                             <i class="fas fa-check-circle me-1"></i> Approve
                                         </button>
                                     </form>
-                                    
+
                                     <button type="submit" class="btn btn-danger w-100" style="height: 39px;"
                                         onclick="rejectWriter({{ $user->id }}, '{{ $user->name }}')">
                                         <i class="fas fa-check-circle me-1"></i> Reject
@@ -153,32 +154,29 @@
     {{-- Rejection Modal --}}
     <div class="modal fade" id="rejectModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title">Reject Writer Application</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+            <div class="modal-content border-0 shadow-sm">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-semibold text-dark">Reject Application</h5>
                 </div>
                 <form id="rejectForm" action="" method="POST">
                     @csrf
-                    <div class="modal-body">
+                    <div class="modal-body px-4 py-4">
                         <div class="text-center mb-4">
-                            <i class="fas fa-exclamation-triangle text-danger" style="font-size: 48px;"></i>
-                            <h5 class="mt-3">Reject Application</h5>
-                            <p class="text-muted">You are about to reject <strong id="writerName"></strong>'s application.
-                            </p>
+                            <div class="rejection-icon-wrapper mb-3">
+                                <i class="bx bx-x-circle text-danger"></i>
+                            </div>
+                            <p class="mb-0">You are about to reject <span id="writerName" class="fw-bold"></span>'s
+                                application</p>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="rejection_reason" class="form-label">Feedback (Optional)</label>
-                            <textarea class="form-control" id="rejection_reason" name="rejection_reason" rows="3"
-                                placeholder="Provide feedback to the applicant"></textarea>
-                            <small class="text-muted">This feedback will be saved for reference.</small>
+                        <div class="d-flex gap-2 mt-4">
+                            <button type="button" class="btn btn-outline-secondary flex-grow-1" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-danger flex-grow-1">
+                                Confirm Rejection
+                            </button>
                         </div>
-                    </div>
-                    <div class="modal-footer bg-light">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Confirm Rejection</button>
                     </div>
                 </form>
             </div>
@@ -222,9 +220,9 @@
         }
 
         /* .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        } */
+                                            transform: translateY(-5px);
+                                            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                                        } */
 
         /* Tab styling */
         .nav-tabs .nav-link {
@@ -236,6 +234,78 @@
         .badge.bg-label-info {
             background-color: rgba(3, 195, 236, 0.1) !important;
             color: #03c3ec !important;
+        }
+
+        /* Minimalist Aesthetic Modal Styling */
+        #rejectModal .modal-content {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        #rejectModal .modal-header {
+            padding-top: 24px;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        #rejectModal .rejection-icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: rgba(234, 84, 85, 0.1);
+        }
+
+        #rejectModal .rejection-icon-wrapper i {
+            font-size: 32px;
+        }
+
+        #rejectModal textarea.form-control {
+            border-color: #e9ecef;
+            padding: 12px;
+            font-size: 14px;
+            border-radius: 8px;
+            resize: none;
+            transition: all 0.2s ease;
+        }
+
+        #rejectModal textarea.form-control:focus {
+            border-color: #ccc;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+        }
+
+        #rejectModal .form-text {
+            font-size: 12px;
+            color: #999;
+        }
+
+        #rejectModal .btn {
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        #rejectModal .btn-outline-secondary {
+            border-color: #e0e0e0;
+            color: #666;
+        }
+
+        #rejectModal .btn-outline-secondary:hover {
+            background-color: #f8f9fa;
+            color: #444;
+        }
+
+        #rejectModal .btn-danger {
+            background-color: #ea5455;
+            border-color: #ea5455;
+        }
+
+        #rejectModal .btn-danger:hover {
+            background-color: #d64041;
+            border-color: #d64041;
         }
     </style>
 
@@ -249,5 +319,29 @@
             var modal = new bootstrap.Modal(document.getElementById('rejectModal'));
             modal.show();
         }
+    </script>
+
+    <script>
+        // Add event listener to all 'Approve' buttons
+        document.querySelectorAll('.approve-btn').forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent the form from submitting immediately
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Approve ' + button.closest('form').querySelector('input[name="name"]')
+                        .value + ' as a Writer?', // Display user name in the confirmation message
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, approve!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        button.closest('form').submit(); // If confirmed, submit the form
+                    }
+                });
+            });
+        });
     </script>
 @endsection

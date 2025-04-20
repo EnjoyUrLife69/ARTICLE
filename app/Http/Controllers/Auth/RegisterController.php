@@ -71,14 +71,14 @@ class RegisterController extends Controller
             'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
-        
+
         // Add conditional validation for writer fields
         if (isset($data['wants_to_be_writer']) && $data['wants_to_be_writer']) {
-            $rules['bio'] = ['required', 'string'];
+            $rules['bio']        = ['required', 'string'];
             $rules['motivation'] = ['required', 'string'];
             // Previous work is optional
         }
-        
+
         return Validator::make($data, $rules);
     }
 
@@ -100,18 +100,25 @@ class RegisterController extends Controller
         // Assign appropriate role
         if (isset($data['wants_to_be_writer']) && $data['wants_to_be_writer']) {
             $user->assignRole('Pending Writer');
-            
+
             // Create writer profile
             $user->writerProfile()->create([
-                'bio' => $data['bio'] ?? null,
+                'bio'           => $data['bio'] ?? null,
                 'previous_work' => $data['previous_work'] ?? null,
-                'motivation' => $data['motivation'] ?? null,
-                'status' => 'pending'
+                'motivation'    => $data['motivation'] ?? null,
+                'status'        => 'pending',
             ]);
+
+            // Set a success message for the toast notification
+            session()->flash('toast_message', 'Your registration was successful! Your proposal is awaiting approval.');
         } else {
             $user->assignRole('Guest');
+
+            // You can add a different toast message for non-writer users if needed
+            session()->flash('toast_message', 'Your registration was successful! You are now a guest.');
         }
 
         return $user;
     }
+
 }

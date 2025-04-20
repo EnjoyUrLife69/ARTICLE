@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Models\Article;
+use App\Models\User;
+use Illuminate\Support\ServiceProvider;
 
 class SidebarServiceProvider extends ServiceProvider
 {
@@ -23,8 +23,10 @@ class SidebarServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $newArticlesCount = Article::where('status', 'pending')
                 ->count();
+            $pendingWritersCount = User::role('Pending Writer')->count();
 
-            $view->with('newArticlesCount', $newArticlesCount);
+            $view->with('newArticlesCount', $newArticlesCount)
+                ->with('pendingWritersCount', $pendingWritersCount);
         });
     }
 

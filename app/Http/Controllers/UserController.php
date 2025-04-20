@@ -65,7 +65,7 @@ class UserController extends Controller
 
     public function index(Request $request): View
     {
-        $data = User::latest()->paginate(5);
+        $data = User::all();
         $roles = Role::pluck('name', 'name')->all();
 
         // Menambahkan userRole untuk setiap user

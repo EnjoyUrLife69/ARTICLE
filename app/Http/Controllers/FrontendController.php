@@ -43,7 +43,7 @@ class FrontendController extends Controller
         }
 
         $categories = Categorie::withCount('articles')
-            // ->orderByDesc('articles_count')
+        // ->orderByDesc('articles_count')
             ->orderBy('name', 'asc')
             ->get();
 
@@ -76,6 +76,7 @@ class FrontendController extends Controller
 
         return view('frontend-page.homepage', compact('articles', 'articless', 'article_trending', 'categories', 'article_history', 'article_trending_slideshow', 'popular_categories', 'mainVideo', 'sidebarVideos'));
     }
+
     public function details($slug)
     {
         // Mencari artikel berdasarkan slug
@@ -113,6 +114,7 @@ class FrontendController extends Controller
         // Mengembalikan view dengan data yang diperlukan
         return view('frontend-page.detail', compact('article', 'categories', 'articles', 'comments', 'article_trending'));
     }
+
     public function toggleLike($id)
     {
         $user    = Auth::user();
@@ -145,6 +147,7 @@ class FrontendController extends Controller
 
         return response()->json(['success' => true]);
     }
+
     public function category($id, Request $request)
     {
         // Ambil filter dari request, default 'latest'
@@ -207,6 +210,7 @@ class FrontendController extends Controller
             'filter'
         ));
     }
+    
     public function allArticles(Request $request)
     {
         // Ambil filter dari request, default 'latest'
@@ -258,6 +262,17 @@ class FrontendController extends Controller
             'popular_categories',
             'filter'
         ));
+    }
+
+    public function faq()
+    {
+        // Get categories from the database (if needed)
+        $categories = Categorie::withCount('articles')
+            ->orderBy('name', 'asc')
+            ->get();
+
+        // Return the FAQ view and pass categories to it
+        return view('frontend-page.faq', compact('categories'));
     }
 
 }

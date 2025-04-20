@@ -3,14 +3,16 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>Create Your Account</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" />
 
     <style>
@@ -330,6 +332,7 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -343,22 +346,14 @@
 
         /* Custom black and white styles */
         .logo {
+            margin-left: 1rem;
             font-size: 2rem;
             font-weight: 700;
             letter-spacing: 2px;
             margin-bottom: 1rem;
+            margin-top: 1rem;
             display: inline-block;
             position: relative;
-        }
-
-        .logo::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 30px;
-            height: 3px;
-            background-color: #000;
         }
 
         /* Progress indicator */
@@ -409,6 +404,62 @@
             font-weight: 500;
             white-space: nowrap;
         }
+
+        /* Modal Styles */
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-footer {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 15px;
+            top: 0;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -416,16 +467,22 @@
     <div class="container">
         <div class="card">
             <div class="card-image">
-                <div class="logo">LOGO</div>
+                <div class="logo-container"
+                    style="display: flex; align-items: center; margin-top: -2rem; margin-bottom: 2em;">
+                    <img src="{{ asset('assets/img/open-book.png') }}" style="width: 8%; margin-right: 10px;">
+                    <div class="logo">ARTICLES</div>
+                </div>
                 <h2>Join Our Platform</h2>
-                <p>Create your account today and become part of our growing community. Whether you're here to explore content or share your own writing, we're excited to have you with us.</p>
-                
+                <p>Create your account today and become part of our growing community. Whether you're here to explore
+                    content or share your own writing, we're excited to have you with us.</p>
+
                 <div class="testimonial">
-                    <p>"This platform has given me a voice and connected me with an incredible audience. The black and white aesthetic perfectly complements the content focus."</p>
+                    <p>"This platform has given me a voice and connected me with an incredible audience. The black and
+                        white aesthetic perfectly complements the content focus."</p>
                     <div class="author">— Alex Thompson, Content Creator</div>
                 </div>
             </div>
-            
+
             <div class="card-content">
                 <div class="app-brand">
                     <h2>CREATE ACCOUNT</h2>
@@ -440,10 +497,12 @@
 
                 <form id="formAuthentication" method="POST" action="{{ route('register') }}">
                     @csrf
-                    
+
                     <div class="form-group">
                         <label for="name" class="form-label">Username</label>
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Enter your username">
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                            name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
+                            placeholder="Enter your username">
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -453,7 +512,9 @@
 
                     <div class="form-group">
                         <label for="email" class="form-label">Email Address</label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter your email address">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}" required autocomplete="email"
+                            placeholder="Enter your email address">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -464,10 +525,13 @@
                     <div class="form-group">
                         <label class="form-label" for="password">Password</label>
                         <div class="password-toggle">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Create a password">
+                            <input id="password" type="password"
+                                class="form-control @error('password') is-invalid @enderror" name="password" required
+                                autocomplete="new-password" placeholder="Create a password">
                             <i class="toggle-icon fas fa-eye-slash" id="togglePassword"></i>
                         </div>
-                        <span class="form-hint">Password must be at least 8 characters long, contain uppercase, lowercase letters and numbers.</span>
+                        <span class="form-hint">Password must be at least 8 characters long, contain uppercase,
+                            lowercase letters and numbers.</span>
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -478,15 +542,19 @@
                     <div class="form-group">
                         <label class="form-label" for="password-confirm">Confirm Password</label>
                         <div class="password-toggle">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm your password">
+                            <input id="password-confirm" type="password" class="form-control"
+                                name="password_confirmation" required autocomplete="new-password"
+                                placeholder="Confirm your password">
                             <i class="toggle-icon fas fa-eye-slash" id="toggleConfirmPassword"></i>
                         </div>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input @error('terms') is-invalid @enderror" type="checkbox" name="terms" id="terms" required>
+                        <input class="form-check-input @error('terms') is-invalid @enderror" type="checkbox"
+                            name="terms" id="terms" required>
                         <label class="form-check-label" for="terms">
-                            I agree to the <a href="#" class="link">terms and conditions</a> and <a href="#" class="link">privacy policy</a>
+                            I agree to the <a href="#" class="link" id="openTermsModal">terms and conditions</a>
+                            {{-- and <a href="#" class="link">privacy policy</a> --}}
                         </label>
                         @error('terms')
                             <span class="invalid-feedback" role="alert">
@@ -495,8 +563,51 @@
                         @enderror
                     </div>
 
+                    <!-- Modal Structure -->
+                    <div id="termsModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="close" id="closeModal">&times;</span>
+                                <h2>Terms and Conditions</h2>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Terms and Conditions</h3>
+                                <p>Welcome to our platform! By signing up, you agree to the following terms:</p>
+
+                                <h4>1. Account Registration</h4>
+                                <p>You must provide accurate information when creating your account and keep it updated.
+                                    You are responsible for maintaining the confidentiality of your account details.</p>
+
+                                <h4>2. User Conduct</h4>
+                                <p>You agree to use the platform responsibly and not post any content that is harmful,
+                                    unlawful, or violates others' rights.</p>
+
+                                <h4>3. Privacy</h4>
+                                <p>Your privacy is important to us. Please review our <a href="#"
+                                        class="link">Privacy Policy</a> for more details on how we handle your data.
+                                </p>
+
+                                <h4>4. Termination</h4>
+                                <p>We may suspend or terminate your account if you violate these terms. You can also
+                                    delete your account at any time.</p>
+
+                                <h4>5. Limitation of Liability</h4>
+                                <p>The platform is provided "as is" and we are not responsible for any damages arising
+                                    from its use.</p>
+
+                                <p>If you have any questions, please contact us at support@example.com.</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" id="agreeTerms">I Agree</button>
+                                <button class="btn btn-secondary" id="closeTerms">Close</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-check mt-4">
-                        <input class="form-check-input" type="checkbox" name="wants_to_be_writer" id="wants_to_be_writer">
+                        <input class="form-check-input" type="checkbox" name="wants_to_be_writer"
+                            id="wants_to_be_writer">
                         <label class="form-check-label" for="wants_to_be_writer">
                             I want to contribute as a writer
                         </label>
@@ -504,20 +615,23 @@
 
                     <div id="writer-form" class="form-section fade-in" style="display: none;">
                         <h3>WRITER PROFILE</h3>
-                        
+
                         <div class="form-group">
                             <label for="bio" class="form-label">About You</label>
-                            <textarea id="bio" name="bio" class="form-control textarea-control" placeholder="Tell us a little about yourself and your writing experience"></textarea>
+                            <textarea id="bio" name="bio" class="form-control textarea-control"
+                                placeholder="Tell us a little about yourself and your writing experience"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="previous_work" class="form-label">Previous Writing Experience</label>
-                            <input type="text" id="previous_work" name="previous_work" class="form-control" placeholder="Provide a link to your previous work (optional)">
+                            <input type="text" id="previous_work" name="previous_work" class="form-control"
+                                placeholder="Provide a link to your previous work (optional)">
                         </div>
 
                         <div class="form-group">
                             <label for="motivation" class="form-label">Why do you want to be a writer?</label>
-                            <textarea id="motivation" name="motivation" class="form-control textarea-control" placeholder="Let us know why you're interested in writing with us"></textarea>
+                            <textarea id="motivation" name="motivation" class="form-control textarea-control"
+                                placeholder="Let us know why you're interested in writing with us"></textarea>
                         </div>
                     </div>
 
@@ -526,19 +640,19 @@
                     </div>
                 </form>
 
-                <div class="divider"><span>Or sign up with</span></div>
+                {{-- <div class="divider"><span>Or sign up with</span></div>
 
                 <div class="social-login">
-                    <button type="button" class="social-btn google">
+                    <a href="{{ url('login/google') }}" class="social-btn google">
                         <i class="fab fa-google"></i>
-                    </button>
+                    </a>
                     <button type="button" class="social-btn facebook">
                         <i class="fab fa-facebook-f"></i>
                     </button>
                     <button type="button" class="social-btn twitter">
                         <i class="fab fa-twitter"></i>
                     </button>
-                </div>
+                </div> --}}
 
                 <p class="text-center">
                     Already have an account?
@@ -554,7 +668,7 @@
             const passwordInput = document.getElementById('password');
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
-            
+
             // Toggle icon
             this.classList.toggle('fa-eye');
             this.classList.toggle('fa-eye-slash');
@@ -564,7 +678,7 @@
             const confirmPasswordInput = document.getElementById('password-confirm');
             const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             confirmPasswordInput.setAttribute('type', type);
-            
+
             // Toggle icon
             this.classList.toggle('fa-eye');
             this.classList.toggle('fa-eye-slash');
@@ -579,6 +693,39 @@
                 writerForm.style.display = 'none';
             }
         });
+
+        // Modal functionality
+        const modal = document.getElementById('termsModal');
+        const openModalBtn = document.getElementById('openTermsModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const closeTermsBtn = document.getElementById('closeTerms');
+        const agreeTermsBtn = document.getElementById('agreeTerms');
+
+        openModalBtn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        closeModalBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        closeTermsBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // You can add your form submission logic here when 'I Agree' is clicked
+        agreeTermsBtn.onclick = function() {
+            document.getElementById('terms').checked = true;
+            modal.style.display = "none";
+        }
+
+        // Close modal if user clicks outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 </body>
+
 </html>

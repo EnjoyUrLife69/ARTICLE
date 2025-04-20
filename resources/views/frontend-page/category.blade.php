@@ -97,11 +97,11 @@
                                         {{ $article->created_at->format('M d, Y') }}</div>
                                 </div>
                                 <div class="article-content">
-                                    <a href="{{ url('/article/' . $article->id) }}"
+                                    <a href="{{ url('/article/' . $article->slug) }}"
                                         class="article-title">{{ $article->title }}</a><br>
                                     <p class="article-excerpt">{{ Str::limit(strip_tags($article->description), 120) }}
                                     </p>
-                                    <a href="{{ url('/article/' . $article->id) }}" class="read-more">Baca
+                                    <a href="{{ url('/article/' . $article->slug) }}" class="read-more">Baca
                                         Selengkapnya</a>
                                 </div>
                             </div>

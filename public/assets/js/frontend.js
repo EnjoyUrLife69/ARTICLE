@@ -270,3 +270,5 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollContainer.addEventListener('scroll', updateArrows);
     }
 });
+
+

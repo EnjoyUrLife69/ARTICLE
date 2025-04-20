@@ -3,14 +3,16 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>Login to Dashboard</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" />
 
     <style>
@@ -330,6 +332,7 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -338,23 +341,16 @@
 
         /* Custom black and white styles */
         .logo {
+            margin-left: 1rem; 
             font-size: 2rem;
             font-weight: 700;
             letter-spacing: 2px;
             margin-bottom: 1rem;
+            margin-top: 1rem;
             display: inline-block;
             position: relative;
         }
 
-        .logo::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 30px;
-            height: 3px;
-            background-color: #fff;
-        }
 
         .input-group {
             position: relative;
@@ -399,10 +395,13 @@
     <div class="container">
         <div class="card">
             <div class="card-image">
-                <div class="logo">LOGO</div>
+                <div class="logo-container" style="display: flex; align-items: center; margin-top: -2rem; margin-bottom: 2rem;">
+                    <img src="{{ asset('assets/img/open-book.png') }}" style="width: 8%; margin-right: 10px;">
+                    <div class="logo">ARTICLES</div>
+                </div>
                 <h2>Welcome Back</h2>
                 <p>Sign in to access your dashboard and continue your journey with us. We've missed you!</p>
-                
+
                 <div class="features">
                     <div class="feature-item">
                         <div class="feature-icon">
@@ -413,7 +412,7 @@
                             <p>Your data is always protected with enterprise-grade security</p>
                         </div>
                     </div>
-                    
+
                     <div class="feature-item">
                         <div class="feature-icon">
                             <i class="fas fa-tachometer-alt"></i>
@@ -423,7 +422,7 @@
                             <p>Access all your tools and data in one convenient place</p>
                         </div>
                     </div>
-                    
+
                     <div class="feature-item">
                         <div class="feature-icon">
                             <i class="fas fa-sync-alt"></i>
@@ -435,7 +434,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="card-content">
                 <div class="app-brand">
                     <h2>SIGN IN</h2>
@@ -444,10 +443,12 @@
 
                 <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('login') }}">
                     @csrf
-                    
+
                     <div class="form-group">
                         <label for="email" class="form-label">Email or Username</label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter your email or username">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
+                            placeholder="Enter your email or username">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -458,11 +459,15 @@
                     <div class="form-group">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <label class="form-label mb-0" for="password">Password</label>
-                            <a href="{{ route('password.request') }}" class="link" style="font-size: 0.9rem;">Forgot Password?</a>
+                            <a href="{{ route('password.request') }}" class="link" style="font-size: 0.9rem;">Forgot
+                                Password?</a>
                         </div>
                         <div class="input-group">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter your password">
-                            <span class="input-group-text cursor-pointer"><i class="fas fa-eye-slash" id="togglePassword"></i></span>
+                            <input id="password" type="password"
+                                class="form-control @error('password') is-invalid @enderror" name="password" required
+                                autocomplete="current-password" placeholder="Enter your password">
+                            <span class="input-group-text cursor-pointer"><i class="fas fa-eye-slash"
+                                    id="togglePassword"></i></span>
                         </div>
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -473,7 +478,8 @@
 
                     <div class="form-group">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                {{ old('remember') ? 'checked' : '' }}>
                             <label class="form-check-label" for="remember">
                                 Remember Me
                             </label>
@@ -485,19 +491,20 @@
                     </div>
                 </form>
 
-                <div class="divider"><span>Or sign in with</span></div>
+                {{-- <div class="divider"><span>Or sign in with</span></div>
 
                 <div class="social-login">
-                    <button type="button" class="social-btn google">
+                    <!-- Tombol Login Google -->
+                    <a href="{{ url('login/google') }}" class="social-btn google">
                         <i class="fab fa-google"></i>
-                    </button>
+                    </a>
                     <button type="button" class="social-btn facebook">
                         <i class="fab fa-facebook-f"></i>
                     </button>
                     <button type="button" class="social-btn twitter">
                         <i class="fab fa-twitter"></i>
                     </button>
-                </div>
+                </div> --}}
 
                 <p class="text-center mt-4">
                     New on our platform?
@@ -512,12 +519,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             const togglePassword = document.getElementById('togglePassword');
             const passwordInput = document.getElementById('password');
-            
+
             if (togglePassword && passwordInput) {
                 togglePassword.addEventListener('click', function() {
                     const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                     passwordInput.setAttribute('type', type);
-                    
+
                     // Toggle icon
                     this.classList.toggle('fa-eye');
                     this.classList.toggle('fa-eye-slash');
@@ -526,4 +533,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -392,6 +392,138 @@
             <p style="color:#888;">Check back later for new video content.</p>
         </div>
     @endif
+    
+    <div class="div" id="faq"></div><br><br><br><br>
+    <!-- FAQ Section - BAGIAN 6 -->
+    <div class="section-title">
+        <h2> FREQUENTLY ASKED QUESTION'S
+        </h2>
+    </div>
 
+    <div class="faq-section" style="padding: 50px 0; background-color: #fafafa;">
+        <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 30px;">
+            <div class="faq-item"
+                style="margin-bottom: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); background-color: #ffffff; overflow: hidden;">
+                <h3 class="faq-question"
+                    style="cursor: pointer; font-size: 1.05rem; color: #333; font-weight: 500; padding: 20px 24px; margin: 0; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s ease;">
+                    What is ARTICLE'S platform?
+                    <svg class="faq-icon" width="14" height="14" viewBox="0 0 24 24"
+                        style="transition: transform 0.3s ease;">
+                        <line x1="12" y1="5" x2="12" y2="19" stroke="#999"
+                            stroke-width="2" stroke-linecap="round" />
+                        <line x1="5" y1="12" x2="19" y2="12" stroke="#999"
+                            stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </h3>
+                <div class="faq-answer"
+                    style="max-height: 0; overflow: hidden; font-size: 0.95rem; line-height: 1.6; color: #555; transition: all 0.4s ease; padding: 0 24px;">
+                    <div style="padding: 0 0 20px 0;">
+                        ARTICLE'S is a content-sharing platform that allows users to explore, create, and share articles on
+                        various topics.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item"
+                style="margin-bottom: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); background-color: #ffffff; overflow: hidden;">
+                <h3 class="faq-question"
+                    style="cursor: pointer; font-size: 1.05rem; color: #333; font-weight: 500; padding: 20px 24px; margin: 0; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s ease;">
+                    How can I create an account?
+                    <svg class="faq-icon" width="14" height="14" viewBox="0 0 24 24"
+                        style="transition: transform 0.3s ease;">
+                        <line x1="12" y1="5" x2="12" y2="19" stroke="#999"
+                            stroke-width="2" stroke-linecap="round" />
+                        <line x1="5" y1="12" x2="19" y2="12" stroke="#999"
+                            stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </h3>
+                <div class="faq-answer"
+                    style="max-height: 0; overflow: hidden; font-size: 0.95rem; line-height: 1.6; color: #555; transition: all 0.4s ease; padding: 0 24px;">
+                    <div style="padding: 0 0 20px 0;">
+                        To create an account, simply click the "Sign Up" button on the homepage and fill in your details to
+                        register.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item"
+                style="margin-bottom: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); background-color: #ffffff; overflow: hidden;">
+                <h3 class="faq-question"
+                    style="cursor: pointer; font-size: 1.05rem; color: #333; font-weight: 500; padding: 20px 24px; margin: 0; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s ease;">
+                    Can I contribute as a writer?
+                    <svg class="faq-icon" width="14" height="14" viewBox="0 0 24 24"
+                        style="transition: transform 0.3s ease;">
+                        <line x1="12" y1="5" x2="12" y2="19" stroke="#999"
+                            stroke-width="2" stroke-linecap="round" />
+                        <line x1="5" y1="12" x2="19" y2="12" stroke="#999"
+                            stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </h3>
+                <div class="faq-answer"
+                    style="max-height: 0; overflow: hidden; font-size: 0.95rem; line-height: 1.6; color: #555; transition: all 0.4s ease; padding: 0 24px;">
+                    <div style="padding: 0 0 20px 0;">
+                        Yes! If you want to contribute articles, sign up as a writer and start submitting your content to
+                        the platform.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item"
+                style="margin-bottom: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); background-color: #ffffff; overflow: hidden;">
+                <h3 class="faq-question"
+                    style="cursor: pointer; font-size: 1.05rem; color: #333; font-weight: 500; padding: 20px 24px; margin: 0; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s ease;">
+                    How can I contact support?
+                    <svg class="faq-icon" width="14" height="14" viewBox="0 0 24 24"
+                        style="transition: transform 0.3s ease;">
+                        <line x1="12" y1="5" x2="12" y2="19" stroke="#999"
+                            stroke-width="2" stroke-linecap="round" />
+                        <line x1="5" y1="12" x2="19" y2="12" stroke="#999"
+                            stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </h3>
+                <div class="faq-answer"
+                    style="max-height: 0; overflow: hidden; font-size: 0.95rem; line-height: 1.6; color: #555; transition: all 0.4s ease; padding: 0 24px;">
+                    <div style="padding: 0 0 20px 0;">
+                        You can contact our support team via the "Contact Us" page or email us directly at
+                        support@example.com.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Aesthetic Minimalist FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(function(question) {
+            question.addEventListener('click', function() {
+                var answer = this.nextElementSibling;
+                var icon = this.querySelector('.faq-icon');
+                var item = this.closest('.faq-item');
+                var isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '';
+
+                // Close all other FAQ answers first
+                document.querySelectorAll('.faq-answer').forEach(function(ans) {
+                    ans.style.maxHeight = '0px';
+                    ans.previousElementSibling.querySelector('.faq-icon').style.transform =
+                        'rotate(0deg)';
+                    ans.closest('.faq-item').style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+                    ans.previousElementSibling.style.color = '#333';
+                });
+
+                // Toggle the clicked answer visibility with smooth animation
+                if (!isOpen) {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(45deg)';
+                    item.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
+                    this.style.color = '#0066cc';
+                } else {
+                    answer.style.maxHeight = '0px';
+                    icon.style.transform = 'rotate(0deg)';
+                    item.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+                    this.style.color = '#333';
+                }
+            });
+        });
+    </script>
 
 @endsection
